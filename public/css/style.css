@@ -1,0 +1,937 @@
+/* Animations */
+
+@keyframes page {
+    0%{
+        opacity: 0.2;
+    }  
+    100%{
+        opacity: 1; 
+    }
+}
+
+/* Polices additionnelles */
+
+@font-face {
+    font-family: "RobotoMedium";
+    src: url("../fonts/Roboto-Medium.ttf");
+}
+
+.responsivePadding{
+
+    padding-top:80px;
+
+}
+
+.responsivePaddingTwo{
+
+    padding-top:80px;
+
+}
+
+.colorTitle{
+
+    color: rgb(100, 100, 100);
+
+}
+
+.maxWidth{
+
+    width: 80%;
+
+}
+
+.titleAdmin{
+
+    font-family: RobotoMedium;
+
+}
+
+/* Menu navigation du haut */
+
+.navAdmin{
+
+    padding-left: 30px;
+    padding-right: 30px;
+    z-index: 10000;
+    background-color: white;
+    position: fixed;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    min-width: 100%;
+    box-shadow: 0px 0px 8px rgba(180, 180, 180,1);
+
+}
+
+.nav{
+
+    padding-left: 10px;
+    padding-right: 10px;
+    z-index: 10000;
+    background-color: white;
+    position: fixed;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    min-width: 100%;
+    box-shadow: 0px 0px 8px rgba(180, 180, 180,1);
+
+}
+
+
+.label{
+
+    display: none;
+
+}
+
+.listeBtn{
+
+    display: flex;
+    flex-direction: row;
+    list-style-type: none;
+    font-family: sans-serif;
+
+}
+
+.checkBox{
+
+    position: absolute;
+    top: -5000px;
+    opacity: 0;
+
+}
+
+.btnCandidature{
+
+    margin-right: 10px;
+
+}
+
+.btnMenu{
+
+    padding: 21px;
+    font-size: 13px;
+    border: 2px solid white;
+    color: rgb(100, 100, 100);
+
+}
+
+.btnMenu:hover{
+
+    border-top:2px solid rgb(100, 203, 74);
+    text-decoration: none;
+    color: rgb(100, 203, 74);
+    cursor: pointer;
+
+}
+
+.btnDropdown{
+
+    display: block;
+    padding: 21px;
+    font-size: 13px;
+
+}
+
+.btnDropdown:hover{
+
+    text-decoration: none;
+    cursor: pointer;
+
+}
+
+.dropdown{
+
+    display: inline-block;
+    border-top: 2px solid white;
+    color: rgb(108, 117, 125);
+    transition: color 150ms linear,border-top 150ms linear;
+
+}
+
+.dropdown:hover{
+
+    border-top:2px solid rgb(100, 203, 74);
+    color:rgb(100, 203, 74);
+
+}
+
+.dropdown-child{
+
+    display: none;
+    background-color: white;
+    border: 1px solid rgb(197, 197, 197);
+    min-width: 200px;
+    padding: 10px;
+    z-index:10;
+    font-family: sans-serif;
+    position: absolute;
+
+}
+
+.dropdown-child a{
+
+    color: rgb(100, 100, 100);
+    font-size: 14px;
+    padding: 8px;
+    text-decoration: none;
+    display: block;
+    transition: color 150ms linear;
+
+}
+
+.dropdown-child a:hover{
+
+    color:rgb(100, 203, 74);
+
+}
+
+.dropdown:hover .dropdown-child{
+
+    display: block;
+
+}
+
+.headerNav{
+
+    color:rgb(100, 203, 74);
+    font-size: 18px;
+    font-family: RobotoMedium;
+    transition: color 0.2s linear;
+
+}
+
+.headerNav:hover{
+
+    color: rgb(141, 216, 106);
+    text-decoration: none;
+
+}
+
+/* Page d'accueil */
+
+.slider{
+    
+    min-height: 500px;
+    background-color: rgb(230, 230, 230);
+
+}
+
+.presentation,.notFound{
+
+    min-height: 500px;
+
+}
+
+.presentation{
+
+    animation: page 1s;
+    padding-top:40px;
+    padding-bottom:75px;
+    max-width: 80%;
+    min-width: 80%;
+    font-family: sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+.professionnels{
+
+    background-color: rgb(230, 230, 230);
+    padding-bottom: 30px;
+
+}
+.recrutement{
+
+    padding-bottom: 80px;
+
+}
+
+.infoImportante li{
+
+    margin-bottom: 10px;
+
+}
+
+.containerActivites{
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding-bottom: 25px;
+    padding-top:10px;
+    flex-wrap: wrap;
+
+}
+
+.activitesIndex{
+
+    border:1px solid rgb(180, 180, 180);
+    background-color: white;
+    width: 200px;
+    margin:10px;
+    padding-top: 18px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    color: rgb(100, 203, 74);
+    transition:color 0.1s linear;
+
+}
+
+.activitesIndex:hover{
+
+    color: rgb(100, 100, 100);
+
+}
+
+.colorLink{
+
+    text-decoration: underline;
+    color: rgb(100, 203, 74);
+    font-weight: bold;
+    transition: text-decoration 0.2s linear, color 0.2s linear;
+
+}
+
+.colorLink:hover{
+
+    text-decoration: none;
+    color: rgb(100, 100, 100);
+
+}
+
+.infoImportante{
+
+    background-color: white;
+    padding-bottom: 50px;
+
+}
+
+/* Footer */
+
+.footer{
+
+    min-height: 300px;
+    background-color: rgb(100, 100, 100);
+    display: flex;
+    flex-direction: row;
+    padding: 40px;
+    font-family: sans-serif;
+
+}
+
+.blocFooter{
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: rgb(210, 210, 210);
+    font-size: 15px;
+    padding-bottom: 10px;
+
+}
+
+.titlesFooter{
+
+    font-size: 20px;
+    color: rgb(245, 245, 245);
+    padding-bottom: 20px;
+    font-family: sans-serif;
+
+}
+
+.logoFooter{
+
+    width: 125px;
+    margin-bottom: 30px;
+
+}
+
+.lienFooter{
+
+    color: rgb(210, 210, 210);
+    transition: color 75ms linear;
+    text-decoration: none;
+    font-family: sans-serif;
+
+}
+
+.lienFooter:hover{
+
+    color: rgb(235, 235, 235);
+    text-decoration: none;
+
+}
+
+.imgPartenaires{
+
+    width: 200px;
+
+}
+
+.imgPartenaires:hover{
+
+    opacity: 0.8;
+
+}
+
+/* Contact Localisation */
+
+.transports img{
+
+    width: 50px;
+    margin-right:10px;
+
+}
+
+.nousTrouver,.nousContacter{
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+}
+
+.forbidden,.notFound{
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding-top: 150px;
+
+}
+
+#carte{
+    width: 100%;
+    height: 350px;
+    background-color: rgb(235, 235, 235);
+    box-shadow: 0px 0px 4px rgba(120, 120, 120, 0.3);
+    margin-bottom: 25px;
+    border: 1px solid rgb(195, 195, 195);
+    border-radius: 5px;
+}
+
+.containerIti{
+
+    z-index: 1000;
+    position: absolute;
+    bottom: 50px;
+    right: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+.iti{
+
+    text-decoration: none;
+    margin: 5px;
+    width: 80px;
+    text-align: center;
+    box-shadow: 0px 0px 8px rgba(100, 100, 100, 0.7);
+
+}
+
+.iti:hover{
+
+    text-decoration: none;
+
+}
+
+/* Partenaires */
+
+
+.listePartenaires{
+
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+
+
+}
+
+.listePartenaires img{
+
+    max-height: 50px;
+    margin: 5px;
+
+}
+
+
+
+
+
+
+
+
+
+
+
+.containerDefault{
+
+    padding-top: 25px;
+    margin-top: 90px;
+    margin-bottom: 75px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 5px;
+
+}
+
+.containerDefaultLogin{
+
+    margin-top: 10px;
+    padding-top: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 5px;
+
+}
+
+.containerDefaultProfil{
+
+    padding-top: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 5px;
+
+}
+
+.paddingResponsive{
+
+    padding-top: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 5px;
+
+}
+
+.btnMenu{
+
+    display: flex;
+
+}
+
+html{
+
+    min-height: 100%;
+
+}
+.body{
+
+    min-height: 100%;
+    font-family: RobotoMedium;
+    color: rgb(125, 125, 125);
+
+}
+
+.fondAdmin{
+
+    background-color:rgb(230,230,230);
+    font-family: sans-serif;
+    color: rgb(108, 117, 125);
+    min-height: 100%;
+
+}
+
+.containerDefaultDeux{
+
+    padding-top: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+.imageAccueil{
+
+    width: 400px;
+
+}
+
+.boutonListe{
+
+    margin-right: 15px;
+
+}
+
+.accueil{
+
+    min-height: 150px;
+
+}
+
+.bienvenue{
+
+    margin-bottom: 30px;
+
+}
+
+.login{
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 25px;
+
+}
+
+.profil{
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 25px;
+    margin-top: 75px;
+
+}
+
+.cadreEpisode{
+
+    padding: 20px;
+    margin-bottom: 10px;
+    background-color: white;
+    box-shadow: 0px 0px 5px rgb(230, 230, 230);
+    transition: transform 0.2s linear;
+
+}
+
+.cadreCommentaire{
+
+    padding: 20px;
+    margin-bottom: 10px;
+    background-color: white;
+    box-shadow: 0px 0px 5px rgb(230, 230, 230);
+
+}
+
+.cadreEpisode:hover{
+
+    transform: scale(0.99);
+
+}
+
+.nomCommentaire{
+
+    font-weight: bold;
+
+}
+
+.containerCom{
+
+    padding-top: 10px;
+    padding-bottom: 0.5px;
+
+}
+
+@media screen and (max-width: 852px) {
+
+    .title{
+
+        margin-top: 25px;
+        
+
+    }
+
+    .presentation{
+
+        padding-top:130px;
+    
+    }
+
+    .containerIti{
+
+        position: absolute;
+        bottom: 15px;
+        right: 15px;
+    
+    }
+
+    .imageAccueil{
+
+        width: 100%;
+
+    }
+
+    .containerDefaultLogin{
+
+        padding-top: 95px;
+    
+    }
+
+    .containerDefaultDeux{
+
+        padding-top: 175px;
+    
+    }
+
+    .btnIndexAdmin{
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 40px;
+
+    }
+
+    .btnIndexAdmin a{
+
+        margin: 5px;
+        width: 200px;
+
+    }
+
+    .boutonListe{
+
+        margin-right: 0px;
+        margin-bottom: 8px;
+    
+    }
+
+    .accueil{
+
+        min-height: 250px;
+    
+    }
+
+    .bienvenue{
+
+        margin-bottom: 30px;
+
+    }
+
+    .containerDefault{
+
+        margin-top: 125px;
+        margin-bottom: 50px;
+    
+    }
+
+    .navAdmin{
+
+        display: flex;
+        flex-direction: column;
+
+    }
+
+    .listeBtnAdmin{
+
+        margin-bottom: 20px;
+        margin-top: 20px;
+
+    }
+
+    .listeBtnAdmin a{
+
+        margin: 5px;
+
+    }
+
+    .containerDefaultProfil{
+
+        padding-top: 100px;
+        margin-bottom: 10px;
+        
+    }
+
+    .profil{
+
+        margin-top: 100px;
+
+    }
+    
+    .responsivePadding{
+
+        padding-top:170px;
+    
+    }
+
+  }
+
+  @media screen and (max-width: 800px) {
+
+    .navAdmin{
+
+        padding-top: 25px;
+
+    }
+
+    .nav{
+
+        display: flex;
+        flex-direction: row;
+        padding-top: 15px;
+        padding-bottom: 15px;
+
+    }
+
+    .presentation{
+
+        padding-top:70px;
+    
+    }
+
+    .containerDefaultLogin{
+
+        padding-top: 30px;
+    
+    }
+
+    .title{
+
+        margin: 0px;
+
+    }
+
+    .menuResponsive{
+
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+    }
+
+    .label{
+
+        display: flex;
+        justify-content: center;
+        margin-top: 10px;
+    
+    }
+
+    .dropdown:hover .dropdown-child{
+
+        position: relative;
+        border:none;
+        padding-bottom: 10px;
+        padding: 0px;
+    
+    }
+
+    .dropdown-child a{
+
+        border-bottom: 1px solid rgb(180, 180, 180);
+    
+    }
+
+    .listeBtn{
+
+        display: none;
+        list-style-type: none;
+        font-family: sans-serif;
+    
+    }
+    
+    .checkBox:checked ~ .listeBtn{
+    
+        display: flex;
+        flex-direction: column;
+    
+    }
+
+    .btnMenu,.btnDropdown{
+
+        font-size: 12px;
+
+    }
+
+    .footer{
+
+        flex-direction: column;
+    
+    }
+
+    .blocFooter{
+
+        text-align: center;
+        padding-bottom: 20px;
+
+    }
+
+    .listeBtnAdmin{
+
+        display: flex;
+        flex-direction: column-reverse;
+
+    }
+
+    .containerDefaultDeux{
+
+        padding-top: 270px;
+    
+    }
+
+    .containerDefaultProfil{
+
+        padding-top: 75px;
+        
+    }
+
+    .profil{
+
+        margin-top: 200px;
+
+    }
+
+    .responsivePaddingTwo{
+
+        padding-top:270px;
+    
+    }
+
+    .responsivePadding{
+
+        padding-top:270px;
+    
+    }
+
+}
+
+@media screen and (max-width: 600px) {
+
+    .nav{
+
+        display: flex;
+        flex-direction: column;
+
+    }
+
+    .presentation{
+
+        padding-top:80px;
+    
+    }
+
+    .titleCenter{
+
+        text-align: center;
+    
+    }
+
+    .maxWidth{
+
+        width: 100%;
+    
+    }
+
+    .containerDefaultLogin{
+
+        padding-top: 60px;
+    
+    }
+
+}
+
+

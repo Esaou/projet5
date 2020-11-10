@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+  
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Jekyll v4.1.1">
+    <title>Centre de Santé l'Étoile</title>
+    <link rel="icon" type="image/png" href="/images/favicon.png" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+    integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+    crossorigin=""/>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
+    
+    <script src="https://cdn.tiny.cloud/1/ztpdey7r3pk9mfbio8d0phcfh7uymugq03n8ui70exrnuk9e/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>  
+    <script>
+        tinymce.init({
+        selector: '#myEditor',
+        toolbar: 'code formatpainter pageembed permanentpen',
+        toolbar_mode: 'floating',
+        tinycomments_mode: 'embedded',
+        tinycomments_author: 'Author name',
+        });
+    </script>
+    <script src="https://kit.fontawesome.com/aee95a7a92.js"></script>
+  
+    </head>
+    
+    <body class="body">
+
+        <nav class="nav">
+                <div class="title">
+                    <a class="headerNav" href="index.php?action=index">Centre de Santé l'Étoile</a>
+                </div>
+                <div class="menuResponsive">
+                    <label for="checkBox" class="label"><i class="fas fa-bars"></i></label>
+                    <input type="checkbox" class="checkBox" id="checkBox">
+                    <div class="listeBtn">
+                            <div class="dropdown">
+                                <span class="btnDropdown">LE CENTRE DE SANTÉ<i style="margin-left:10px;" class="fas fa-caret-down"></i></span>
+                                <div class="dropdown-child">
+                                    <a href="index.php?action=presentation">Présentation</a>
+                                    <a href="index.php?action=projetSoin">Projet de soins</a>
+                                    <a href="index.php?action=partenaires">Nos partenaires</a>
+                                </div>
+                            </div>
+                            <div class="dropdown">
+                                <span class="btnDropdown">NOS ACTIVITÉS<i style="margin-left:10px;" class="fas fa-caret-down"></i></span>
+                                <div class="dropdown-child">
+                                
+                                </div>
+                            </div>
+                            <a class="btnMenu" href="index.php?action=rejoindre">NOUS REJOINDRE</a>
+                            <a class="btnMenu" href="index.php?action=contact">CONTACT</a>
+                    </div>
+                </div>
+        </nav>
+
+        <main role="main" style="padding-top:63px;">
+
+            {% block content %}{% endblock %}
+
+        </main>
+
+        <footer class="footer">
+
+            <div class="container blocFooter">
+                <div>
+                    <img src="/images/logo.png" alt="logo" class="logoFooter">
+                    <p>4 avenue du 8 mai 1945</p>
+                    <p>38400, Saint Martin d'Hères</p>
+                    <a href="index.php?action=contact" class="lienFooter"><p>Plus d'informations</p></a>
+                </div>
+            </div>
+            <div class="container blocFooter">
+                <div>
+                    <p class="titlesFooter">Accès rapides</p>
+                    <a href="index.php?action=presentation" class="lienFooter"><p>Présentation</p></a>
+                    <a href="index.php?action=activites" class="lienFooter"><p>Nos activités</p></a>
+                    <a href="index.php?action=projetSoin" class="lienFooter"><p>Projet de soins</p></a>
+                    <a href="index.php?action=rejoindre" class="lienFooter"><p>Nous rejoindre</p></a>
+                </div>
+            </div>
+            <div class="container blocFooter">
+                <div>
+                    <p class="titlesFooter">Partenaires</p>
+                    <a href="index.php?action=partenaires"><img src="images/partenaire.png" alt="partenaires" class="imgPartenaires"></a>
+                </div>
+            </div>
+
+        </footer>
+        <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+        integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+        crossorigin=""></script>
+        <script src="/js/Map.js"></script>
+    </body>
+
+</html>
+

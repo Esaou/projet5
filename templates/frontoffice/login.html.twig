@@ -1,0 +1,15 @@
+{% extends "/frontoffice/layout.html.twig" %}
+
+{% block content %}
+<div class="container starter-template containerDefaultLogin">
+    <form class="rounded shadow-sm p-3 mb-5 bg-white text-secondary border border-muted" method="post">
+        <input type="hidden" name="token" id="token" value=""/>
+        {{ forms.input('username')|raw }}
+        {{ forms.password('password')|raw }}
+        <button class="btn btn-success" style="margin-top:10px">Se connecter</button>
+        {% if error == true %}
+            <div class="alert alert-danger" style="margin-top:15px">Identifiants incorrects</div>
+        {% endif %}
+    </form>
+</div>
+{%  endblock %}

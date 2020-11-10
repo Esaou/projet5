@@ -1,0 +1,51 @@
+{% extends "/frontoffice/layout.html.twig" %}
+
+{% block content %}
+
+<section class="container presentation">
+
+    <div class="nousContacter maxWidth" style="margin-bottom:25px;">
+
+        <div>
+
+            <h5 class="colorTitle">Nous contacter</h5> 
+            <hr/>
+            <p>Vous pouvez nous contacter au 06.87.95.84.32 du lundi au vendredi de 8h à 18h. Sans réponse de notre part ? Laissez-nous un message nous vous rapelleront dès que possible !</p>
+
+        </div>
+
+    </div>
+    <div class="nousTrouver maxWidth">
+
+        <div style="margin-bottom:15px;">
+
+            <h5 class="colorTitle">Nous trouver</h5> 
+            <hr/>
+            <p>4 avenue du 8 mai 1945, 38400 Saint Martin d'Hères - Auvergne-Rhône-Alpes</p>
+            <p>Situé face à la Poste Principale - Entrée côté place Étienne Grappe - En face du terminus Tram D</p>
+            <p>Parking du TRAM D avec place PMR - Pistes cyclables / Barres à vélo</p>
+            <p>Arrêt de tram et de bus : Étienne Grappe</p>
+
+        </div>
+        <div class="transports" style="margin-bottom:35px;">
+
+            <img src="/images/busUn.png" alt="transport">
+            <img src="/images/busDeux.png" alt="transport">
+            <img src="/images/busTrois.png" alt="transport">
+            <img src="/images/tram.png" alt="transport">
+
+        </div>
+        <div id="carte">
+
+            <div class="containerIti">
+                <a class="btn-sm btn-primary iti" style="color:white;" target="_blank" href="https://www.google.com/maps/dir//google++espace+sant%C3%A9+l'%C3%A9toile/@45.1718479,5.7521593,15z/data=!4m8!4m7!1m0!1m5!1m1!1s0x478af52238f415ef:0x5c35a791b9943c87!2m2!1d5.7570156!2d45.1717431">Itinéraire</a>
+                <p class="btn-sm btn-primary iti" id="boutonRecentrer">Recentrer</p>
+            </div>
+                
+        </div>
+
+    </div>      
+
+</section>
+
+{%  endblock %}

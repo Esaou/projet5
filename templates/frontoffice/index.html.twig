@@ -1,0 +1,58 @@
+{% extends "/frontoffice/layout.html.twig" %}
+
+{% block content %}
+<div class="">
+
+    <div class="slider">
+
+
+    </div>
+
+</div>
+<section class="infoImportante">
+    
+    <div class="container">
+
+        <div class="container maxWidth" style="font-family:sans-serif;padding-top: 50px;">
+            <h5 style="color:rgb(100, 203, 74);" class="titleCenter">INFORMATION IMPORTANTE</h5> 
+            <hr/>
+            {% for encadre in encadres %}
+                <p>{{ encadre.contenu|raw }}</p>
+            {% endfor %}
+        </div>
+
+    </div>
+
+</section>
+
+<section class="professionnels">
+    <div class="container">
+        <div class="container maxWidth" style="font-family:sans-serif;padding-top: 50px;">
+            <h5 class="colorTitle titleCenter">NOS ACTIVITÉS</h5>
+            <hr/>
+            <div class="container containerActivites">
+                {% for activite in activites %}
+                <a style="text-decoration: none;" href="index.php?p=activites&id={{ activite.id }}"><div class="activitesIndex rounded"><p style="font-family:RobotoMedium;" class="colorLinkTwo">{{ activite.activite }}</p></div></a>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="recrutement">
+    
+    <div class="container">
+        <div class="container maxWidth" style="font-family:sans-serif;padding-top: 50px;">
+            <h5 class="colorTitle titleCenter">NOUS RECRUTONS</h5>
+            <hr/>
+            <p>Vous êtes un professionnel de santé désireux de travailler au sein du centre de santé l'Étoile ?</p>
+            <p>Nous sommes à votre disposition pour toute information complémentaire concernant l'intégration du centre.</p>
+            <p>Merci de nous laisser vos coordonnées ainsi que votre activité via <a href="index.php?action=rejoindre" class="colorLink">notre formulaire</a>, afin que nous puissions entrer en contact.</p>
+        </div>
+    </div>
+
+</section>
+
+{%  endblock %}
+
+
