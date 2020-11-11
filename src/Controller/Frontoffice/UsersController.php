@@ -40,6 +40,7 @@ class UsersController
             }
         }
         $dataForm = $this->postManager->form();
-        $this->view->render(['template' => 'login', 'data' => ['forms' => $dataForm, 'error' => $error]]);
+        $dataActivites = $this->postManager->activites();
+        $this->view->render(['template' => 'login', 'data' => ['forms' => $dataForm, 'error' => $error,'activites' => $dataActivites]]);
     }
 }

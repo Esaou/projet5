@@ -51,7 +51,9 @@
                             <div class="dropdown">
                                 <span class="btnDropdown">NOS ACTIVITÉS<i style="margin-left:10px;" class="fas fa-caret-down"></i></span>
                                 <div class="dropdown-child">
-                                
+                                {% for activite in activites %}
+                                    <a href="index.php?action=activites&id={{ activite.id }}">{{ activite.activite }}</a>
+                                {% endfor %}
                                 </div>
                             </div>
                             <a class="btnMenu" href="index.php?action=rejoindre">NOUS REJOINDRE</a>

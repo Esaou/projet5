@@ -35,31 +35,31 @@ class Router
 
         if ($action === 'index') {
             $postManager = new FrontManager($this->database);
-            $controller = new FrontController($postManager, $this->view);
+            $controller = new FrontController($postManager, $this->view, $this->database);
             $controller->index();
         } elseif ($action === 'presentation') {
             $postManager = new FrontManager($this->database);
-            $controller = new FrontController($postManager, $this->view);
+            $controller = new FrontController($postManager, $this->view, $this->database);
             $controller->presentation();
         } elseif ($action === 'projetSoin') {
             $postManager = new FrontManager($this->database);
-            $controller = new FrontController($postManager, $this->view);
+            $controller = new FrontController($postManager, $this->view, $this->database);
             $controller->projetSoin();
         } elseif ($action === 'partenaires') {
             $postManager = new FrontManager($this->database);
-            $controller = new FrontController($postManager, $this->view);
+            $controller = new FrontController($postManager, $this->view, $this->database);
             $controller->partenaires();
         } elseif ($action === 'activites') {
             $postManager = new FrontManager($this->database);
-            $controller = new FrontController($postManager, $this->view);
+            $controller = new FrontController($postManager, $this->view, $this->database);
             $controller->activites();
         } elseif ($action === 'rejoindre') {
             $postManager = new FrontManager($this->database);
-            $controller = new FrontController($postManager, $this->view);
+            $controller = new FrontController($postManager, $this->view, $this->database);
             $controller->rejoindre();
         } elseif ($action === 'contact') {
             $postManager = new FrontManager($this->database);
-            $controller = new FrontController($postManager, $this->view);
+            $controller = new FrontController($postManager, $this->view, $this->database);
             $controller->contact();
         } elseif ($action === 'login') {
             $postManager = new FrontManager($this->database);
@@ -73,11 +73,11 @@ class Router
             $controller->index();
         } elseif ($action === 'forbidden') {
             $postManager = new FrontManager($this->database);
-            $controller = new FrontController($postManager, $this->view);
+            $controller = new FrontController($postManager, $this->view, $this->database);
             $controller->forbidden();
         } else {
             $postManager = new FrontManager($this->database);
-            $controller = new FrontController($postManager, $this->view);
+            $controller = new FrontController($postManager, $this->view, $this->database);
             $controller->notFound();
         }
     }

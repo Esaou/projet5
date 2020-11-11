@@ -6,16 +6,20 @@ namespace App\Controller\Frontoffice;
 
 use App\Model\CommentManager;
 use App\Model\FrontManager;
+use App\Service\Database;
+use App\Service\Http\Request;
 use App\View\View;
 
 class FrontController
 {
     private FrontManager $postManager;
     private View $view;
+    private Database $database;
 
-    public function __construct(FrontManager $postManager, View $view)
+    public function __construct(FrontManager $postManager, View $view, Database $database)
     {
         $this->postManager = $postManager;
+        $this->database = $database;
         $this->view = $view;
     }
 
@@ -29,42 +33,91 @@ class FrontController
 
     public function presentation(): void
     {
-        $this->view->render(['template' => 'presentation', 'data' => []]);
+        $dataActivites = $this->postManager->activites();
+        $this->view->render(['template' => 'presentation', 'data' => ['activites' => $dataActivites]]);
     }
 
     public function projetSoin(): void
     {
-        $this->view->render(['template' => 'projetSoin', 'data' => []]);
+        $dataActivites = $this->postManager->activites();
+        $this->view->render(['template' => 'projetSoin', 'data' => ['activites' => $dataActivites]]);
     }
 
     public function partenaires(): void
     {
-        $this->view->render(['template' => 'partenaires', 'data' => []]);
+        $dataActivites = $this->postManager->activites();
+        $this->view->render(['template' => 'partenaires', 'data' => ['activites' => $dataActivites]]);
     }
 
     public function activites(): void
     {
-        $this->view->render(['template' => 'activites', 'data' => []]);
+        $dataActivites = $this->postManager->activites();
+        $dataShowActivites = $this->postManager->showActivites();
+        $dataShowProfessionnels = $this->postManager->showProfessionnels();
+        $this->view->render(['template' => 'activites', 'data' => ['activites' => $dataActivites,'showActivites' => $dataShowActivites,'professionnels' => $dataShowProfessionnels]]);
     }
 
     public function contact(): void
     {
-        $this->view->render(['template' => 'contact', 'data' => []]);
+        $dataActivites = $this->postManager->activites();
+        $this->view->render(['template' => 'contact', 'data' => ['activites' => $dataActivites]]);
     }
 
     public function rejoindre(): void
     {
+        $request = new Request();
+
+        
+        $error = false;
+        $errors=false;
+        $result = false;
+
+        $nom = $request->getPost()->get('nom');
+        $email = $request->getPost()->get('email');
+        $objet = $request->getPost()->get('objet');
+        $message = $request->getPost()->get('message');
+
+        $postTable = $this->database->getInstance()->getTable('FrontManager');
+
+        if (!empty($_POST)) {
+            if ((isset($nom,$email,$objet,$message) and !empty($nom) and !empty($email) and !empty($objet) and !empty($message))) {
+                $pseudo = htmlspecialchars($nom);
+                $email = htmlspecialchars($email);
+                $objet = htmlspecialchars($objet);
+                $message = htmlspecialchars($message);
+
+                if (mb_strlen($pseudo) < 25) {
+                    $postTable->createMessage([
+            
+                        'nom' => $pseudo,
+                        'email' => $email,
+                        'objet' => $objet,
+                        'message' => $message
+                        
+            
+                    ]);
+                    $result = true;
+                } else {
+                    $error = true;
+                }
+            } else {
+                $errors= true;
+            }
+        }
         $dataForm = $this->postManager->form();
-        $this->view->render(['template' => 'rejoindre', 'data' => ['forms' => $dataForm]]);
+        $dataActivites = $this->postManager->activites();
+        $this->view->render(['template' => 'rejoindre', 'data' => ['result' => $result, 'error' => $error,'errors' => $errors,'forms' => $dataForm, 'activites' => $dataActivites]]);
     }
 
     public function notFound():void
     {
-        $this->view->render(['template' => 'notFound', 'data' => []]);
+        $dataActivites = $this->postManager->activites();
+        $this->view->render(['template' => 'notFound', 'data' => ['activites' => $dataActivites]]);
     }
 
     public function forbidden():void
     {
-        $this->view->render(['template' => 'forbidden', 'data' => []]);
+        $dataActivites = $this->postManager->activites();
+        $this->view->render(['template' => 'forbidden', 'data' => ['activites' => $dataActivites]]);
     }
 }

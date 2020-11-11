@@ -15,6 +15,7 @@ class Database
     private $pdo;
     private $database;
     private $instance;
+    private $className;
 
 
     public function __construct(string $dbName, string $dbUser = 'root', string $dbPass ='', string $dbHost='localhost')
@@ -97,5 +98,11 @@ class Database
             $this->instance = new Database($this->dbName, $this->dbUser, $this->dbPass, $this->dbHost);
         }
         return $this->instance;
+    }
+
+    public function getTable(string $name):object
+    {
+        $className ='\\App\\Model\\' . ucfirst($name);
+        return new $className(new Database($this->dbName, $this->dbUser, $this->dbPass, $this->dbHost));
     }
 }
