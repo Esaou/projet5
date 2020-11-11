@@ -1,1 +1,68 @@
 {% extends "/backoffice/layout.html.twig" %}
+
+{% block content %}
+
+    <section class="container presentation">
+
+        <div class="container rounded dashboard">
+
+            <div class="blocDashboard rounded">
+            
+                <a class="container" href="index.php?action=activitesManager" >
+                    <h5 class="colorTitle">Vos activités</h5> 
+                    <hr/>
+                    <div class="container d-flex flex-column justify-content-center" style="min-height:100px;">
+                    <p>Dernière activité : {% for activite in activites %}
+                                                <span class="green">{{ activite.activite|raw }}</span>
+                                            {% endfor %}</p>
+                    <p>Nombre d'activités : {% for count in countA %}
+                                                    <span class="green">{{ count.nb|raw }}</span>
+                                                  {% endfor %}</p>
+                    </div>
+                    <p class="text-right" style="font-size:15px;">Cliquer pour gérer</p>
+                </a>
+                <a href="index.php?action=professionnelsManager" class="container">
+                    <h5 class="colorTitle">Vos professionnels</h5> 
+                    <hr/>
+                    <div class="container d-flex flex-column justify-content-center" style="min-height:100px;">
+                    <p>Dernier professionnel : {% for professionnel in professionnels %}
+                                                    <span class="green">{{ professionnel.nom|raw }}</span>
+                                               {% endfor %}</p>
+                    <p>Nombre de professionnels : {% for count in countP %}
+                                                    <span class="green">{{ count.nb|raw }}</span>
+                                                  {% endfor %}</p>
+                    </div>
+                    <p class="text-right" style="font-size:15px;">Cliquer pour gérer</p>
+                </a>
+            
+            </div>
+            <div class="blocDashboard rounded">
+            
+                <a href="" class="container">
+                    <h5 class="colorTitle">Modifier les pages</h5> 
+                    <hr/>
+                    <p></p>
+                    <div class="container d-flex flex-column justify-content-center" style="min-height:100px;">
+
+                    </div>
+                    <p class="text-right" style="font-size:15px;">Cliquer pour gérer</p>
+                </a>
+                <a href="index.php?action=messagesManager" class="container">
+                    <h5 class="colorTitle">Dernier message</h5> 
+                    <hr/>
+                    <div class="container d-flex flex-column justify-content-center" style="min-height:100px;">
+                    {% for message in messages %}
+                        <p>Nom : <span class="green">{{ message.nom|raw }}</span></p>
+                        <p>Objet : <span class="green">{{ message.objet|raw }}</span></p>
+                    {% endfor %}</p>
+                    </div>
+                    <p class="text-right" style="font-size:15px;">Cliquer pour gérer</p>
+                </a>
+            
+            </div>
+
+        </div>
+
+    </section>
+
+{%  endblock %}

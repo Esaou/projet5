@@ -7,6 +7,7 @@ namespace  App\Service;
 use App\Controller\Backoffice\BackController;
 use App\Controller\Frontoffice\FrontController;
 use App\Controller\Frontoffice\UsersController;
+use App\Model\BackManager;
 use App\Model\CommentManager;
 use App\Model\FrontManager;
 use App\Model\UsersManager;
@@ -69,8 +70,39 @@ class Router
         } elseif ($action === 'indexAdmin') {
             $postManager = new FrontManager($this->database);
             $usersManager = new UsersManager($this->database);
-            $controller = new BackController($postManager, $this->view, $this->database);
+            $backManager = new BackManager($this->database);
+            $controller = new BackController($postManager, $backManager, $this->view, $this->database);
             $controller->index();
+        } elseif ($action === 'activitesManager') {
+            $postManager = new FrontManager($this->database);
+            $usersManager = new UsersManager($this->database);
+            $backManager = new BackManager($this->database);
+            $controller = new BackController($postManager, $backManager, $this->view, $this->database);
+            $controller->activitesManager();
+        } elseif ($action === 'professionnelsManager') {
+            $postManager = new FrontManager($this->database);
+            $usersManager = new UsersManager($this->database);
+            $backManager = new BackManager($this->database);
+            $controller = new BackController($postManager, $backManager, $this->view, $this->database);
+            $controller->professionnelsManager();
+        } elseif ($action === 'messagesManager') {
+            $postManager = new FrontManager($this->database);
+            $usersManager = new UsersManager($this->database);
+            $backManager = new BackManager($this->database);
+            $controller = new BackController($postManager, $backManager, $this->view, $this->database);
+            $controller->messagesManager();
+        } elseif ($action === 'deconnecter') {
+            $postManager = new FrontManager($this->database);
+            $usersManager = new UsersManager($this->database);
+            $backManager = new BackManager($this->database);
+            $controller = new BackController($postManager, $backManager, $this->view, $this->database);
+            $controller->deconnecter();
+        } elseif ($action === 'profil') {
+            $postManager = new FrontManager($this->database);
+            $backManager = new BackManager($this->database);
+            $usersManager = new UsersManager($this->database);
+            $controller = new BackController($postManager, $backManager, $this->view, $this->database);
+            $controller->profil();
         } elseif ($action === 'forbidden') {
             $postManager = new FrontManager($this->database);
             $controller = new FrontController($postManager, $this->view, $this->database);
