@@ -1,86 +1,114 @@
 <!doctype html>
 <html lang="en">
-  
   <head>
-
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
-    <meta name="generator" content="Jekyll v4.1.1">
-    <title>Centre de Santé l'Étoile</title>
-    <link rel="icon" type="image/png" href="/images/favicon.png" />
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
-    integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
-    crossorigin=""/>
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="/css/style.css">
-    
-    <script src="https://cdn.tiny.cloud/1/ztpdey7r3pk9mfbio8d0phcfh7uymugq03n8ui70exrnuk9e/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>  
-    <script>
-        tinymce.init({
-        selector: '#myEditor',
-        toolbar: 'code formatpainter pageembed permanentpen',
-        toolbar_mode: 'floating',
-        tinycomments_mode: 'embedded',
-        tinycomments_author: 'Author name',
-        });
-    </script>
-    <script src="https://kit.fontawesome.com/aee95a7a92.js"></script>
-  
-    </head>
-    
-    <body class="body">
+   
+    <title>Administration | Centre de santé l'Étoile</title>
 
-        <nav class="navAdmin" style="min-height:60px;">
-                <div class="title">
-                    <a class="headerNav" href="index.php?action=index">Centre de Santé l'Étoile</a>
-                </div>
-                <div class="listeBtnAdmin">
-                    <a href="?action=deconnecter" class="btn btn-outline-danger">Se déconnecter</a>
-                    <a href="?action=profil&id={{ userId|raw }}" class="btn btn-outline-primary">Modifier mon profil</a>
-                    <a class="btn btn-primary" href="index.php?action=indexAdmin">Espace administration</a>
-                </div>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="icon" type="image/png" href="/images/favicon.png" />
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="https://kit.fontawesome.com/aee95a7a92.js"></script>
+
+  </head>
+  
+  <body>
+    <nav class="navbar navbar-expand-md navbar-default">
+
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="?action=indexAdmin" style="font-weight:bold;">Dashboard</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="?action=activitesManager">Activités</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="?action=professionnelsManager">Professionnels</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="?action=messagesManager">Messages</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav navbar-right">
+                <li class="nav-item">
+                    <a class="nav-link" href="?action=profil&id={{ userId|raw }}">Mon profil</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="?action=deconnecter">Se déconnecter</a>
+                </li>
+                </li>
+            </ul>
+        </div>
         </nav>
 
-        <main role="main" style="padding-top:63px;">
+        <header>
 
-            {% block content %}{% endblock %}
+            <div class="container">
 
-        </main>
+                <div class="row">
+                
+                    <div class="col-md-10">
 
-        <footer class="footer">
+                        <h2><i class="fas fa-cog" style="margin-right:15px;"></i>Dashboard <small>Gérez votre site !</small></h2>
 
-            <div class="container blocFooter">
-                <div>
-                    <img src="/images/logo.png" alt="logo" class="logoFooter">
-                    <p>4 avenue du 8 mai 1945</p>
-                    <p>38400, Saint Martin d'Hères</p>
-                    <a href="index.php?action=contact" class="lienFooter"><p>Plus d'informations</p></a>
+                    </div>
+                    <div class="col-md-2">
+
+                        <div class="dropdown">
+                            <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Créer du contenu
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item" href="?action=addActivite">Ajouter une activité</a>
+                                <a class="dropdown-item" href="?action=addProfessionnel">Ajouter un professionnel</a>
+                            </div>
+                        </div>
+                    
+                    </div>
+                
                 </div>
-            </div>
-            <div class="container blocFooter">
-                <div>
-                    <p class="titlesFooter">Accès rapides</p>
-                    <a href="index.php?action=presentation" class="lienFooter"><p>Présentation</p></a>
-                    <a href="index.php?action=activites" class="lienFooter"><p>Nos activités</p></a>
-                    <a href="index.php?action=projetSoin" class="lienFooter"><p>Projet de soins</p></a>
-                    <a href="index.php?action=rejoindre" class="lienFooter"><p>Nous rejoindre</p></a>
-                </div>
-            </div>
-            <div class="container blocFooter">
-                <div>
-                    <p class="titlesFooter">Partenaires</p>
-                    <a href="index.php?action=partenaires"><img src="images/partenaire.png" alt="partenaires" class="imgPartenaires"></a>
-                </div>
+
             </div>
 
-        </footer>
-        <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
-        integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
-        crossorigin=""></script>
-        <script src="/js/Map.js"></script>
-    </body>
+        </header>
 
+        <section id="main">
+
+            <div class="container">
+
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="list-group">
+                            <a href="?action=indexAdmin" class="list-group-item list-group-item-action active" style="background-color:rgb(100,100,100);">
+                                <i class="fas fa-cog"></i> Dashboard
+                            </a>
+                            <a href="?action=activitesManager" class="list-group-item list-group-item-action"><i class="fas fa-stethoscope" style="margin-right:10px;"></i>Activités <span class="badge badge-secondary">7</span></a>
+                            <a href="?action=professionnelsManager" class="list-group-item list-group-item-action"><i class="fas fa-user-alt" style="margin-right:10px;"></i>Professionnels <span class="badge badge-secondary">16</span></a>
+                            <a href="?action=messagesManager" class="list-group-item list-group-item-action"><i class="fas fa-envelope" style="margin-right:10px;"></i>Messages <span class="badge badge-secondary">3</span></a>
+                             <a href="#" class="list-group-item list-group-item-action"><i class="fas fa-file" style="margin-right:14px;"></i>Modifier les pages </a>
+                        </div>
+                    </div>
+                    <div class="col-md-9">
+                        <div class="card card-default" style="margin-bottom:50px;">
+                            <div class="card-body">
+                                {% block content %}{% endblock %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </section>
+
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+      </body>
 </html>
+
+
 

@@ -2,11 +2,8 @@
 
 {% block content %}
 
-    <section class="container presentation">
-
-        <div class="container rounded dashboard">
-
-            <h4 style="margin-bottom:20px;" class="colorTitle">Vos Professionnels</h4> 
+    <h4 class="card-title">Professionnels</h4>
+        <div class="card-body">
             <table class="table table-striped table-responsive-sm text-center">
                 <thead>
                     <tr class="colorTitle">
@@ -21,19 +18,16 @@
                             <td>{{ professionnel.nom|raw }}</td>
                             <td>{{ professionnel.activite|raw }}</td>
                             <td>
-                                <a href="?action=editPro&id={{ professionnel.id|raw }}" class="btn btn-outline-primary"><i class="fas fa-pen"></i></a>
-                                <form action="?action=deletePro&id={{ professionnel.id|raw }}" method="post" style="display:inline;">
+                                <a href="?action=editProfessionnel&id={{ professionnel.id|raw }}" class="btn btn-secondary">Modifier</a>
+                                <form action="?action=deleteProfessionnel&id={{ professionnel.id|raw }}" method="post" style="display:inline;">
                                     <input type="hidden" name="token" id="token" value=""/>
-                                    <button type="submit" class="btn btn-outline-danger"><i class="fas fa-trash"></i></button>
+                                    <button type="submit" class="btn btn-danger"><i class="fas fa-trash"></i></button>
                                 </form>
                             </td>
                         </tr>
                     {% endfor %}
                 </tbody>
             </table>
-
         </div>
-
-    </section>
 
 {%  endblock %}

@@ -51,6 +51,12 @@ class BackManager
         return $this->database->getDb()->query("SELECT * FROM messages ORDER BY id DESC", 'App\Models\BackManager');
     }
 
+    public function showMessage($getId)
+    {
+        return $this->database->getDb()->query("SELECT * FROM messages WHERE id = $getId", 'App\Models\BackManager');
+       
+    }
+
     public function allProfessionnels()
     {
         return $this->database->getDb()->query("SELECT * FROM activites LEFT JOIN professionnels ON activites.id = professionnels.id_activites WHERE id_activites IS NOT NULL", 'App\Models\BackManager');
@@ -68,6 +74,64 @@ class BackManager
         return $this->query("UPDATE users SET $sqlPart WHERE id = $id", $attributes, true);
     }
 
+    public function updateActivite(string $id, array $fields):bool
+    {
+        $sqlParts = [];
+        $attributes = [];
+        foreach ($fields as $k => $v) {
+            $sqlParts[] = "$k = ?";
+            $attributes[] = $v;
+        }
+        $sqlPart = implode(', ', $sqlParts);
+        return $this->query("UPDATE activites SET $sqlPart WHERE id = $id", $attributes, true);
+    }
+
+    public function updateProfessionnel(string $id, array $fields):bool
+    {
+        $sqlParts = [];
+        $attributes = [];
+        foreach ($fields as $k => $v) {
+            $sqlParts[] = "$k = ?";
+            $attributes[] = $v;
+        }
+        $sqlPart = implode(', ', $sqlParts);
+        return $this->query("UPDATE professionnels SET $sqlPart WHERE id = $id", $attributes, true);
+    }
+
+    public function createActivite(array $fields):bool
+    {
+        $sqlParts = [];
+        $attributes = [];
+        foreach ($fields as $k => $v) {
+            $sqlParts[] = "$k = ?";
+            $attributes[] = $v;
+        }
+        $sqlPart = implode(', ', $sqlParts);
+        return $this->query("INSERT INTO activites SET $sqlPart", $attributes, true);
+    }
+
+    public function createProfessionnel(array $fields):bool
+    {
+        $sqlParts = [];
+        $attributes = [];
+        foreach ($fields as $k => $v) {
+            $sqlParts[] = "$k = ?";
+            $attributes[] = $v;
+        }
+        $sqlPart = implode(', ', $sqlParts);
+        return $this->query("INSERT INTO professionnels SET $sqlPart", $attributes, true);
+    }
+
+    public function deleteActivite(string $id):bool
+    {
+        return $this->query("DELETE FROM activites WHERE id = ?", [$id], true);
+    }
+
+    public function deleteProfessionnel(string $id):bool
+    {
+        return $this->query("DELETE FROM activites WHERE id = ?", [$id], true);
+    }
+
     public function query($statement, array $attributes = null, bool $one = false):bool
     {
         if ($attributes) {
@@ -79,5 +143,15 @@ class BackManager
             str_replace('Table', 'Entity', get_class($this)),
             $one
         );
+    }
+
+    public function find(string $id):object
+    {
+        return $this->database->getDb()->prepare("SELECT * FROM activites  WHERE id = ?", [$id], null, true);
+    }
+
+    public function findPro(string $id):object
+    {
+        return $this->database->getDb()->prepare("SELECT * FROM professionnels  WHERE id = ?", [$id], null, true);
     }
 }

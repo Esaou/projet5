@@ -1,3 +1,5 @@
 vendor/bin/php-cs-fixer fix --diff
 
 vendor/bin/phpstan analyse src --level 0
+
+php -S localhost:8000 -t public

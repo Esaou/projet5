@@ -1,0 +1,30 @@
+{% extends "/backoffice/layout.html.twig" %}
+
+{% block content %}
+
+    <h4 class="text-primary">Ajouter un professionnel</h4>
+    <div class="card-body">
+        <form method="post">
+
+            <input type="hidden" name="token" id="token" value=""/>
+            {{ form.inputEditor('nom')|raw }}
+            <div class="form-group" style="margin-bottom:25px;">
+                <label style="font-size:17px;">Activité</label>
+                <select name="activite" class="form-control">
+                {% for activite in activites %}
+                    <option value='{{ activite.id|raw }}'>{{ activite.activite|raw }}</option>
+                {% endfor %}
+                </select>
+            </div>
+
+            {% if result %}
+                <div class="alert alert-success text-center" style="margin-top:15px">Professionnel ajouté !</div>
+            {% endif %}
+            
+            <button class="btn btn-primary" style="margin-top:10px;">Ajouter le professionnel</button>
+            <a class="btn btn-outline-primary" style="margin-top:10px;" href="index.php?action=professionnelsManager">Retour à la liste</a>
+
+        </form>
+    </div>
+
+{%  endblock %}

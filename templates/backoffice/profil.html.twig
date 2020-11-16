@@ -2,10 +2,9 @@
 
 {% block content %}
 
-    <div class="container starter-template containerDefaultProfil">
-        <form class="profil shadow-sm p-3 mb-5 rounded bg-white border border-muted" method="post">
-
-            <h5 class="text-primary" style="margin-bottom:20px;">Modifier mon profil</h5>
+    <h4 class="text-primary">Modifier mon profil</h4>
+    <div class="card-body">
+        <form method="post">
 
             <input type="hidden" name="token" id="token" value="<?=$token;?>"/>
             {{ form.input('Username')|raw }}
@@ -20,8 +19,8 @@
             {% if result == true %}
                 <div class="alert alert-success text-center" style="margin-top:15px">Modifications sauvegardées !</div>
             {% endif %}
-            <button class="btn btn-primary" style="margin-bottom:15px;margin-top:5px;">Sauvegarder</button>
-            <a class="btn btn-outline-primary" href="index.php?action=indexAdmin">Retour page administrateur</a>
+            <button class="btn btn-primary" style="margin-top:10px;">Sauvegarder</button>
+            <a class="btn btn-outline-primary" style="margin-top:10px;" href="index.php?action=indexAdmin">Retour page administrateur</a>
 
         </form>
     </div>

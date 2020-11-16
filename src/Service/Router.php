@@ -91,7 +91,49 @@ class Router
             $backManager = new BackManager($this->database);
             $controller = new BackController($postManager, $backManager, $this->view, $this->database);
             $controller->messagesManager();
-        } elseif ($action === 'deconnecter') {
+        } elseif ($action === 'showMessage') {
+            $postManager = new FrontManager($this->database);
+            $usersManager = new UsersManager($this->database);
+            $backManager = new BackManager($this->database);
+            $controller = new BackController($postManager, $backManager, $this->view, $this->database);
+            $controller->showMessage();
+        }elseif ($action === 'deleteActivite') {
+            $postManager = new FrontManager($this->database);
+            $usersManager = new UsersManager($this->database);
+            $backManager = new BackManager($this->database);
+            $controller = new BackController($postManager, $backManager, $this->view, $this->database);
+            $controller->deleteActivite();
+        }elseif ($action === 'deleteProfessionnel') {
+            $postManager = new FrontManager($this->database);
+            $usersManager = new UsersManager($this->database);
+            $backManager = new BackManager($this->database);
+            $controller = new BackController($postManager, $backManager, $this->view, $this->database);
+            $controller->deleteProfessionnel();
+        }elseif ($action === 'addActivite') {
+            $postManager = new FrontManager($this->database);
+            $usersManager = new UsersManager($this->database);
+            $backManager = new BackManager($this->database);
+            $controller = new BackController($postManager, $backManager, $this->view, $this->database);
+            $controller->addActivite();
+        }elseif ($action === 'addProfessionnel') {
+            $postManager = new FrontManager($this->database);
+            $usersManager = new UsersManager($this->database);
+            $backManager = new BackManager($this->database);
+            $controller = new BackController($postManager, $backManager, $this->view, $this->database);
+            $controller->addProfessionnel();
+        }elseif ($action === 'editActivite') {
+            $postManager = new FrontManager($this->database);
+            $usersManager = new UsersManager($this->database);
+            $backManager = new BackManager($this->database);
+            $controller = new BackController($postManager, $backManager, $this->view, $this->database);
+            $controller->editActivite();
+        }elseif ($action === 'editProfessionnel') {
+            $postManager = new FrontManager($this->database);
+            $usersManager = new UsersManager($this->database);
+            $backManager = new BackManager($this->database);
+            $controller = new BackController($postManager, $backManager, $this->view, $this->database);
+            $controller->editProfessionnel();
+        }elseif ($action === 'deconnecter') {
             $postManager = new FrontManager($this->database);
             $usersManager = new UsersManager($this->database);
             $backManager = new BackManager($this->database);

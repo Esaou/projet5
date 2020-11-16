@@ -1,0 +1,26 @@
+{% extends "/backoffice/layout.html.twig" %}
+
+{% block content %}
+
+<h4 class="text-primary">Ajouter une activité</h4>
+    <div class="card-body">
+        <form method="post">
+
+            <input type="hidden" name="token" id="token" value="<?=$token;?>"/>
+            {{ form.inputActivite('activite')|raw }}
+            {{ form.inputTitre('titre')|raw }}
+            {{ form.textAreaEditor('description')|raw }}
+            {% if error == true %}
+                <div class="alert alert-danger text-center" style="margin-top:15px">Les champs sont vides !</div>
+            {% endif %}
+            {% if result %}
+                <div class="alert alert-success text-center" style="margin-top:15px">Activité ajoutée !</div>
+            {% endif %}
+            
+            <button class="btn btn-primary" style="margin-top:10px;">Ajouter l'activité</button>
+            <a class="btn btn-outline-primary" style="margin-top:10px;" href="index.php?action=activitesManager">Retour à la liste</a>
+
+        </form>
+    </div>
+
+{%  endblock %}
