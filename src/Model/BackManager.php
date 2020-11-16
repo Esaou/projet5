@@ -26,6 +26,11 @@ class BackManager
         return $this->database->getDb()->query("SELECT count(*) as nb FROM professionnels", 'App\Models\BackManager');
     }
 
+    public function countMessages()
+    {
+        return $this->database->getDb()->query("SELECT count(*) as nb FROM messages", 'App\Models\BackManager');
+    }
+
     public function lastActivite()
     {
         return $this->database->getDb()->query("SELECT * FROM activites ORDER BY id DESC LIMIT 0,1", 'App\Models\BackManager');
@@ -33,7 +38,7 @@ class BackManager
 
     public function lastProfessionnel()
     {
-        return $this->database->getDb()->query("SELECT * FROM professionnels ORDER BY id DESC LIMIT 0,1", 'App\Models\BackManager');
+        return $this->database->getDb()->query("SELECT * FROM activites LEFT JOIN professionnels ON activites.id = professionnels.id_activites WHERE id_activites IS NOT NULL LIMIT 0,1", 'App\Models\BackManager');
     }
 
     public function lastMessage()
@@ -54,7 +59,6 @@ class BackManager
     public function showMessage($getId)
     {
         return $this->database->getDb()->query("SELECT * FROM messages WHERE id = $getId", 'App\Models\BackManager');
-       
     }
 
     public function allProfessionnels()
@@ -127,9 +131,14 @@ class BackManager
         return $this->query("DELETE FROM activites WHERE id = ?", [$id], true);
     }
 
+    public function deleteMessage(string $id):bool
+    {
+        return $this->query("DELETE FROM messages WHERE id = ?", [$id], true);
+    }
+
     public function deleteProfessionnel(string $id):bool
     {
-        return $this->query("DELETE FROM activites WHERE id = ?", [$id], true);
+        return $this->query("DELETE FROM professionnels WHERE id = ?", [$id], true);
     }
 
     public function query($statement, array $attributes = null, bool $one = false):bool

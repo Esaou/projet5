@@ -41,33 +41,43 @@ class BackController
         $auth = new \App\Service\Security\AccessControl($app->getDb());
         $userId = $auth->getUserId();
         $dataActivite = $this->backManager->lastActivite();
-        $dataProfessionnel = $this->backManager->allProfessionnels();
+        $dataProfessionnel = $this->backManager->lastProfessionnel();
         $dataMessage = $this->backManager->lastMessage();
+        $countMessage = $this->backManager->countMessages();
         $countProfessionnel = $this->backManager->countProfessionnels();
         $countActivites = $this->backManager->countActivites();
-        $this->view->renderAdmin(['template' => 'index', 'data' => ['userId' => $userId,'activites' => $dataActivite,'professionnels' => $dataProfessionnel,'messages' => $dataMessage,'countA' => $countActivites,'countP' => $countProfessionnel]]);
+        $this->view->renderAdmin(['template' => 'index', 'data' => ['countM' => $countMessage,'userId' => $userId,'activites' => $dataActivite,'professionnels' => $dataProfessionnel,'messages' => $dataMessage,'countA' => $countActivites,'countP' => $countProfessionnel]]);
     }
 
     public function activitesManager(): void
     {
+        $countMessage = $this->backManager->countMessages();
+        $countProfessionnel = $this->backManager->countProfessionnels();
+        $countActivites = $this->backManager->countActivites();
         $app = $this->database->getInstance();
         $auth = new \App\Service\Security\AccessControl($app->getDb());
         $userId = $auth->getUserId();
         $dataActivite = $this->backManager->allActivites();
-        $this->view->renderAdmin(['template' => 'activitesManager', 'data' => ['userId' => $userId,'activites' => $dataActivite]]);
+        $this->view->renderAdmin(['template' => 'activitesManager', 'data' => ['countM' => $countMessage,'countA' => $countActivites,'countP' => $countProfessionnel,'userId' => $userId,'activites' => $dataActivite]]);
     }
 
     public function professionnelsManager(): void
     {
+        $countMessage = $this->backManager->countMessages();
+        $countProfessionnel = $this->backManager->countProfessionnels();
+        $countActivites = $this->backManager->countActivites();
         $app = $this->database->getInstance();
         $auth = new \App\Service\Security\AccessControl($app->getDb());
         $userId = $auth->getUserId();
         $dataProfessionnels = $this->backManager->allProfessionnels();
-        $this->view->renderAdmin(['template' => 'professionnelsManager', 'data' => ['userId' => $userId,'professionnels' => $dataProfessionnels]]);
+        $this->view->renderAdmin(['template' => 'professionnelsManager', 'data' => ['countM' => $countMessage,'countA' => $countActivites,'countP' => $countProfessionnel,'userId' => $userId,'professionnels' => $dataProfessionnels]]);
     }
 
     public function addActivite(): void
     {
+        $countMessage = $this->backManager->countMessages();
+        $countProfessionnel = $this->backManager->countProfessionnels();
+        $countActivites = $this->backManager->countActivites();
         $app = $this->database->getInstance();
         $auth = new \App\Service\Security\AccessControl($app->getDb());
         $userId = $auth->getUserId();
@@ -82,30 +92,33 @@ class BackController
         $error = false;
         $result = false;
 
-        if(!empty($_POST)){
+        if (!empty($_POST)) {
             if (!empty($nom) && !empty($titre)) {
-                    $res = $postTable->createActivite([
+                $res = $postTable->createActivite([
                     
                         'activite' => $nom,
                         'titre' => $titre,
                         'description' => $description
 
                     ]);
-                    if ($res) {
-                        $result = true;
-                    }
-            }else {
+                if ($res) {
+                    $result = true;
+                }
+            } else {
                 $error = true;
             }
         }
 
         $form = new \App\Service\BootstrapForm($_POST);
 
-        $this->view->renderAdmin(['template' => 'addActivite', 'data' => ['result' => $result, 'form' => $form, 'userId' => $userId,'error' => $error]]);
+        $this->view->renderAdmin(['template' => 'addActivite', 'data' => ['countM' => $countMessage,'countA' => $countActivites,'countP' => $countProfessionnel,'result' => $result, 'form' => $form, 'userId' => $userId,'error' => $error]]);
     }
 
     public function addProfessionnel(): void
     {
+        $countMessage = $this->backManager->countMessages();
+        $countProfessionnel = $this->backManager->countProfessionnels();
+        $countActivites = $this->backManager->countActivites();
         $app = $this->database->getInstance();
         $auth = new \App\Service\Security\AccessControl($app->getDb());
         $userId = $auth->getUserId();
@@ -119,25 +132,25 @@ class BackController
         $error = false;
         $result = false;
 
-        if(!empty($_POST)){
-            if (!empty($nom)) {
-                    $res = $postTable->createProfessionnel([
+        if (!empty($_POST)) {
+            if (!empty($nom) && !empty($activite)) {
+                $res = $postTable->createProfessionnel([
                     
                         'nom' => $nom,
                         'id_activites' => $activite,
 
                     ]);
-                    if ($res) {
-                        $result = true;
-                    }
-            }else {
+                if ($res) {
+                    $result = true;
+                }
+            } else {
                 $error = true;
             }
         }
 
         $form = new \App\Service\BootstrapForm($_POST);
         $dataActivite = $this->backManager->allActivites();
-        $this->view->renderAdmin(['template' => 'addProfessionnel', 'data' => ['activites' => $dataActivite,'result' => $result, 'form' => $form, 'userId' => $userId,'error' => $error]]);
+        $this->view->renderAdmin(['template' => 'addProfessionnel', 'data' => ['countM' => $countMessage,'countA' => $countActivites,'countP' => $countProfessionnel,'activites' => $dataActivite,'result' => $result, 'form' => $form, 'userId' => $userId,'error' => $error]]);
     }
 
     public function deleteActivite():void
@@ -148,12 +161,12 @@ class BackController
         
 
         if (!empty($_POST)) {
-                $result = $postTable->deleteActivite($activiteId);
-                if ($result) {
-                    header("Location: index?action=activitesManager");
-                }else{
-                    header("Location: index?action=activitesManager");
-                }
+            $result = $postTable->deleteActivite($activiteId);
+            if ($result) {
+                header("Location: index?action=activitesManager");
+            } else {
+                header("Location: index?action=activitesManager");
+            }
         }
     }
 
@@ -165,17 +178,37 @@ class BackController
         
 
         if (!empty($_POST)) {
-                $result = $postTable->deleteProfessionnel($proId);
-                if ($result) {
-                    header("Location: index?action=professionnelManager");
-                }else{
-                    header("Location: index?action=professionnelManager");
-                }
+            $res = $postTable->deleteProfessionnel($proId);
+            if ($res) {
+                header("Location: index?action=professionnelsManager");
+            } else {
+                header("Location: index?action=professionnelsManager");
+            }
+        }
+    }
+
+    public function deleteMessage():void
+    {
+        $postTable = $this->database->getInstance()->getTable('BackManager');
+        $request = new Request();
+        $msgId = $request->getGet()->get('id');
+        
+
+        if (!empty($_POST)) {
+            $res = $postTable->deleteMessage($msgId);
+            if ($res) {
+                header("Location: index?action=messagesManager");
+            } else {
+                header("Location: index?action=messagesManager");
+            }
         }
     }
 
     public function editActivite(): void
     {
+        $countMessage = $this->backManager->countMessages();
+        $countProfessionnel = $this->backManager->countProfessionnels();
+        $countActivites = $this->backManager->countActivites();
         $app = $this->database->getInstance();
         $auth = new \App\Service\Security\AccessControl($app->getDb());
         $userId = $auth->getUserId();
@@ -193,27 +226,30 @@ class BackController
         $result = false;
 
         if (!empty($_POST)) {
-                $res = $postTable->updateActivite($id, [
+            $res = $postTable->updateActivite($id, [
                 
                     'activite' => $nom,
                     'titre' => $titre,
                     'description' => $description
 
                 ]);
-                if ($res) {
-                    $result = true;
-                }
-        }else {
+            if ($res) {
+                $result = true;
+            }
+        } else {
             $error = true;
         }
 
         $post = $postTable->find($id);
         $form = new \App\Service\BootstrapForm($post);
-        $this->view->renderAdmin(['template' => 'editActivite', 'data' => ['result' => $result,'userId' => $userId,'error' => $error,'form' => $form]]);
+        $this->view->renderAdmin(['template' => 'editActivite', 'data' => ['countM' => $countMessage,'countA' => $countActivites,'countP' => $countProfessionnel,'result' => $result,'userId' => $userId,'error' => $error,'form' => $form]]);
     }
 
     public function editProfessionnel(): void
     {
+        $countMessage = $this->backManager->countMessages();
+        $countProfessionnel = $this->backManager->countProfessionnels();
+        $countActivites = $this->backManager->countActivites();
         $app = $this->database->getInstance();
         $auth = new \App\Service\Security\AccessControl($app->getDb());
         $userId = $auth->getUserId();
@@ -228,49 +264,59 @@ class BackController
         
         $error = false;
         $result = false;
-
         if (!empty($_POST)) {
+            if (!empty($activite) && !empty($nom)) {
                 $res = $postTable->updateProfessionnel($id, [
-                
-                    'nom' => $nom,
-                    'id_activites' => $activite,
+                    
+                        'nom' => $nom,
+                        'id_activites' => $activite,
 
-                ]);
+                    ]);
                 if ($res) {
                     $result = true;
                 }
-        }else {
-            $error = true;
+            } else {
+                $error = true;
+            }
         }
 
         $dataActivite = $this->backManager->allActivites();
         $post = $postTable->findPro($id);
         $form = new \App\Service\BootstrapForm($post);
-        $this->view->renderAdmin(['template' => 'editProfessionnel', 'data' => ['result' => $result,'activites' => $dataActivite, 'userId' => $userId,'error' => $error,'form' => $form]]);
+        $this->view->renderAdmin(['template' => 'editProfessionnel', 'data' => ['countM' => $countMessage,'countA' => $countActivites,'countP' => $countProfessionnel,'result' => $result,'activites' => $dataActivite, 'userId' => $userId,'error' => $error,'form' => $form]]);
     }
 
     public function messagesManager(): void
     {
+        $countMessage = $this->backManager->countMessages();
+        $countProfessionnel = $this->backManager->countProfessionnels();
+        $countActivites = $this->backManager->countActivites();
         $app = $this->database->getInstance();
         $auth = new \App\Service\Security\AccessControl($app->getDb());
         $userId = $auth->getUserId();
         $dataMessages = $this->backManager->allMessages();
-        $this->view->renderAdmin(['template' => 'messagesManager', 'data' => ['userId' => $userId,'messages' => $dataMessages]]);
+        $this->view->renderAdmin(['template' => 'messagesManager', 'data' => ['countM' => $countMessage,'countA' => $countActivites,'countP' => $countProfessionnel,'userId' => $userId,'messages' => $dataMessages]]);
     }
 
     public function showMessage(): void
     {
+        $countMessage = $this->backManager->countMessages();
+        $countProfessionnel = $this->backManager->countProfessionnels();
+        $countActivites = $this->backManager->countActivites();
         $request = new Request();
         $id = $request->getGet()->get('id');
         $app = $this->database->getInstance();
         $auth = new \App\Service\Security\AccessControl($app->getDb());
         $userId = $auth->getUserId();
         $dataMessages = $this->backManager->showMessage($id);
-        $this->view->renderAdmin(['template' => 'showMessage', 'data' => ['userId' => $userId,'messages' => $dataMessages]]);
+        $this->view->renderAdmin(['template' => 'showMessage', 'data' => ['countM' => $countMessage,'countA' => $countActivites,'countP' => $countProfessionnel,'userId' => $userId,'messages' => $dataMessages]]);
     }
 
     public function profil(): void
     {
+        $countMessage = $this->backManager->countMessages();
+        $countProfessionnel = $this->backManager->countProfessionnels();
+        $countActivites = $this->backManager->countActivites();
         $request = new Request();
         
         $username = $request->getPost()->get('Username');
@@ -305,7 +351,7 @@ class BackController
         }
 
         $form = new \App\Service\BootstrapForm();
-        $this->view->renderAdmin(['template' => 'profil', 'data' => ['form' => $form,'errors' => $errors, 'error' => $error,'result'=>$result]]);
+        $this->view->renderAdmin(['template' => 'profil', 'data' => ['countM' => $countMessage,'countA' => $countActivites,'countP' => $countProfessionnel,'form' => $form,'errors' => $errors, 'error' => $error,'result'=>$result]]);
     }
 
     public function deconnecter():void

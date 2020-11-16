@@ -33,6 +33,9 @@
             </ul>
             <ul class="navbar-nav navbar-right">
                 <li class="nav-item">
+                    <a class="nav-link" href="?action=index">Retour au site</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" href="?action=profil&id={{ userId|raw }}">Mon profil</a>
                 </li>
                 <li class="nav-item">
@@ -84,9 +87,9 @@
                             <a href="?action=indexAdmin" class="list-group-item list-group-item-action active" style="background-color:rgb(100,100,100);">
                                 <i class="fas fa-cog"></i> Dashboard
                             </a>
-                            <a href="?action=activitesManager" class="list-group-item list-group-item-action"><i class="fas fa-stethoscope" style="margin-right:10px;"></i>Activités <span class="badge badge-secondary">7</span></a>
-                            <a href="?action=professionnelsManager" class="list-group-item list-group-item-action"><i class="fas fa-user-alt" style="margin-right:10px;"></i>Professionnels <span class="badge badge-secondary">16</span></a>
-                            <a href="?action=messagesManager" class="list-group-item list-group-item-action"><i class="fas fa-envelope" style="margin-right:10px;"></i>Messages <span class="badge badge-secondary">3</span></a>
+                            <a href="?action=activitesManager" class="list-group-item list-group-item-action"><i class="fas fa-stethoscope" style="margin-right:10px;"></i>Activités <span class="badge badge-secondary">{% for count in countA %}{{ count.nb|raw }}{% endfor %}</span></a>
+                            <a href="?action=professionnelsManager" class="list-group-item list-group-item-action"><i class="fas fa-user-alt" style="margin-right:10px;"></i>Professionnels <span class="badge badge-secondary">{% for count in countP %}{{ count.nb|raw }}{% endfor %}</span></a>
+                            <a href="?action=messagesManager" class="list-group-item list-group-item-action"><i class="fas fa-envelope" style="margin-right:10px;"></i>Messages <span class="badge badge-secondary">{% for count in countM %}{{ count.nb|raw }}{% endfor %}</span></a>
                              <a href="#" class="list-group-item list-group-item-action"><i class="fas fa-file" style="margin-right:14px;"></i>Modifier les pages </a>
                         </div>
                     </div>

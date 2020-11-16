@@ -2,7 +2,7 @@
 
 {% block content %}
 
-    <h4 class="text-primary">Modifier un professionnel</h4>
+    <h4 class="colorTitle">Modifier un professionnel</h4>
     <div class="card-body">
         <form method="post">
 
@@ -10,7 +10,8 @@
             {{ form.inputEditor('nom')|raw }}
             <div class="form-group" style="margin-bottom:25px;">
                 <label style="font-size:17px;">Activité</label>
-                <select name="activite" class="form-control">
+                <select name="activite" class="form-control" >
+                <option value='' hidden selected>Sélectionner une activité</option> 
                 {% for activite in activites %}
                     <option value='{{ activite.id|raw }}'>{{ activite.activite|raw }}</option>
                 {% endfor %}
@@ -19,6 +20,10 @@
 
             {% if result %}
                 <div class="alert alert-success text-center" style="margin-top:15px">Modifications sauvegardées !</div>
+            {% endif %}
+
+            {% if error == true %}
+                <div class="alert alert-danger text-center" style="margin-top:15px">Renseignez tous les champs !</div>
             {% endif %}
             
             <button class="btn btn-primary" style="margin-top:10px;">Sauvegarder</button>
