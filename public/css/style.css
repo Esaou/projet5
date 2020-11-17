@@ -458,17 +458,18 @@
 
 .listePartenaires{
 
+    margin-top: 25px;
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
-
+    width: 100%;
 
 }
 
 .listePartenaires img{
 
     max-height: 50px;
-    margin: 5px;
+    margin: 10px;
 
 }
 
@@ -794,6 +795,46 @@ header{
     padding-top: 15px;
     padding-bottom: 10px;
     margin-bottom: 15px;
+
+}
+
+.titreCarte{
+
+    font-family: RobotoMedium;
+    font-size: 17px;
+    color: rgb(100, 203, 74);
+
+}
+
+.carteAdmin:hover{
+
+    transition: background-color 300ms linear;
+
+}
+
+.carteAdmin:hover{
+
+    background-color: rgba(230, 230, 230,06)!important;
+
+}
+
+.linkCarte:hover{
+
+    color: rgb(100, 100, 100);
+
+}
+
+.btnPages{
+
+    display: flex;
+    flex-direction: column;
+
+}
+
+.btnPages a{
+
+    max-width: 250px;
+    margin: 5px;
 
 }
 

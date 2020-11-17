@@ -1,3 +1,23 @@
 {% extends "/frontoffice/layout.html.twig" %}
 
+{% block content %}
 
+<section class="container presentation">
+
+    <div class="nousContacter maxWidth" style="margin-bottom:25px;">
+
+        <div>
+
+            <h5 class="colorTitle">Projet de soin</h5> 
+            <hr/>
+            {% for projetSoin in projetSoins %}
+                <p>{{ projetSoin.contenu|raw }}</p>
+            {% endfor %}
+
+        </div>
+
+    </div>   
+
+</section>
+
+{%  endblock %}

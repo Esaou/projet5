@@ -2,7 +2,7 @@
 
 {% block content %}
 
-        <h4 class="text-primary colorTitle">Message de {% for message in messages %}
+        <h4 class="colorTitle">Message de {% for message in messages %}
         {{ message.nom|raw }}
             {% endfor %}</h5></h4>
         <div class="card-body">
@@ -31,11 +31,7 @@
             {% for message in messages %}
                 <h5 class="colorTitle" style="margin-top:35px;">Contenu</h5>
                 <p class="text-left text-dark container rounded border border-muted bg-light" style="padding:10px;margin-top:20px;margin-bottom:30px;">{{ message.message|raw }}</p>
-                <form action="?p=admin.posts.deleteCandidature&id={{ message.id|raw }}" method="post" style="display:inline;">
-                    <input type="hidden" name="token" id="token" value=""/>
-                    <button type="submit" class="btn btn-danger">Supprimer ce message</button>
-                </form>
-                <a class="btn btn-outline-primary" href="index.php?action=messagesManager">Retour à la liste</a>
+                <a class="btn btn-primary" href="index.php?action=messagesManager">Retour à la liste</a>
             {% endfor %}
         </div>
 

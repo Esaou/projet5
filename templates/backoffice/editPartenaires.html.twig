@@ -1,0 +1,25 @@
+{% extends "/backoffice/layout.html.twig" %}
+
+{% block content %}
+
+<h4 class="colorTitle">Modification de la page "Partenaires"</h4>
+    <div class="card-body">
+        <form method="post">
+
+            <input type="hidden" name="token" id="token" value=""/>
+            {{ form.textAreaEditorContenu('contenu')|raw }}
+            
+            {% if error == true %}
+                <div class="alert alert-danger text-center" style="margin-top:15px">Les champs sont vides !</div>
+            {% endif %}
+            {% if result == true %}
+                <div class="alert alert-success text-center" style="margin-top:15px">Page modifiée !</div>
+            {% endif %}
+            
+            <button class="btn btn-primary" style="margin-top:10px;">Modifier la page</button>
+            <a class="btn btn-outline-primary" style="margin-top:10px;" href="index.php?action=pagesManager">Retour à la liste</a>
+
+        </form>
+    </div>
+
+{%  endblock %}

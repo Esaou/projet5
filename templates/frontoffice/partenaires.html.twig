@@ -1,3 +1,36 @@
 {% extends "/frontoffice/layout.html.twig" %}
 
+{% block content %}
+
+<section class="container presentation">
+
+    <div class="nousContacter maxWidth" style="margin-bottom:25px;">
+
+        <div>
+
+            <h5 class="colorTitle">Partenaires</h5> 
+            <hr/>
+            {% for partenaire in partenaires %}
+                <p>{{ partenaire.contenu|raw }}</p>
+            {% endfor %}
+
+        </div>
+
+        <div class="listePartenaires">
+
+            <img src="/images/ars.png" alt="ars">
+            <img src="/images/caf.jpg" alt="caf">
+            <img src="/images/cget.png" alt="cget">
+            <img src="/images/cpam.png" alt="cpam">
+            <img src="/images/isere.png" alt="isere">
+            <img src="/images/laRegion.png" alt="ars">
+            <img src="/images/metropole.png" alt="metropole">
+
+        </div>
+
+    </div>   
+
+</section>
+
+{%  endblock %}
 

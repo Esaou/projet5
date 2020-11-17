@@ -38,12 +38,32 @@ class BackManager
 
     public function lastProfessionnel()
     {
-        return $this->database->getDb()->query("SELECT * FROM activites LEFT JOIN professionnels ON activites.id = professionnels.id_activites WHERE id_activites IS NOT NULL LIMIT 0,1", 'App\Models\BackManager');
+        return $this->database->getDb()->query("SELECT * FROM activites LEFT JOIN professionnels ON activites.id = professionnels.id_activites WHERE id_activites IS NOT NULL ORDER BY professionnels.id DESC LIMIT 0,1", 'App\Models\BackManager');
     }
 
     public function lastMessage()
     {
         return $this->database->getDb()->query("SELECT * FROM messages ORDER BY id DESC LIMIT 0,1", 'App\Models\BackManager');
+    }
+
+    public function contenuAccueil()
+    {
+        return $this->database->getDb()->query("SELECT * FROM accueil", 'App\Models\BackManager');
+    }
+
+    public function contenuPresentation()
+    {
+        return $this->database->getDb()->query("SELECT * FROM presentation", 'App\Models\BackManager');
+    }
+
+    public function contenuProjetSoin()
+    {
+        return $this->database->getDb()->query("SELECT * FROM projetSoin", 'App\Models\BackManager');
+    }
+
+    public function contenuPartenaires()
+    {
+        return $this->database->getDb()->query("SELECT * FROM partenaires", 'App\Models\BackManager');
     }
 
     public function allActivites()
@@ -76,6 +96,54 @@ class BackManager
         }
         $sqlPart = implode(', ', $sqlParts);
         return $this->query("UPDATE users SET $sqlPart WHERE id = $id", $attributes, true);
+    }
+
+    public function updateAccueil(string $id, array $fields):bool
+    {
+        $sqlParts = [];
+        $attributes = [];
+        foreach ($fields as $k => $v) {
+            $sqlParts[] = "$k = ?";
+            $attributes[] = $v;
+        }
+        $sqlPart = implode(', ', $sqlParts);
+        return $this->query("UPDATE accueil SET $sqlPart WHERE id = $id", $attributes, true);
+    }
+
+    public function updatePresentation(string $id, array $fields):bool
+    {
+        $sqlParts = [];
+        $attributes = [];
+        foreach ($fields as $k => $v) {
+            $sqlParts[] = "$k = ?";
+            $attributes[] = $v;
+        }
+        $sqlPart = implode(', ', $sqlParts);
+        return $this->query("UPDATE presentation SET $sqlPart WHERE id = $id", $attributes, true);
+    }
+
+    public function updatePartenaires(string $id, array $fields):bool
+    {
+        $sqlParts = [];
+        $attributes = [];
+        foreach ($fields as $k => $v) {
+            $sqlParts[] = "$k = ?";
+            $attributes[] = $v;
+        }
+        $sqlPart = implode(', ', $sqlParts);
+        return $this->query("UPDATE partenaires SET $sqlPart WHERE id = $id", $attributes, true);
+    }
+
+    public function updateProjetSoin(string $id, array $fields):bool
+    {
+        $sqlParts = [];
+        $attributes = [];
+        foreach ($fields as $k => $v) {
+            $sqlParts[] = "$k = ?";
+            $attributes[] = $v;
+        }
+        $sqlPart = implode(', ', $sqlParts);
+        return $this->query("UPDATE projetSoin SET $sqlPart WHERE id = $id", $attributes, true);
     }
 
     public function updateActivite(string $id, array $fields):bool
@@ -162,5 +230,25 @@ class BackManager
     public function findPro(string $id):object
     {
         return $this->database->getDb()->prepare("SELECT * FROM professionnels  WHERE id = ?", [$id], null, true);
+    }
+
+    public function findAccueil(string $id):object
+    {
+        return $this->database->getDb()->prepare("SELECT * FROM accueil  WHERE id = ?", [$id], null, true);
+    }
+
+    public function findPresentation(string $id):object
+    {
+        return $this->database->getDb()->prepare("SELECT * FROM presentation  WHERE id = ?", [$id], null, true);
+    }
+
+    public function findPartenaires(string $id):object
+    {
+        return $this->database->getDb()->prepare("SELECT * FROM partenaires  WHERE id = ?", [$id], null, true);
+    }
+
+    public function findProjetSoin(string $id):object
+    {
+        return $this->database->getDb()->prepare("SELECT * FROM projetSoin  WHERE id = ?", [$id], null, true);
     }
 }

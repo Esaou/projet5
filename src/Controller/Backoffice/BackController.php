@@ -49,6 +49,182 @@ class BackController
         $this->view->renderAdmin(['template' => 'index', 'data' => ['countM' => $countMessage,'userId' => $userId,'activites' => $dataActivite,'professionnels' => $dataProfessionnel,'messages' => $dataMessage,'countA' => $countActivites,'countP' => $countProfessionnel]]);
     }
 
+    public function pagesManager(): void
+    {
+        $app = $this->database->getInstance();
+        $auth = new \App\Service\Security\AccessControl($app->getDb());
+        $userId = $auth->getUserId();
+        $countMessage = $this->backManager->countMessages();
+        $countProfessionnel = $this->backManager->countProfessionnels();
+        $countActivites = $this->backManager->countActivites();
+        $contenuAccueil = $this->backManager->contenuAccueil();
+        $contenuPresentation = $this->backManager->contenuPresentation();
+        $contenuProjetSoin = $this->backManager->contenuProjetSoin();
+        $contenuPartenaires = $this->backManager->contenuPartenaires();
+
+        $this->view->renderAdmin(['template' => 'pagesManager', 'data' => ['presentation' => $contenuPresentation,'projetSoins' => $contenuProjetSoin,'partenaires' => $contenuPartenaires,'contenus' => $contenuAccueil,'countM' => $countMessage,'userId' => $userId,'countA' => $countActivites,'countP' => $countProfessionnel]]);
+    }
+
+    public function editAccueil(): void
+    {
+        $app = $this->database->getInstance();
+        $auth = new \App\Service\Security\AccessControl($app->getDb());
+        $userId = $auth->getUserId();
+        $countMessage = $this->backManager->countMessages();
+        $countProfessionnel = $this->backManager->countProfessionnels();
+        $countActivites = $this->backManager->countActivites();
+        $contenuAccueil = $this->backManager->contenuAccueil();
+
+        $postTable = $this->database->getInstance()->getTable('BackManager');
+        $request = new Request();
+    
+        $contenu = $request->getPost()->getWithoutHtml('contenu');
+        $id = $request->getGet()->get('id');
+        
+        $error = false;
+        $result = false;
+
+        if (!empty($_POST)) {
+            if (!empty($contenu)) {
+                $res = $postTable->updateAccueil($id, [
+                
+                    'contenu' => $contenu,
+
+                ]);
+                if ($res) {
+                    $result = true;
+                }
+            } else {
+                $error = true;
+            }
+        }
+
+        $post = $postTable->findAccueil($id);
+        $form = new \App\Service\BootstrapForm($post);
+
+        $this->view->renderAdmin(['template' => 'editAccueil', 'data' => ['contenus' => $contenuAccueil,'form' => $form, 'error' => $error,'result' => $result,'countM' => $countMessage,'userId' => $userId,'countA' => $countActivites,'countP' => $countProfessionnel]]);
+    }
+
+    public function editPresentation(): void
+    {
+        $app = $this->database->getInstance();
+        $auth = new \App\Service\Security\AccessControl($app->getDb());
+        $userId = $auth->getUserId();
+        $countMessage = $this->backManager->countMessages();
+        $countProfessionnel = $this->backManager->countProfessionnels();
+        $countActivites = $this->backManager->countActivites();
+        $contenuAccueil = $this->backManager->contenuAccueil();
+
+        $postTable = $this->database->getInstance()->getTable('BackManager');
+        $request = new Request();
+    
+        $contenu = $request->getPost()->getWithoutHtml('contenu');
+        $id = $request->getGet()->get('id');
+        
+        $error = false;
+        $result = false;
+
+        if (!empty($_POST)) {
+            if (!empty($contenu)) {
+                $res = $postTable->updatePresentation($id, [
+                
+                    'contenu' => $contenu,
+
+                ]);
+                if ($res) {
+                    $result = true;
+                }
+            } else {
+                $error = true;
+            }
+        }
+
+        $post = $postTable->findPresentation($id);
+        $form = new \App\Service\BootstrapForm($post);
+
+        $this->view->renderAdmin(['template' => 'editPresentation', 'data' => ['contenus' => $contenuAccueil,'form' => $form, 'error' => $error,'result' => $result,'countM' => $countMessage,'userId' => $userId,'countA' => $countActivites,'countP' => $countProfessionnel]]);
+    }
+
+    public function editProjetSoin(): void
+    {
+        $app = $this->database->getInstance();
+        $auth = new \App\Service\Security\AccessControl($app->getDb());
+        $userId = $auth->getUserId();
+        $countMessage = $this->backManager->countMessages();
+        $countProfessionnel = $this->backManager->countProfessionnels();
+        $countActivites = $this->backManager->countActivites();
+        $contenuAccueil = $this->backManager->contenuAccueil();
+
+        $postTable = $this->database->getInstance()->getTable('BackManager');
+        $request = new Request();
+    
+        $contenu = $request->getPost()->getWithoutHtml('contenu');
+        $id = $request->getGet()->get('id');
+        
+        $error = false;
+        $result = false;
+
+        if (!empty($_POST)) {
+            if (!empty($contenu)) {
+                $res = $postTable->updateProjetSoin($id, [
+                
+                    'contenu' => $contenu,
+
+                ]);
+                if ($res) {
+                    $result = true;
+                }
+            } else {
+                $error = true;
+            }
+        }
+
+        $post = $postTable->findProjetSoin($id);
+        $form = new \App\Service\BootstrapForm($post);
+
+        $this->view->renderAdmin(['template' => 'editProjetSoin', 'data' => ['contenus' => $contenuAccueil,'form' => $form, 'error' => $error,'result' => $result,'countM' => $countMessage,'userId' => $userId,'countA' => $countActivites,'countP' => $countProfessionnel]]);
+    }
+
+    public function editPartenaires(): void
+    {
+        $app = $this->database->getInstance();
+        $auth = new \App\Service\Security\AccessControl($app->getDb());
+        $userId = $auth->getUserId();
+        $countMessage = $this->backManager->countMessages();
+        $countProfessionnel = $this->backManager->countProfessionnels();
+        $countActivites = $this->backManager->countActivites();
+        $contenuAccueil = $this->backManager->contenuAccueil();
+
+        $postTable = $this->database->getInstance()->getTable('BackManager');
+        $request = new Request();
+    
+        $contenu = $request->getPost()->getWithoutHtml('contenu');
+        $id = $request->getGet()->get('id');
+        
+        $error = false;
+        $result = false;
+
+        if (!empty($_POST)) {
+            if (!empty($contenu)) {
+                $res = $postTable->updatePartenaires($id, [
+                
+                    'contenu' => $contenu,
+
+                ]);
+                if ($res) {
+                    $result = true;
+                }
+            } else {
+                $error = true;
+            }
+        }
+
+        $post = $postTable->findPartenaires($id);
+        $form = new \App\Service\BootstrapForm($post);
+
+        $this->view->renderAdmin(['template' => 'editPartenaires', 'data' => ['contenus' => $contenuAccueil,'form' => $form, 'error' => $error,'result' => $result,'countM' => $countMessage,'userId' => $userId,'countA' => $countActivites,'countP' => $countProfessionnel]]);
+    }
+
     public function activitesManager(): void
     {
         $countMessage = $this->backManager->countMessages();

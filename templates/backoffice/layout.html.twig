@@ -10,6 +10,16 @@
     <link rel="icon" type="image/png" href="/images/favicon.png" />
     <link rel="stylesheet" href="/css/style.css">
     <script src="https://kit.fontawesome.com/aee95a7a92.js"></script>
+    <script src="https://cdn.tiny.cloud/1/ztpdey7r3pk9mfbio8d0phcfh7uymugq03n8ui70exrnuk9e/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>  
+    <script>
+        tinymce.init({
+        selector: '#myEditor',
+        toolbar: 'code formatpainter pageembed permanentpen',
+        toolbar_mode: 'floating',
+        tinycomments_mode: 'embedded',
+        tinycomments_author: 'Author name',
+        });
+    </script>
 
   </head>
   
@@ -90,7 +100,7 @@
                             <a href="?action=activitesManager" class="list-group-item list-group-item-action"><i class="fas fa-stethoscope" style="margin-right:10px;"></i>Activités <span class="badge badge-secondary">{% for count in countA %}{{ count.nb|raw }}{% endfor %}</span></a>
                             <a href="?action=professionnelsManager" class="list-group-item list-group-item-action"><i class="fas fa-user-alt" style="margin-right:10px;"></i>Professionnels <span class="badge badge-secondary">{% for count in countP %}{{ count.nb|raw }}{% endfor %}</span></a>
                             <a href="?action=messagesManager" class="list-group-item list-group-item-action"><i class="fas fa-envelope" style="margin-right:10px;"></i>Messages <span class="badge badge-secondary">{% for count in countM %}{{ count.nb|raw }}{% endfor %}</span></a>
-                             <a href="#" class="list-group-item list-group-item-action"><i class="fas fa-file" style="margin-right:14px;"></i>Modifier les pages </a>
+                             <a href="?action=pagesManager" class="list-group-item list-group-item-action"><i class="fas fa-file" style="margin-right:14px;"></i>Modifier les pages </a>
                         </div>
                     </div>
                     <div class="col-md-9">

@@ -57,14 +57,21 @@ class BootstrapForm
     public function textArea(string $name):string
     {
         return $this->surround(
-            '<label style="font-size:17px;">' . ucfirst($name) . '</label><textarea name="' . $name . '" class="form-control">' . $this->getValue($name) .'</textarea>'
+            '<label style="font-size:17px;">' . ucfirst($name) . '</label><textarea style="min-height:100px;" name="' . $name . '" class="form-control">' . $this->getValue($name) .'</textarea>'
         );
     }
 
     public function textAreaEditor(string $name):string
     {
         return $this->surround(
-            '<label style="font-size:17px;">' . ucfirst($name) . ' (s\'affichera dans la rubrique \'activité\' du site)</label><textarea name="' . $name . '" class="form-control" id="myEditor">' . $this->getValue($name) .'</textarea>'
+            '<label style="font-size:17px;">' . ucfirst($name) . ' (s\'affichera dans la rubrique \'activité\' du site)</label><textarea style="min-height:300px;" name="' . $name . '" class="form-control" id="myEditor">' . $this->getValue($name) .'</textarea>'
+        );
+    }
+
+    public function textAreaEditorContenu(string $name):string
+    {
+        return $this->surround(
+            '<label style="font-size:17px;">' . ucfirst($name) . '</label><textarea name="' . $name . '" style="min-height:300px;" class="form-control" id="myEditor">' . $this->getValue($name) .'</textarea>'
         );
     }
 

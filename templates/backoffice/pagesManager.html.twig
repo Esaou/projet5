@@ -1,0 +1,22 @@
+{% extends "/backoffice/layout.html.twig" %}
+
+{% block content %}
+
+    <h4 class="card-title colorTitle">Gestion des pages</h4>
+        <div class="card-body">
+            <p class="btnPages">{% for contenu in contenus %}
+                <a href="?action=editAccueil&id={{ contenu.id }}" class="btn btn-primary">Modifier l'encadré d'accueil</a>
+                {% endfor %}
+                {% for pres in presentation %}
+                <a href="?action=editPresentation&id={{ pres.id }}" class="btn btn-primary">Modifier la page présentation</a>
+                {% endfor %}
+                {% for projetSoin in projetSoins %}
+                <a href="?action=editProjetSoin&id={{ projetSoin.id }}" class="btn btn-primary">Modifier la page projet de soin</a>
+                {% endfor %}
+                {% for partenaire in partenaires %}
+                <a href="?action=editPartenaires&id={{ partenaire.id }}" class="btn btn-primary">Modifier la page partenaires</a>
+                {% endfor %}
+            </p>
+        </div>
+
+{%  endblock %}
