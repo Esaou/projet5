@@ -12,28 +12,28 @@ use App\View\View;
 
 class FrontController
 {
-    private FrontManager $postManager;
+    private FrontManager $frontManager;
     private View $view;
     private Database $database;
 
-    public function __construct(FrontManager $postManager, View $view, Database $database)
+    public function __construct(FrontManager $frontManager, View $view, Database $database)
     {
-        $this->postManager = $postManager;
+        $this->frontManager = $frontManager;
         $this->database = $database;
         $this->view = $view;
     }
 
     public function index(): void
     {
-        $dataEncadre = $this->postManager->encadre();
-        $dataActivites = $this->postManager->activites();
+        $dataEncadre = $this->frontManager->encadre();
+        $dataActivites = $this->frontManager->activites();
         
         $this->view->render(['template' => 'index', 'data' => ['encadres' => $dataEncadre,'activites' => $dataActivites]]);
     }
 
     public function presentation(): void
     {
-        $dataActivites = $this->postManager->activites();
+        $dataActivites = $this->frontManager->activites();
         $backManager = new \App\Model\BackManager($this->database);
         $contenu = $backManager->contenuPresentation();
         $this->view->render(['template' => 'presentation', 'data' => ['presentation' => $contenu,'activites' => $dataActivites]]);
@@ -41,7 +41,7 @@ class FrontController
 
     public function projetSoin(): void
     {
-        $dataActivites = $this->postManager->activites();
+        $dataActivites = $this->frontManager->activites();
         $backManager = new \App\Model\BackManager($this->database);
         $contenu = $backManager->contenuProjetSoin();
         $this->view->render(['template' => 'projetSoin', 'data' => ['projetSoins' => $contenu,'activites' => $dataActivites]]);
@@ -49,7 +49,7 @@ class FrontController
 
     public function partenaires(): void
     {
-        $dataActivites = $this->postManager->activites();
+        $dataActivites = $this->frontManager->activites();
         $backManager = new \App\Model\BackManager($this->database);
         $contenu = $backManager->contenuPartenaires();
         $this->view->render(['template' => 'partenaires', 'data' => ['partenaires' => $contenu,'activites' => $dataActivites]]);
@@ -57,73 +57,32 @@ class FrontController
 
     public function activites(): void
     {
-        $dataActivites = $this->postManager->activites();
-        $dataShowActivites = $this->postManager->showActivites();
-        $dataShowProfessionnels = $this->postManager->showProfessionnels();
+        $dataActivites = $this->frontManager->activites();
+        $dataShowActivites = $this->frontManager->showActivites();
+        $dataShowProfessionnels = $this->frontManager->showProfessionnels();
         $this->view->render(['template' => 'activites', 'data' => ['activites' => $dataActivites,'showActivites' => $dataShowActivites,'professionnels' => $dataShowProfessionnels]]);
-    }
-
-    public function contact(): void
-    {
-        $dataActivites = $this->postManager->activites();
-        $this->view->render(['template' => 'contact', 'data' => ['activites' => $dataActivites]]);
     }
 
     public function rejoindre(): void
     {
-        $request = new Request();
+        $this->frontManager->getRejoindre();
+    }
 
-        
-        $error = false;
-        $errors=false;
-        $result = false;
-
-        $nom = $request->getPost()->get('nom');
-        $email = $request->getPost()->get('email');
-        $objet = $request->getPost()->get('objet');
-        $message = $request->getPost()->get('message');
-
-        $postTable = $this->database->getInstance()->getTable('FrontManager');
-
-        if (!empty($_POST)) {
-            if ((isset($nom,$email,$objet,$message) and !empty($nom) and !empty($email) and !empty($objet) and !empty($message))) {
-                $pseudo = htmlspecialchars($nom);
-                $email = htmlspecialchars($email);
-                $objet = htmlspecialchars($objet);
-                $message = htmlspecialchars($message);
-
-                if (mb_strlen($pseudo) < 25) {
-                    $postTable->createMessage([
-            
-                        'nom' => $pseudo,
-                        'email' => $email,
-                        'objet' => $objet,
-                        'message' => $message
-                        
-            
-                    ]);
-                    $result = true;
-                } else {
-                    $error = true;
-                }
-            } else {
-                $errors= true;
-            }
-        }
-        $dataForm = $this->postManager->form();
-        $dataActivites = $this->postManager->activites();
-        $this->view->render(['template' => 'rejoindre', 'data' => ['result' => $result, 'error' => $error,'errors' => $errors,'forms' => $dataForm, 'activites' => $dataActivites]]);
+    public function contact(): void
+    {
+        $dataActivites = $this->frontManager->activites();
+        $this->view->render(['template' => 'contact', 'data' => ['activites' => $dataActivites]]);
     }
 
     public function notFound():void
     {
-        $dataActivites = $this->postManager->activites();
+        $dataActivites = $this->frontManager->activites();
         $this->view->render(['template' => 'notFound', 'data' => ['activites' => $dataActivites]]);
     }
 
     public function forbidden():void
     {
-        $dataActivites = $this->postManager->activites();
+        $dataActivites = $this->frontManager->activites();
         $this->view->render(['template' => 'forbidden', 'data' => ['activites' => $dataActivites]]);
     }
 }

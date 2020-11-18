@@ -22,7 +22,7 @@ class BootstrapForm
     public function input(string $name):string
     {
         return $this->surround(
-            '<label style="font-size:17px;">' . ucfirst($name) . '</label><input style="font-family:sans-serif;" type="text" name="' . $name . '" value="' . $this->getValue($name) . '" class="form-control">'
+            '<label style="font-size:15px;">' . ucfirst($name) . '</label><input style="font-family:sans-serif;" type="text" name="' . $name . '" value="' . $this->getValue($name) . '" class="form-control">'
         );
     }
 

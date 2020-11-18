@@ -16,6 +16,53 @@ class FrontManager
         $this->database = $database;
     }
 
+    public function getRejoindre(): void
+    {
+        $request = new Request();
+
+        
+        $error = false;
+        $errors=false;
+        $result = false;
+
+        $nom = $request->getPost()->get('nom');
+        $email = $request->getPost()->get('email');
+        $objet = $request->getPost()->get('objet');
+        $message = $request->getPost()->get('message');
+
+        $postTable = $this->database->getInstance()->getTable('FrontManager');
+
+        if (!empty($_POST)) {
+            if ((isset($nom,$email,$objet,$message) and !empty($nom) and !empty($email) and !empty($objet) and !empty($message))) {
+                $pseudo = htmlspecialchars($nom);
+                $email = htmlspecialchars($email);
+                $objet = htmlspecialchars($objet);
+                $message = htmlspecialchars($message);
+
+                if (mb_strlen($pseudo) < 25) {
+                    $postTable->createMessage([
+            
+                        'nom' => $pseudo,
+                        'email' => $email,
+                        'objet' => $objet,
+                        'message' => $message
+                        
+            
+                    ]);
+                    $result = true;
+                } else {
+                    $error = true;
+                }
+            } else {
+                $errors= true;
+            }
+        }
+        $dataForm = $this->form();
+        $dataActivites = $this->activites();
+        $view = new \App\View\View();
+        $view->render(['template' => 'rejoindre', 'data' => ['result' => $result, 'error' => $error,'errors' => $errors,'forms' => $dataForm, 'activites' => $dataActivites]]);
+    }
+
     public function encadre()
     {
         return $this->database->getDb()->query("SELECT * FROM accueil ORDER BY id DESC", 'App\Models\BackOffice');
@@ -43,10 +90,6 @@ class FrontManager
     public function form()
     {
         return new \App\Service\BootstrapForm();
-    }
-
-    public function formulaire(): void
-    {
     }
 
     public function createMessage(array $fields):bool
