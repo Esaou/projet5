@@ -97,13 +97,14 @@ class BackController
 
     public function deleteActivite():void
     {
+        $table = $this->database->getInstance()->getTable('GlobalManager');
         $postTable = $this->database->getInstance()->getTable('BackManager');
         $request = new Request();
         $activiteId = $request->getGet()->get('id');
         
 
         if (!empty($_POST)) {
-            $result = $postTable->deleteActivite($activiteId);
+            $result = $table->deleteActivite($activiteId);
             if ($result) {
                 header("Location: index?action=activitesManager");
             } else {
@@ -114,13 +115,14 @@ class BackController
 
     public function deleteProfessionnel():void
     {
+        $table = $this->database->getInstance()->getTable('GlobalManager');
         $postTable = $this->database->getInstance()->getTable('BackManager');
         $request = new Request();
         $proId = $request->getGet()->get('id');
         
 
         if (!empty($_POST)) {
-            $res = $postTable->deleteProfessionnel($proId);
+            $res = $table->deleteProfessionnel($proId);
             if ($res) {
                 header("Location: index?action=professionnelsManager");
             } else {
@@ -131,13 +133,14 @@ class BackController
 
     public function deleteMessage():void
     {
+        $table = $this->database->getInstance()->getTable('GlobalManager');
         $postTable = $this->database->getInstance()->getTable('BackManager');
         $request = new Request();
         $msgId = $request->getGet()->get('id');
         
 
         if (!empty($_POST)) {
-            $res = $postTable->deleteMessage($msgId);
+            $res = $table->deleteMessage($msgId);
             if ($res) {
                 header("Location: index?action=messagesManager");
             } else {

@@ -1,5 +1,7 @@
 {% extends "/backoffice/layout.html.twig" %}
 
+{% block title %}Administration | Message{% endblock %}
+
 {% block content %}
 
         <h4 class="colorTitle">Message de {% for message in messages %}
@@ -23,7 +25,7 @@
                         </tr>
                         <tr>
                             <th>Date</th>
-                            <td>{{ message.date|raw }}</td>
+                            <td>le {{ message.date|date("d/m/Y") }} à {{ message.date|date("H") }}h{{ message.date|date("s") }}</td>
                         </tr>
                     {% endfor %}
                 </tbody>

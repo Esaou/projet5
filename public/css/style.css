@@ -9,7 +9,13 @@
     }
 }
 
-/* Polices additionnelles */
+.contentAdmin{
+
+    animation: page 500ms;
+
+}
+
+/* Polices additionnelles + réglages généraux */
 
 @font-face {
     font-family: "RobotoMedium";
@@ -473,16 +479,6 @@
 
 }
 
-
-
-
-
-
-
-
-
-
-
 .containerDefault{
 
     padding-top: 25px;
@@ -644,6 +640,7 @@ html{
 }
 
 /* Interface Administrateur */
+
 .navbar{
 
     min-height: 33px !important;
@@ -806,6 +803,20 @@ header{
 
 }
 
+.dashTitle{
+
+    color: white;
+    text-decoration: none;
+
+}
+
+.dashTitle:hover{
+
+    color: white;
+    text-decoration: none;
+
+}
+
 .carteAdmin:hover{
 
     transition: background-color 300ms linear;
@@ -837,6 +848,8 @@ header{
     margin: 5px;
 
 }
+
+/* MEDIA QUERRIES */
 
 @media screen and (max-width: 852px) {
 

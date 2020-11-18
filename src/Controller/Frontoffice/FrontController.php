@@ -34,24 +34,24 @@ class FrontController
     public function presentation(): void
     {
         $dataActivites = $this->frontManager->activites();
-        $backManager = new \App\Model\BackManager($this->database);
-        $contenu = $backManager->contenuPresentation();
+        $table = new \App\Model\GlobalManager($this->database);
+        $contenu = $table->contenuPresentation();
         $this->view->render(['template' => 'presentation', 'data' => ['presentation' => $contenu,'activites' => $dataActivites]]);
     }
 
     public function projetSoin(): void
     {
         $dataActivites = $this->frontManager->activites();
-        $backManager = new \App\Model\BackManager($this->database);
-        $contenu = $backManager->contenuProjetSoin();
+        $table = new \App\Model\GlobalManager($this->database);
+        $contenu = $table->contenuProjetSoin();
         $this->view->render(['template' => 'projetSoin', 'data' => ['projetSoins' => $contenu,'activites' => $dataActivites]]);
     }
 
     public function partenaires(): void
     {
         $dataActivites = $this->frontManager->activites();
-        $backManager = new \App\Model\BackManager($this->database);
-        $contenu = $backManager->contenuPartenaires();
+        $table = new \App\Model\GlobalManager($this->database);
+        $contenu = $table->contenuPartenaires();
         $this->view->render(['template' => 'partenaires', 'data' => ['partenaires' => $contenu,'activites' => $dataActivites]]);
     }
 

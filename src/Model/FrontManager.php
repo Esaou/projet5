@@ -30,7 +30,7 @@ class FrontManager
         $objet = $request->getPost()->get('objet');
         $message = $request->getPost()->get('message');
 
-        $postTable = $this->database->getInstance()->getTable('FrontManager');
+        $postTable = $this->database->getInstance()->getTable('GlobalManager');
 
         if (!empty($_POST)) {
             if ((isset($nom,$email,$objet,$message) and !empty($nom) and !empty($email) and !empty($objet) and !empty($message))) {
@@ -90,30 +90,5 @@ class FrontManager
     public function form()
     {
         return new \App\Service\BootstrapForm();
-    }
-
-    public function createMessage(array $fields):bool
-    {
-        $sqlParts = [];
-        $attributes = [];
-        foreach ($fields as $k => $v) {
-            $sqlParts[] = "$k = ?";
-            $attributes[] = $v;
-        }
-        $sqlPart = implode(', ', $sqlParts);
-        return $this->query("INSERT INTO messages SET $sqlPart", $attributes, true);
-    }
-
-    public function query($statement, array $attributes = null, bool $one = false):bool
-    {
-        if ($attributes) {
-            return $this->database->getDb()->prepare($statement, $attributes, str_replace('Table', 'Entity', get_class($this)), $one);
-        }
-
-        return $this->database->getDb()->query(
-            $statement,
-            str_replace('Table', 'Entity', get_class($this)),
-            $one
-        );
     }
 }

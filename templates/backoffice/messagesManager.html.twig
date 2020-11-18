@@ -1,5 +1,7 @@
 {% extends "/backoffice/layout.html.twig" %}
 
+{% block title %}Administration | Messages{% endblock %}
+
 {% block content %}
 
     <h4 class="card-title colorTitle">Messages</h4>
@@ -18,7 +20,7 @@
                         <tr>
                             <td>{{ message.nom|raw }}</td>
                             <td>{{ message.objet|raw }}</td>
-                            <td>{{ message.date|raw }}</td>
+                            <td>le {{ message.date|date("d/m/Y") }} à {{ message.date|date("H") }}h{{ message.date|date("s") }}</td>
                             <td>
                                 <a href="?action=showMessage&id={{ message.id|raw }}" class="btn btn-primary">Ouvrir</a>
                                 <form action="?action=deleteMessage&id={{ message.id|raw }}" method="post" style="display:inline;">
