@@ -11,10 +11,10 @@
                 <a href="?action=activitesManager" class="linkCarte colorTitle" style="display:flex;text-decoration:none;">
                 <div class="card bg-light mb-3 carteAdmin" style="width: 18rem;margin:15px;">
                         <div class="card-header titreCarte">Dernière activité</div>
-                        <div class="card-body">
+                        <div class="card-body" style="font-size:16px;">
                         {% for activite in activites %}
                         <h6 class="card-title">{{ activite.activite|raw }}</h6>
-                        <p class="card-text">{{ activite.description|raw|slice(0,50) }} ...</p>
+                        <p class="card-text">{{ activite.description|slice(0,75)|raw }} ...</p>
                         {% endfor %}
                         </div>
                 </div>
@@ -22,7 +22,7 @@
                 <a href="?action=professionnelsManager" class="linkCarte colorTitle" style="display:flex;text-decoration:none;">
                 <div class="card bg-light mb-3 carteAdmin" style="width: 18rem;margin:15px;">
                         <div class="card-header titreCarte">Dernier professionnel</div>
-                        <div class="card-body">
+                        <div class="card-body" style="font-size:16px;">
                         {% for professionnel in professionnels %}
                         <h6 class="card-title">{{ professionnel.nom|raw }}</h6>
                         <p class="card-text">{{ professionnel.activite|raw|slice(0,50) }}</p>
@@ -34,7 +34,7 @@
                 <a href="?action=showMessage&id={{ message.id|raw }}" class="linkCarte colorTitle" style="display:flex;text-decoration:none;">
                 <div class="card bg-light mb-3 carteAdmin" style="width: 18rem;margin:15px;">
                         <div class="card-header titreCarte">Dernier message</div>
-                        <div class="card-body">
+                        <div class="card-body" style="font-size:16px;">
                         <h6 class="card-title">de {{ message.nom|raw }}</h6>
                         <p class="card-text">{{ message.message|raw|slice(0,50) }} ...</p>
                         {% endfor %}
@@ -44,7 +44,7 @@
                 <a href="?action=pagesManager" style="display:flex;text-decoration:none;" class="linkCarte colorTitle">
                 <div class="card bg-light mb-3 carteAdmin" style="width: 18rem;margin:15px;">
                         <div class="card-header titreCarte">Gestion des pages</div>
-                        <div class="card-body">
+                        <div class="card-body" style="font-size:16px;">
                         <p class="card-text">Gérer les pages du centre de santé ainsi que l'encadré "information importante" de la page d'accueil.</p>
                         <h6 class="card-title text-right">Cliquez ici</h6>
                         </div>

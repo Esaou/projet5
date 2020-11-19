@@ -16,12 +16,12 @@
                         <th scope="col" class="text-center">Actions</th>
                     </tr>
                 </thead>
-                <tbody style="color:rgb(90,90,90);" class="text-left">
+                <tbody style="color:rgb(90,90,90);font-size:15px;" class="text-left">
                     {% for message in messages %}
                         <tr>
                             <td>{{ message.nom|raw }}</td>
                             <td>{{ message.objet|raw }}</td>
-                            <td>le {{ message.date|date("d/m/Y") }} à {{ message.date|date("H") }}h{{ message.date|date("s") }}</td>
+                            <td>le {{ message.date|date("d/m/Y") }} à {{ message.date|date("H") }}h{{ message.date|date("i") }}</td>
                             <td class="text-center">
                                 <a href="?action=showMessage&id={{ message.id|raw }}" class="btn btn-primary">Ouvrir</a>
                                 <form action="?action=deleteMessage&id={{ message.id|raw }}" method="post" style="display:inline;">
