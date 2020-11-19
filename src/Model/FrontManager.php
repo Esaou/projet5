@@ -24,6 +24,7 @@ class FrontManager
         $error = false;
         $errors=false;
         $result = false;
+        $nameError = false;
 
         $nom = $request->getPost()->get('nom');
         $email = $request->getPost()->get('email');
@@ -34,6 +35,7 @@ class FrontManager
 
         if (!empty($_POST)) {
             if ((isset($nom,$email,$objet,$message) and !empty($nom) and !empty($email) and !empty($objet) and !empty($message))) {
+                //if (preg_match("/\^[a-zA-Z]\$/", $nom)){
                 $pseudo = htmlspecialchars($nom);
                 $email = htmlspecialchars($email);
                 $objet = htmlspecialchars($objet);
@@ -41,18 +43,21 @@ class FrontManager
 
                 if (mb_strlen($pseudo) < 25) {
                     $postTable->createMessage([
-            
-                        'nom' => $pseudo,
-                        'email' => $email,
-                        'objet' => $objet,
-                        'message' => $message
-                        
-            
-                    ]);
+                
+                            'nom' => $pseudo,
+                            'email' => $email,
+                            'objet' => $objet,
+                            'message' => $message
+                            
+                
+                        ]);
                     $result = true;
                 } else {
                     $error = true;
                 }
+                //}else{
+                   // $nameError = true;
+                //}
             } else {
                 $errors= true;
             }
@@ -60,7 +65,7 @@ class FrontManager
         $dataForm = $this->form();
         $dataActivites = $this->activites();
         $view = new \App\View\View();
-        $view->render(['template' => 'rejoindre', 'data' => ['result' => $result, 'error' => $error,'errors' => $errors,'forms' => $dataForm, 'activites' => $dataActivites]]);
+        $view->render(['template' => 'rejoindre', 'data' => ['nameError' => $nameError,'result' => $result, 'error' => $error,'errors' => $errors,'forms' => $dataForm, 'activites' => $dataActivites]]);
     }
 
     public function encadre()

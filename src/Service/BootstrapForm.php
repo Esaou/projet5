@@ -26,31 +26,45 @@ class BootstrapForm
         );
     }
 
+    public function password(string $name):string
+    {
+        return $this->surround(
+            '<label style="font-size:15px;">' . ucfirst($name) . '</label><input style="font-family:sans-serif;" type="password" name="' . $name . '" value="" class="form-control">'
+        );
+    }
+
+    public function inputProfil(string $name):string
+    {
+        return $this->surround(
+            '<label style="font-size:15px;">' . ucfirst($name) . '</label><input style="font-family:sans-serif;" type="text" name="' . $name . '" value="' . $this->getValue($name) . '" class="form-control">'
+        );
+    }
+
+    public function passwordProfil(string $name):string
+    {
+        return $this->surround(
+            '<label style="font-size:15px;">' . ucfirst($name) . '</label><input style="font-family:sans-serif;" type="password" name="' . $name . '" value="" class="form-control">'
+        );
+    }
+
     public function inputActivite(string $name):string
     {
         return $this->surround(
-            '<label style="font-size:17px;">' . ucfirst($name) . ' (ex: Médecine générale)</label><input style="font-family:sans-serif;" type="text" name="' . $name . '" value="' . $this->getValue($name) . '" class="form-control">'
+            '<label style="font-size:17px;font-family:RobotoMedium;" class="green">' . ucfirst($name) . ' <span style="font-family:sans-serif;font-size:15px;" class="colorTitle">(ex: Médecine générale)</span></label><input style="font-family:sans-serif;font-size:15px;margin-bottom:40px;" type="text" name="' . $name . '" value="' . $this->getValue($name) . '" class="form-control">'
         );
     }
 
     public function inputTitre(string $name):string
     {
         return $this->surround(
-            '<label style="font-size:17px;">' . ucfirst($name) . ' (ex: Médecins généralistes)</label><input style="font-family:sans-serif;" type="text" name="' . $name . '" value="' . $this->getValue($name) . '" class="form-control">'
+            '<label style="font-size:17px;font-family:RobotoMedium;" class="green">' . ucfirst($name) . ' <span style="font-family:sans-serif;font-size:15px;" class="colorTitle">(ex: Médecins généralistes)</span></label><input style="font-family:sans-serif;font-size:15px;margin-bottom:40px;" type="text" name="' . $name . '" value="' . $this->getValue($name) . '" class="form-control">'
         );
     }
 
     public function inputEditor(string $name):string
     {
         return $this->surround(
-            '<label style="font-size:17px;">' . ucfirst($name) . '</label><input style="font-family:sans-serif;" type="text" name="' . $name . '" value="' . $this->getValue($name) . '" class="form-control">'
-        );
-    }
-
-    public function password(string $name):string
-    {
-        return $this->surround(
-            '<label style="font-size:15px;">' . ucfirst($name) . '</label><input style="font-family:sans-serif;" type="password" name="' . $name . '" value="" class="form-control">'
+            '<label style="font-size:17px;font-family:RobotoMedium;" class="colorTitle">' . ucfirst($name) . '</label><input style="font-family:sans-serif;" type="text" name="' . $name . '" value="' . $this->getValue($name) . '" class="form-control">'
         );
     }
 
@@ -64,14 +78,14 @@ class BootstrapForm
     public function textAreaEditor(string $name):string
     {
         return $this->surround(
-            '<label style="font-size:17px;">' . ucfirst($name) . ' (s\'affichera dans la rubrique \'activité\' du site)</label><textarea style="min-height:300px;" name="' . $name . '" class="form-control" id="myEditor">' . $this->getValue($name) .'</textarea>'
+            '<label style="font-size:17px;font-family:RobotoMedium;" class="green">' . ucfirst($name) . ' <span style="font-family:sans-serif;font-size:15px;" class="colorTitle">(s\'affichera dans la rubrique \'activité\' du site)</span></label><textarea style="min-height:300px;" name="' . $name . '" class="form-control" id="myEditor">' . $this->getValue($name) .'</textarea>'
         );
     }
 
     public function textAreaEditorContenu(string $name):string
     {
         return $this->surround(
-            '<label style="font-size:17px;">' . ucfirst($name) . '</label><textarea name="' . $name . '" style="min-height:300px;" class="form-control" id="myEditor">' . $this->getValue($name) .'</textarea>'
+            '<label style="font-size:17px;font-family:RobotoMedium;" class="colorTitle">' . ucfirst($name) . '</label><textarea name="' . $name . '" style="min-height:300px;" class="form-control" id="myEditor">' . $this->getValue($name) .'</textarea>'
         );
     }
 

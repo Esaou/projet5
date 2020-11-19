@@ -4,14 +4,15 @@
 
 {% block content %}
 
-    <h4 class="colorTitle">Modifier mon profil</h4>
-    <div class="card-body">
+    <div class="card-body" style="padding-top:0px!important;padding-bottom:0px!important;">
+        <h4 class="colorTitle">Modifier mon profil</h4>
+        <hr/>
         <form method="post">
 
             <input type="hidden" name="token" id="token" value="<?=$token;?>"/>
-            {{ form.input('Username')|raw }}
-            {{ form.password('Password')|raw }}
-            {{ form.password('Confirm')|raw }}
+            {{ form.inputProfil('Username')|raw }}
+            {{ form.passwordProfil('Password')|raw }}
+            {{ form.passwordProfil('Confirm')|raw }}
             {% if error == true %}
                 <div class="alert alert-danger text-center" style="margin-top:15px">Tous les champs doivent être complétés !</div>
             {% endif %}
@@ -22,7 +23,7 @@
                 <div class="alert alert-success text-center" style="margin-top:15px">Modifications sauvegardées !</div>
             {% endif %}
             <button class="btn btn-primary" style="margin-top:10px;">Sauvegarder</button>
-            <a class="btn btn-outline-primary" style="margin-top:10px;" href="index.php?action=indexAdmin">Retour page administrateur</a>
+            <a class="btn btn-outline-secondary" style="margin-top:10px;" href="index.php?action=indexAdmin">Retour accueil</a>
 
         </form>
     </div>

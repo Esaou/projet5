@@ -3,8 +3,11 @@
 {% block title %}Administration | Accueil{% endblock %}
 
 {% block content %}
-        
-        <div class="container d-flex row justify-content-center">
+
+<div class="card-body" style="padding-top:0px!important;padding-bottom:0px!important;">
+        <h4 class="card-title colorTitle text-center">Bienvenue dans votre espace administration !</h4>
+        <hr/>
+        <div class="d-flex row justify-content-center">
                 <a href="?action=activitesManager" class="linkCarte colorTitle" style="display:flex;text-decoration:none;">
                 <div class="card bg-light mb-3 carteAdmin" style="width: 18rem;margin:15px;">
                         <div class="card-header titreCarte">Dernière activité</div>
@@ -48,5 +51,5 @@
                 </div>
                 </a>
         </div>
-
+</div>
 {%  endblock %}

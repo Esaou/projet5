@@ -4,8 +4,9 @@
 
 {% block content %}
 
-<h4 class="colorTitle">Ajouter une activité</h4>
-    <div class="card-body">
+    <div class="card-body" style="padding-top:0px!important;padding-bottom:0px!important;">
+    <h4 class="colorTitle">Ajouter une activité</h4>
+    <hr/>
         <form method="post">
 
             <input type="hidden" name="token" id="token" value="<?=$token;?>"/>
@@ -20,7 +21,7 @@
             {% endif %}
             
             <button class="btn btn-primary" style="margin-top:10px;">Ajouter l'activité</button>
-            <a class="btn btn-outline-primary" style="margin-top:10px;" href="index.php?action=activitesManager">Retour à la liste</a>
+            <a class="btn btn-outline-secondary" style="margin-top:10px;" href="index.php?action=activitesManager">Retour à la liste</a>
 
         </form>
     </div>

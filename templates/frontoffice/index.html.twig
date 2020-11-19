@@ -34,7 +34,7 @@
             <hr/>
             <div class="container containerActivites">
                 {% for activite in activites %}
-                <a style="text-decoration: none;" href="index.php?p=activites&id={{ activite.id }}"><div class="activitesIndex rounded"><p style="font-family:RobotoMedium;" class="colorLinkTwo">{{ activite.activite }}</p></div></a>
+                <a style="text-decoration: none;" href="index.php?action=activites&id={{ activite.id }}"><div class="activitesIndex rounded"><p style="font-family:RobotoMedium;" class="colorLinkTwo">{{ activite.activite }}</p></div></a>
                 {% endfor %}
             </div>
         </div>

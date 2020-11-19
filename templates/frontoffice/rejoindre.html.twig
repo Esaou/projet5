@@ -36,6 +36,9 @@
                 {% if errors == true %}
                     <div class="alert alert-danger text-center" style="margin-top:15px">Tous les champs doivent être complétés !</div>
                 {% endif %}
+                {% if nameError == true %}
+                    <div class="alert alert-danger text-center" style="margin-top:15px">Votre nom doit être composé uniquement de lettres majuscules ou minuscules, de tirets et d'espaces.</div>
+                {% endif %}
                 {% if result == true %}
                     <div class="alert alert-success text-center" style="margin-top:15px">Message bien posté !</div>
                 {% endif %}
