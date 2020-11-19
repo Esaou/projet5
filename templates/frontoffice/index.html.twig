@@ -3,14 +3,15 @@
 {% block title %}Centre de santé l'Étoile | Accueil{% endblock %}
 
 {% block content %}
+
 <div class="">
 
     <div class="slider">
-
-
+        <img src="images/banner.png" alt="banner" style="max-width:100%;"/>
     </div>
 
 </div>
+
 <section class="infoImportante">
     
     <div class="container">
@@ -34,7 +35,7 @@
             <hr/>
             <div class="container containerActivites">
                 {% for activite in activites %}
-                <a style="text-decoration: none;" href="index.php?action=activites&id={{ activite.id }}"><div class="activitesIndex rounded"><p style="font-family:RobotoMedium;" class="colorLinkTwo">{{ activite.activite }}</p></div></a>
+                <a style="text-decoration: none;" href="index.php?action=activites&id={{ activite.id }}"><div class="activitesIndex rounded"><img src="images/medecineGenerale.jpg" alt="medecin" style="max-width:100%;"/><p style="font-family:RobotoMedium;position:absolute;background-color:rgba(255,255,255,0.9);padding:10px;z-index:500;" class="rounded texteImg colorLinkTwo">{{ activite.activite }}</p><div class="overlay"></div></div></a>
                 {% endfor %}
             </div>
         </div>
