@@ -100,13 +100,19 @@ class BackController
         $table = $this->database->getInstance()->getTable('GlobalManager');
         $postTable = $this->database->getInstance()->getTable('BackManager');
         $request = new Request();
+        $tokenSession = $request->getSession()->get('token');
+        $tokenGet = $request->getPost()->get('token');
         $activiteId = $request->getGet()->get('id');
         
 
         if (!empty($_POST)) {
-            $result = $table->deleteActivite($activiteId);
-            if ($result) {
-                header("Location: index?action=activitesManager");
+            if (isset($tokenGet) && $tokenGet === $tokenSession) {
+                $result = $table->deleteActivite($activiteId);
+                if ($result) {
+                    header("Location: index?action=activitesManager");
+                } else {
+                    header("Location: index?action=activitesManager");
+                }
             } else {
                 header("Location: index?action=activitesManager");
             }
@@ -118,13 +124,19 @@ class BackController
         $table = $this->database->getInstance()->getTable('GlobalManager');
         $postTable = $this->database->getInstance()->getTable('BackManager');
         $request = new Request();
+        $tokenSession = $request->getSession()->get('token');
+        $tokenGet = $request->getPost()->get('token');
         $proId = $request->getGet()->get('id');
         
 
         if (!empty($_POST)) {
-            $res = $table->deleteProfessionnel($proId);
-            if ($res) {
-                header("Location: index?action=professionnelsManager");
+            if (isset($tokenGet) && $tokenGet === $tokenSession) {
+                $res = $table->deleteProfessionnel($proId);
+                if ($res) {
+                    header("Location: index?action=professionnelsManager");
+                } else {
+                    header("Location: index?action=professionnelsManager");
+                }
             } else {
                 header("Location: index?action=professionnelsManager");
             }
@@ -136,13 +148,19 @@ class BackController
         $table = $this->database->getInstance()->getTable('GlobalManager');
         $postTable = $this->database->getInstance()->getTable('BackManager');
         $request = new Request();
+        $tokenSession = $request->getSession()->get('token');
+        $tokenGet = $request->getPost()->get('token');
         $msgId = $request->getGet()->get('id');
         
 
         if (!empty($_POST)) {
-            $res = $table->deleteMessage($msgId);
-            if ($res) {
-                header("Location: index?action=messagesManager");
+            if (isset($tokenGet) && $tokenGet === $tokenSession) {
+                $res = $table->deleteMessage($msgId);
+                if ($res) {
+                    header("Location: index?action=messagesManager");
+                } else {
+                    header("Location: index?action=messagesManager");
+                }
             } else {
                 header("Location: index?action=messagesManager");
             }

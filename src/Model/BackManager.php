@@ -41,6 +41,10 @@ class BackManager
         $countProfessionnel = $table->countProfessionnels();
         $countActivites = $table->countActivites();
         $request = new Request();
+
+        $token = base_convert(hash('sha256', time() . mt_rand()), 16, 36);
+        $tokenSession = $request->getSession()->get('token');
+        $tokenGet = $request->getPost()->get('token');
         
         $username = $request->getPost()->get('Username');
         $password = $request->getPost()->get('Password');
@@ -52,32 +56,40 @@ class BackManager
         $errors = false;
         $error = false;
         $result = false;
+        $tokenError = false;
 
         if (!empty($_POST)) {
-            if (!empty($username) && !empty($password) && !empty($confirm)) {
-                if ($password === $confirm) {
-                    $table->updateProfil($id, [
-                    
-                        'username' => $username,
-                        'password' => sha1($confirm)
+            if (isset($tokenGet) && $tokenGet === $tokenSession) {
+                if (!empty($username) && !empty($password) && !empty($confirm)) {
+                    if ($password === $confirm) {
+                        $table->updateProfil($id, [
+                        
+                            'username' => $username,
+                            'password' => sha1($confirm)
 
-                    ]);
-                    $result = true;
+                        ]);
+                        $result = true;
+                    } else {
+                        $errors = true;
+                    }
                 } else {
-                    $errors = true;
+                    $error = true;
                 }
             } else {
-                $error = true;
+                $tokenError = true;
             }
         }
-
+        $request->getSession()->set('token', $token);
         $form = new \App\Service\BootstrapForm();
         $view = new \App\View\View();
-        $view->renderAdmin(['template' => 'profil', 'data' => ['countM' => $countMessage,'countA' => $countActivites,'countP' => $countProfessionnel,'form' => $form,'errors' => $errors, 'error' => $error,'result'=>$result]]);
+        $view->renderAdmin(['template' => 'profil', 'data' => ['token' => $token, 'tokenError' => $tokenError,'countM' => $countMessage,'countA' => $countActivites,'countP' => $countProfessionnel,'form' => $form,'errors' => $errors, 'error' => $error,'result'=>$result]]);
     }
 
     public function getActivitesManager(): void
     {
+        $request = new Request();
+        $token = base_convert(hash('sha256', time() . mt_rand()), 16, 36);
+        $request->getSession()->set('token', $token);
         $table = $this->database->getInstance()->getTable('GlobalManager');
         $countMessage = $table->countMessages();
         $countProfessionnel = $table->countProfessionnels();
@@ -87,11 +99,14 @@ class BackManager
         $userId = $auth->getUserId();
         $dataActivite = $table->allActivites();
         $view = new \App\View\View();
-        $view->renderAdmin(['template' => 'activitesManager', 'data' => ['countM' => $countMessage,'countA' => $countActivites,'countP' => $countProfessionnel,'userId' => $userId,'activites' => $dataActivite]]);
+        $view->renderAdmin(['template' => 'activitesManager', 'data' => ['token' => $token,'countM' => $countMessage,'countA' => $countActivites,'countP' => $countProfessionnel,'userId' => $userId,'activites' => $dataActivite]]);
     }
 
     public function getProfessionnelsManager(): void
     {
+        $request = new Request();
+        $token = base_convert(hash('sha256', time() . mt_rand()), 16, 36);
+        $request->getSession()->set('token', $token);
         $table = $this->database->getInstance()->getTable('GlobalManager');
         $countMessage = $table->countMessages();
         $countProfessionnel = $table->countProfessionnels();
@@ -101,11 +116,14 @@ class BackManager
         $userId = $auth->getUserId();
         $dataProfessionnels = $table->allProfessionnels();
         $view = new \App\View\View();
-        $view->renderAdmin(['template' => 'professionnelsManager', 'data' => ['countM' => $countMessage,'countA' => $countActivites,'countP' => $countProfessionnel,'userId' => $userId,'professionnels' => $dataProfessionnels]]);
+        $view->renderAdmin(['template' => 'professionnelsManager', 'data' => ['token' => $token,'countM' => $countMessage,'countA' => $countActivites,'countP' => $countProfessionnel,'userId' => $userId,'professionnels' => $dataProfessionnels]]);
     }
 
     public function getMessagesManager(): void
     {
+        $request = new Request();
+        $token = base_convert(hash('sha256', time() . mt_rand()), 16, 36);
+        $request->getSession()->set('token', $token);
         $table = $this->database->getInstance()->getTable('GlobalManager');
         $countMessage = $table->countMessages();
         $countProfessionnel = $table->countProfessionnels();
@@ -115,7 +133,7 @@ class BackManager
         $userId = $auth->getUserId();
         $dataMessages = $table->allMessages();
         $view = new \App\View\View();
-        $view->renderAdmin(['template' => 'messagesManager', 'data' => ['countM' => $countMessage,'countA' => $countActivites,'countP' => $countProfessionnel,'userId' => $userId,'messages' => $dataMessages]]);
+        $view->renderAdmin(['template' => 'messagesManager', 'data' => ['token' => $token,'countM' => $countMessage,'countA' => $countActivites,'countP' => $countProfessionnel,'userId' => $userId,'messages' => $dataMessages]]);
     }
 
     public function getPagesManager(): void
@@ -163,32 +181,40 @@ class BackManager
         $contenuAccueil = $table->contenuAccueil();
 
         $request = new Request();
+        $token = base_convert(hash('sha256', time() . mt_rand()), 16, 36);
+        $tokenSession = $request->getSession()->get('token');
+        $tokenGet = $request->getPost()->get('token');
     
         $contenu = $request->getPost()->getWithoutHtml('contenu');
         $id = $request->getGet()->get('id');
         
+        $tokenError = false;
         $error = false;
         $result = false;
 
         if (!empty($_POST)) {
-            if (!empty($contenu)) {
-                $res = $table->updateAccueil($id, [
-                
-                    'contenu' => $contenu,
+            if (isset($tokenGet) && $tokenGet === $tokenSession) {
+                if (!empty($contenu)) {
+                    $res = $table->updateAccueil($id, [
+                    
+                        'contenu' => $contenu,
 
-                ]);
-                if ($res) {
-                    $result = true;
+                    ]);
+                    if ($res) {
+                        $result = true;
+                    }
+                } else {
+                    $error = true;
                 }
             } else {
-                $error = true;
+                $tokenError =true;
             }
         }
-
+        $request->getSession()->set('token', $token);
         $post = $table->findAccueil($id);
         $form = new \App\Service\BootstrapForm($post);
         $view = new \App\View\View();
-        $view->renderAdmin(['template' => 'editAccueil', 'data' => ['contenus' => $contenuAccueil,'form' => $form, 'error' => $error,'result' => $result,'countM' => $countMessage,'userId' => $userId,'countA' => $countActivites,'countP' => $countProfessionnel]]);
+        $view->renderAdmin(['template' => 'editAccueil', 'data' => ['token' => $token, 'tokenError' => $tokenError,'contenus' => $contenuAccueil,'form' => $form, 'error' => $error,'result' => $result,'countM' => $countMessage,'userId' => $userId,'countA' => $countActivites,'countP' => $countProfessionnel]]);
     }
 
     public function getEditPresentation(): void
@@ -203,32 +229,40 @@ class BackManager
         $contenuAccueil = $table->contenuAccueil();
 
         $request = new Request();
+        $token = base_convert(hash('sha256', time() . mt_rand()), 16, 36);
+        $tokenSession = $request->getSession()->get('token');
+        $tokenGet = $request->getPost()->get('token');
     
         $contenu = $request->getPost()->getWithoutHtml('contenu');
         $id = $request->getGet()->get('id');
         
         $error = false;
         $result = false;
+        $tokenError = false;
 
         if (!empty($_POST)) {
-            if (!empty($contenu)) {
-                $res = $table->updatePresentation($id, [
-                
-                    'contenu' => $contenu,
+            if (isset($tokenGet) && $tokenGet === $tokenSession) {
+                if (!empty($contenu)) {
+                    $res = $table->updatePresentation($id, [
+                    
+                        'contenu' => $contenu,
 
-                ]);
-                if ($res) {
-                    $result = true;
+                    ]);
+                    if ($res) {
+                        $result = true;
+                    }
+                } else {
+                    $error = true;
                 }
             } else {
-                $error = true;
+                $tokenError =true;
             }
         }
-
+        $request->getSession()->set('token', $token);
         $post = $table->findPresentation($id);
         $form = new \App\Service\BootstrapForm($post);
         $view = new \App\View\View();
-        $view->renderAdmin(['template' => 'editPresentation', 'data' => ['contenus' => $contenuAccueil,'form' => $form, 'error' => $error,'result' => $result,'countM' => $countMessage,'userId' => $userId,'countA' => $countActivites,'countP' => $countProfessionnel]]);
+        $view->renderAdmin(['template' => 'editPresentation', 'data' => ['token' => $token, 'tokenError' => $tokenError,'contenus' => $contenuAccueil,'form' => $form, 'error' => $error,'result' => $result,'countM' => $countMessage,'userId' => $userId,'countA' => $countActivites,'countP' => $countProfessionnel]]);
     }
 
     public function getEditProjetSoin(): void
@@ -243,32 +277,40 @@ class BackManager
         $contenuAccueil = $table->contenuAccueil();
 
         $request = new Request();
+        $token = base_convert(hash('sha256', time() . mt_rand()), 16, 36);
+        $tokenSession = $request->getSession()->get('token');
+        $tokenGet = $request->getPost()->get('token');
     
         $contenu = $request->getPost()->getWithoutHtml('contenu');
         $id = $request->getGet()->get('id');
         
         $error = false;
         $result = false;
+        $tokenError = false;
 
         if (!empty($_POST)) {
-            if (!empty($contenu)) {
-                $res = $table->updateProjetSoin($id, [
-                
-                    'contenu' => $contenu,
+            if (isset($tokenGet) && $tokenGet === $tokenSession) {
+                if (!empty($contenu)) {
+                    $res = $table->updateProjetSoin($id, [
+                    
+                        'contenu' => $contenu,
 
-                ]);
-                if ($res) {
-                    $result = true;
+                    ]);
+                    if ($res) {
+                        $result = true;
+                    }
+                } else {
+                    $error = true;
                 }
             } else {
-                $error = true;
+                $tokenError =true;
             }
         }
-
+        $request->getSession()->set('token', $token);
         $post = $table->findProjetSoin($id);
         $form = new \App\Service\BootstrapForm($post);
         $view = new \App\View\View();
-        $view->renderAdmin(['template' => 'editProjetSoin', 'data' => ['contenus' => $contenuAccueil,'form' => $form, 'error' => $error,'result' => $result,'countM' => $countMessage,'userId' => $userId,'countA' => $countActivites,'countP' => $countProfessionnel]]);
+        $view->renderAdmin(['template' => 'editProjetSoin', 'data' => ['token' => $token, 'tokenError' => $tokenError,'contenus' => $contenuAccueil,'form' => $form, 'error' => $error,'result' => $result,'countM' => $countMessage,'userId' => $userId,'countA' => $countActivites,'countP' => $countProfessionnel]]);
     }
 
     public function getEditPartenaires(): void
@@ -283,32 +325,40 @@ class BackManager
         $contenuAccueil = $table->contenuAccueil();
 
         $request = new Request();
+        $token = base_convert(hash('sha256', time() . mt_rand()), 16, 36);
+        $tokenSession = $request->getSession()->get('token');
+        $tokenGet = $request->getPost()->get('token');
     
         $contenu = $request->getPost()->getWithoutHtml('contenu');
         $id = $request->getGet()->get('id');
         
         $error = false;
         $result = false;
+        $tokenError = false;
 
         if (!empty($_POST)) {
-            if (!empty($contenu)) {
-                $res = $table->updatePartenaires($id, [
-                
-                    'contenu' => $contenu,
+            if (isset($tokenGet) && $tokenGet === $tokenSession) {
+                if (!empty($contenu)) {
+                    $res = $table->updatePartenaires($id, [
+                    
+                        'contenu' => $contenu,
 
-                ]);
-                if ($res) {
-                    $result = true;
+                    ]);
+                    if ($res) {
+                        $result = true;
+                    }
+                } else {
+                    $error = true;
                 }
             } else {
-                $error = true;
+                $tokenError =true;
             }
         }
         $view = new \App\View\View();
         $post = $table->findPartenaires($id);
         $form = new \App\Service\BootstrapForm($post);
-
-        $view->renderAdmin(['template' => 'editPartenaires', 'data' => ['contenus' => $contenuAccueil,'form' => $form, 'error' => $error,'result' => $result,'countM' => $countMessage,'userId' => $userId,'countA' => $countActivites,'countP' => $countProfessionnel]]);
+        $request->getSession()->set('token', $token);
+        $view->renderAdmin(['template' => 'editPartenaires', 'data' => ['token' => $token, 'tokenError' => $tokenError,'contenus' => $contenuAccueil,'form' => $form, 'error' => $error,'result' => $result,'countM' => $countMessage,'userId' => $userId,'countA' => $countActivites,'countP' => $countProfessionnel]]);
     }
 
     public function getEditActivite(): void
@@ -322,6 +372,9 @@ class BackManager
         $userId = $auth->getUserId();
         
         $request = new Request();
+        $token = base_convert(hash('sha256', time() . mt_rand()), 16, 36);
+        $tokenSession = $request->getSession()->get('token');
+        $tokenGet = $request->getPost()->get('token');
 
         $nom = $request->getPost()->get('activite');
         $titre = $request->getPost()->get('titre');
@@ -330,26 +383,31 @@ class BackManager
         
         $error = false;
         $result = false;
+        $tokenError = false;
 
         if (!empty($_POST)) {
-            $res = $table->updateActivite($id, [
-                
-                    'activite' => $nom,
-                    'titre' => $titre,
-                    'description' => $description
+            if (isset($tokenGet) && $tokenGet === $tokenSession) {
+                $res = $table->updateActivite($id, [
+                    
+                        'activite' => $nom,
+                        'titre' => $titre,
+                        'description' => $description
 
-                ]);
-            if ($res) {
-                $result = true;
+                    ]);
+                if ($res) {
+                    $result = true;
+                }
+            } else {
+                $tokenError =true;
             }
         } else {
             $error = true;
         }
-
+        $request->getSession()->set('token', $token);
         $post = $table->find($id);
         $form = new \App\Service\BootstrapForm($post);
         $view = new \App\View\View();
-        $view->renderAdmin(['template' => 'editActivite', 'data' => ['countM' => $countMessage,'countA' => $countActivites,'countP' => $countProfessionnel,'result' => $result,'userId' => $userId,'error' => $error,'form' => $form]]);
+        $view->renderAdmin(['template' => 'editActivite', 'data' => ['token' => $token, 'tokenError' => $tokenError,'countM' => $countMessage,'countA' => $countActivites,'countP' => $countProfessionnel,'result' => $result,'userId' => $userId,'error' => $error,'form' => $form]]);
     }
 
     public function getEditProfessionnel(): void
@@ -363,6 +421,9 @@ class BackManager
         $userId = $auth->getUserId();
         
         $request = new Request();
+        $token = base_convert(hash('sha256', time() . mt_rand()), 16, 36);
+        $tokenSession = $request->getSession()->get('token');
+        $tokenGet = $request->getPost()->get('token');
 
         $nom = $request->getPost()->get('nom');
         $activite = $request->getPost()->get('activite');
@@ -370,27 +431,33 @@ class BackManager
         
         $error = false;
         $result = false;
-        if (!empty($_POST)) {
-            if (!empty($activite) && !empty($nom)) {
-                $res = $table->updateProfessionnel($id, [
-                    
-                        'nom' => $nom,
-                        'id_activites' => $activite,
+        $tokenError = false;
 
-                    ]);
-                if ($res) {
-                    $result = true;
+        if (!empty($_POST)) {
+            if (isset($tokenGet) && $tokenGet === $tokenSession) {
+                if (!empty($activite) && !empty($nom)) {
+                    $res = $table->updateProfessionnel($id, [
+                        
+                            'nom' => $nom,
+                            'id_activites' => $activite,
+
+                        ]);
+                    if ($res) {
+                        $result = true;
+                    }
+                } else {
+                    $error = true;
                 }
             } else {
-                $error = true;
+                $tokenError =true;
             }
         }
-
+        $request->getSession()->set('token', $token);
         $dataActivite = $table->allActivites();
         $post = $table->findPro($id);
         $form = new \App\Service\BootstrapForm($post);
         $view = new \App\View\View();
-        $view->renderAdmin(['template' => 'editProfessionnel', 'data' => ['countM' => $countMessage,'countA' => $countActivites,'countP' => $countProfessionnel,'result' => $result,'activites' => $dataActivite, 'userId' => $userId,'error' => $error,'form' => $form]]);
+        $view->renderAdmin(['template' => 'editProfessionnel', 'data' => ['token' => $token, 'tokenError' => $tokenError,'countM' => $countMessage,'countA' => $countActivites,'countP' => $countProfessionnel,'result' => $result,'activites' => $dataActivite, 'userId' => $userId,'error' => $error,'form' => $form]]);
     }
 
     public function getAddActivite(): void
@@ -404,6 +471,9 @@ class BackManager
         $userId = $auth->getUserId();
         
         $request = new Request();
+        $token = base_convert(hash('sha256', time() . mt_rand()), 16, 36);
+        $tokenSession = $request->getSession()->get('token');
+        $tokenGet = $request->getPost()->get('token');
         
         $nom = $request->getPost()->get('activite');
         $titre = $request->getPost()->get('titre');
@@ -411,27 +481,32 @@ class BackManager
         
         $error = false;
         $result = false;
+        $tokenError = false;
 
         if (!empty($_POST)) {
-            if (!empty($nom) && !empty($titre)) {
-                $res = $table->createActivite([
-                    
-                        'activite' => $nom,
-                        'titre' => $titre,
-                        'description' => $description
+            if (isset($tokenGet) && $tokenGet === $tokenSession) {
+                if (!empty($nom) && !empty($titre)) {
+                    $res = $table->createActivite([
+                        
+                            'activite' => $nom,
+                            'titre' => $titre,
+                            'description' => $description
 
-                    ]);
-                if ($res) {
-                    $result = true;
+                        ]);
+                    if ($res) {
+                        $result = true;
+                    }
+                } else {
+                    $error = true;
                 }
             } else {
-                $error = true;
+                $tokenError =true;
             }
         }
-
+        $request->getSession()->set('token', $token);
         $form = new \App\Service\BootstrapForm($_POST);
         $view = new \App\View\View();
-        $view->renderAdmin(['template' => 'addActivite', 'data' => ['countM' => $countMessage,'countA' => $countActivites,'countP' => $countProfessionnel,'result' => $result, 'form' => $form, 'userId' => $userId,'error' => $error]]);
+        $view->renderAdmin(['template' => 'addActivite', 'data' => ['token' => $token, 'tokenError' => $tokenError,'countM' => $countMessage,'countA' => $countActivites,'countP' => $countProfessionnel,'result' => $result, 'form' => $form, 'userId' => $userId,'error' => $error]]);
     }
 
     public function getAddProfessionnel(): void
@@ -445,32 +520,40 @@ class BackManager
         $userId = $auth->getUserId();
 
         $request = new Request();
+        $token = base_convert(hash('sha256', time() . mt_rand()), 16, 36);
+        $tokenSession = $request->getSession()->get('token');
+        $tokenGet = $request->getPost()->get('token');
         
         $nom = $request->getPost()->get('nom');
         $activite = $request->getPost()->get('activite');
         
         $error = false;
         $result = false;
+        $tokenError = false;
 
         if (!empty($_POST)) {
-            if (!empty($nom) && !empty($activite)) {
-                $res = $table->createProfessionnel([
-                    
-                        'nom' => $nom,
-                        'id_activites' => $activite,
+            if (isset($tokenGet) && $tokenGet === $tokenSession) {
+                if (!empty($nom) && !empty($activite)) {
+                    $res = $table->createProfessionnel([
+                        
+                            'nom' => $nom,
+                            'id_activites' => $activite,
 
-                    ]);
-                if ($res) {
-                    $result = true;
+                        ]);
+                    if ($res) {
+                        $result = true;
+                    }
+                } else {
+                    $error = true;
                 }
             } else {
-                $error = true;
+                $tokenError =true;
             }
         }
-
+        $request->getSession()->set('token', $token);
         $form = new \App\Service\BootstrapForm($_POST);
         $dataActivite = $table->allActivites();
         $view = new \App\View\View();
-        $view->renderAdmin(['template' => 'addProfessionnel', 'data' => ['countM' => $countMessage,'countA' => $countActivites,'countP' => $countProfessionnel,'activites' => $dataActivite,'result' => $result, 'form' => $form, 'userId' => $userId,'error' => $error]]);
+        $view->renderAdmin(['template' => 'addProfessionnel', 'data' => ['token' => $token, 'tokenError' => $tokenError,'countM' => $countMessage,'countA' => $countActivites,'countP' => $countProfessionnel,'activites' => $dataActivite,'result' => $result, 'form' => $form, 'userId' => $userId,'error' => $error]]);
     }
 }

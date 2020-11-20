@@ -50,14 +50,14 @@ class BootstrapForm
     public function inputActivite(string $name):string
     {
         return $this->surround(
-            '<label style="font-size:17px;font-family:RobotoMedium;" class="green">' . ucfirst($name) . ' <span style="font-family:sans-serif;font-size:15px;" class="colorTitle">(ex: Médecine générale)</span></label><input style="font-family:sans-serif;font-size:15px;margin-bottom:40px;" type="text" name="' . $name . '" value="' . $this->getValue($name) . '" class="form-control">'
+            '<label style="font-size:17px;font-family:RobotoMedium;" class="green">' . ucfirst($name) . ' <span style="font-family:sans-serif;font-size:15px;" class="colorTitle">(ex: Médecine générale)</span></label><input style="font-family:sans-serif;font-size:15px;margin-bottom:30px;" type="text" name="' . $name . '" value="' . $this->getValue($name) . '" class="form-control">'
         );
     }
 
     public function inputTitre(string $name):string
     {
         return $this->surround(
-            '<label style="font-size:17px;font-family:RobotoMedium;" class="green">' . ucfirst($name) . ' <span style="font-family:sans-serif;font-size:15px;" class="colorTitle">(ex: Médecins généralistes)</span></label><input style="font-family:sans-serif;font-size:15px;margin-bottom:40px;" type="text" name="' . $name . '" value="' . $this->getValue($name) . '" class="form-control">'
+            '<label style="font-size:17px;font-family:RobotoMedium;" class="green">' . ucfirst($name) . ' <span style="font-family:sans-serif;font-size:15px;" class="colorTitle">(ex: Médecins généralistes)</span></label><input style="font-family:sans-serif;font-size:15px;margin-bottom:30px;" type="text" name="' . $name . '" value="' . $this->getValue($name) . '" class="form-control">'
         );
     }
 
@@ -86,6 +86,13 @@ class BootstrapForm
     {
         return $this->surround(
             '<label style="font-size:17px;font-family:RobotoMedium;" class="colorTitle">' . ucfirst($name) . '</label><textarea name="' . $name . '" style="min-height:300px;" class="form-control" id="myEditor">' . $this->getValue($name) .'</textarea>'
+        );
+    }
+
+    public function inputFile(string $name):string
+    {
+        return $this->surround(
+            '<label style="font-size:17px;font-family:RobotoMedium;margin-bottom:15px;margin-top:20px;" class="green">' . ucfirst($name) . '<span style="font-family:sans-serif;font-size:15px;" class="colorTitle"> (s\'affichera sur la page d\'accueil)</span></label><input style="font-family:sans-serif;font-size:15px;margin-bottom:40px;display:block;" type="file" name="' . $name . '" value="' . $this->getValue($name) . '">'
         );
     }
 

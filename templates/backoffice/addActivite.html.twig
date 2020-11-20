@@ -9,15 +9,19 @@
     <hr/>
         <form method="post">
 
-            <input type="hidden" name="token" id="token" value="<?=$token;?>"/>
+            <input type="hidden" name="token" id="token" value="{{ token|raw }}"/>
             {{ form.inputActivite('activite')|raw }}
             {{ form.inputTitre('titre')|raw }}
             {{ form.textAreaEditor('description')|raw }}
+            {{ form.inputFile('Photo')|raw }}
             {% if error == true %}
                 <div class="alert alert-danger text-center" style="margin-top:15px">Les champs sont vides !</div>
             {% endif %}
             {% if result %}
                 <div class="alert alert-success text-center" style="margin-top:15px">Activité ajoutée !</div>
+            {% endif %}
+            {% if tokenError == true %}
+                <div class="alert alert-danger text-center" style="margin-top:15px">Token de sécurité périmé !</div>
             {% endif %}
             
             <button class="btn btn-primary" style="margin-top:10px;">Ajouter l'activité</button>

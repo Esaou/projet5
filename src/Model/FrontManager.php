@@ -19,12 +19,15 @@ class FrontManager
     public function getRejoindre(): void
     {
         $request = new Request();
-
+        $token = base_convert(hash('sha256', time() . mt_rand()), 16, 36);
+        $tokenSession = $request->getSession()->get('token');
+        $tokenGet = $request->getPost()->get('token');
         
         $error = false;
         $errors=false;
         $result = false;
         $nameError = false;
+        $tokenError = false;
 
         $nom = $request->getPost()->get('nom');
         $email = $request->getPost()->get('email');
@@ -34,38 +37,45 @@ class FrontManager
         $postTable = $this->database->getInstance()->getTable('GlobalManager');
 
         if (!empty($_POST)) {
-            if ((isset($nom,$email,$objet,$message) and !empty($nom) and !empty($email) and !empty($objet) and !empty($message))) {
-                //if (preg_match("/\^[a-zA-Z]\$/", $nom)){
-                $pseudo = htmlspecialchars($nom);
-                $email = htmlspecialchars($email);
-                $objet = htmlspecialchars($objet);
-                $message = htmlspecialchars($message);
+            if (isset($tokenGet) && $tokenGet === $tokenSession) {
+                if ((isset($nom,$email,$objet,$message) and !empty($nom) and !empty($email) and !empty($objet) and !empty($message))) {
+                    //if (preg_match("/\^[a-zA-Z]\$/", $nom)){
+                    $pseudo = htmlspecialchars($nom);
+                    $email = htmlspecialchars($email);
+                    $objet = htmlspecialchars($objet);
+                    $message = htmlspecialchars($message);
 
-                if (mb_strlen($pseudo) < 25) {
-                    $postTable->createMessage([
-                
-                            'nom' => $pseudo,
-                            'email' => $email,
-                            'objet' => $objet,
-                            'message' => $message
-                            
-                
-                        ]);
-                    $result = true;
+                    if (mb_strlen($pseudo) < 25) {
+                        $postTable->createMessage([
+                    
+                                'nom' => $pseudo,
+                                'email' => $email,
+                                'objet' => $objet,
+                                'message' => $message
+                                
+                    
+                            ]);
+                        $result = true;
+                    } else {
+                        $error = true;
+                    }
+                    //}else{
+                    // $nameError = true;
+                    //}
                 } else {
-                    $error = true;
+                    $errors= true;
                 }
-                //}else{
-                   // $nameError = true;
-                //}
             } else {
-                $errors= true;
+                $tokenError = true;
             }
         }
+        
+        $request->getSession()->set('token', $token);
+
         $dataForm = $this->form();
         $dataActivites = $this->activites();
         $view = new \App\View\View();
-        $view->render(['template' => 'rejoindre', 'data' => ['nameError' => $nameError,'result' => $result, 'error' => $error,'errors' => $errors,'forms' => $dataForm, 'activites' => $dataActivites]]);
+        $view->render(['template' => 'rejoindre', 'data' => ['tokenSession' => $tokenSession, 'token' => $token, 'tokenError' => $tokenError,'nameError' => $nameError,'result' => $result, 'error' => $error,'errors' => $errors,'forms' => $dataForm, 'activites' => $dataActivites]]);
     }
 
     public function encadre()

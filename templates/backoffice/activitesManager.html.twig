@@ -22,7 +22,7 @@
                             <td>
                                 <a href="?action=editActivite&id={{ activite.id|raw }}" class="btn btn-primary">Modifier</a>
                                 <form action="?action=deleteActivite&id={{ activite.id|raw }}" method="post" style="display:inline;">
-                                    <input type="hidden" name="token" id="token" value=""/>
+                                    <input type="hidden" name="token" id="token" value="{{ token|raw }}"/>
                                     <button type="submit" class="btn btn-danger"><i class="fas fa-trash"></i></button>
                                 </form>
                             </td>

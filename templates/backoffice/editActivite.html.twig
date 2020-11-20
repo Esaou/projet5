@@ -9,13 +9,16 @@
     <hr/>
         <form method="post" style="margin-top:20px;">
 
-            <input type="hidden" name="token" id="token" value="<?=$token;?>"/>
+            <input type="hidden" name="token" id="token" value="{{ token|raw }}"/>
             {{ form.inputActivite('activite')|raw }}
             {{ form.inputTitre('titre')|raw }}
             {{ form.textAreaEditor('description')|raw }}
 
             {% if result %}
                 <div class="alert alert-success text-center" style="margin-top:15px">Modifications sauvegardées !</div>
+            {% endif %}
+            {% if tokenError == true %}
+                <div class="alert alert-danger text-center" style="margin-top:15px">Token de sécurité périmé !</div>
             {% endif %}
             
             <button class="btn btn-primary" style="margin-top:10px;">Sauvegarder</button>

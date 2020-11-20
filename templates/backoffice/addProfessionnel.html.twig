@@ -9,7 +9,7 @@
     <hr/>
         <form method="post">
 
-            <input type="hidden" name="token" id="token" value=""/>
+            <input type="hidden" name="token" id="token" value="{{ token|raw }}"/>
             {{ form.inputEditor('nom')|raw }}
             <div class="form-group" style="margin-bottom:25px;">
                 <label style="font-size:17px;font-family:RobotoMedium;" class="colorTitle">Activité</label>
@@ -26,6 +26,9 @@
             {% endif %}
             {% if error == true %}
                 <div class="alert alert-danger text-center" style="margin-top:15px">Renseignez tous les champs !</div>
+            {% endif %}
+            {% if tokenError == true %}
+                <div class="alert alert-danger text-center" style="margin-top:15px">Token de sécurité périmé !</div>
             {% endif %}
             
             <button class="btn btn-primary" style="margin-top:10px;">Ajouter le professionnel</button>

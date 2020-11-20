@@ -9,7 +9,7 @@
         <hr/>
         <form method="post">
 
-            <input type="hidden" name="token" id="token" value="<?=$token;?>"/>
+            <input type="hidden" name="token" id="token" value="{{ token|raw }}"/>
             {{ form.inputProfil('Username')|raw }}
             {{ form.passwordProfil('Password')|raw }}
             {{ form.passwordProfil('Confirm')|raw }}
@@ -21,6 +21,9 @@
             {% endif %}
             {% if result == true %}
                 <div class="alert alert-success text-center" style="margin-top:15px">Modifications sauvegardées !</div>
+            {% endif %}
+            {% if tokenError == true %}
+                <div class="alert alert-danger text-center" style="margin-top:15px">Token de sécurité périmé !</div>
             {% endif %}
             <button class="btn btn-primary" style="margin-top:10px;">Sauvegarder</button>
             <a class="btn btn-outline-secondary" style="margin-top:10px;" href="index.php?action=indexAdmin">Retour accueil</a>

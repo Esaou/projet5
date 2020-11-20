@@ -9,7 +9,7 @@
     <hr/>
         <form method="post">
 
-            <input type="hidden" name="token" id="token" value=""/>
+            <input type="hidden" name="token" id="token" value="{{ token|raw }}"/>
             {{ form.textAreaEditorContenu('contenu')|raw }}
             
             {% if error == true %}
@@ -17,6 +17,9 @@
             {% endif %}
             {% if result == true %}
                 <div class="alert alert-success text-center" style="margin-top:15px">Page modifiée !</div>
+            {% endif %}
+            {% if tokenError == true %}
+                <div class="alert alert-danger text-center" style="margin-top:15px">Token de sécurité périmé !</div>
             {% endif %}
             
             <button class="btn btn-primary" style="margin-top:10px;">Modifier la page</button>
