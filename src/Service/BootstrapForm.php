@@ -92,7 +92,7 @@ class BootstrapForm
     public function inputFile(string $name):string
     {
         return $this->surround(
-            '<label style="font-size:17px;font-family:RobotoMedium;margin-bottom:15px;margin-top:20px;" class="green">' . ucfirst($name) . '<span style="font-family:sans-serif;font-size:15px;" class="colorTitle"> (s\'affichera sur la page d\'accueil)</span></label><input style="font-family:sans-serif;font-size:15px;margin-bottom:40px;display:block;" type="file" name="' . $name . '" value="' . $this->getValue($name) . '">'
+            '<label style="font-size:17px;font-family:RobotoMedium;margin-bottom:15px;" class="green">' . ucfirst($name) . '<span style="font-family:sans-serif;font-size:15px;" class="colorTitle"> (s\'affichera sur la page d\'accueil)</span></label><input style="font-family:sans-serif;font-size:15px;margin-bottom:20px;display:block;" type="file" name="' . $name . '" value="' . $this->getValue($name) . '">'
         );
     }
 

@@ -384,18 +384,52 @@ class BackManager
         $error = false;
         $result = false;
         $tokenError = false;
+        $photoError =false;
+        $photoExtension = false;
+        $photoTaille = false;
 
         if (!empty($_POST)) {
             if (isset($tokenGet) && $tokenGet === $tokenSession) {
-                $res = $table->updateActivite($id, [
-                    
+                if (isset($_FILES['photo']) && !empty($_FILES['photo']['name'])) {
+                    $tailleMax = 2097152;
+                    $extensionsValides = ['jpg','jpeg','gif','png'];
+                    if ($_FILES['photo']['size'] <= $tailleMax) {
+                        $extensionUpload = mb_strtolower(mb_substr(mb_strrchr($_FILES['photo']['name'], '.'), 1));
+                        if (in_array($extensionUpload, $extensionsValides, true)) {
+                            $path = "images/" . $nom . "." . $extensionUpload ;
+                            $res = move_uploaded_file($_FILES['photo']['tmp_name'], $path);
+                            if ($res) {
+                                $resultat = $table->updateActivite($id, [
+                                
+                                    'activite' => $nom,
+                                    'titre' => $titre,
+                                    'description' => $description,
+                                    'photo' => $nom . "." . $extensionUpload
+        
+                                ]);
+                                if ($resultat) {
+                                    $result = true;
+                                }
+                            } else {
+                                $photoError = true;
+                            }
+                        } else {
+                            $photoExtension = true;
+                        }
+                    } else {
+                        $photoTaille = true;
+                    }
+                } else {
+                    $resultat = $table->updateActivite($id, [
+                                
                         'activite' => $nom,
                         'titre' => $titre,
-                        'description' => $description
-
+                        'description' => $description,
+    
                     ]);
-                if ($res) {
-                    $result = true;
+                    if ($resultat) {
+                        $result = true;
+                    }
                 }
             } else {
                 $tokenError =true;
@@ -407,7 +441,7 @@ class BackManager
         $post = $table->find($id);
         $form = new \App\Service\BootstrapForm($post);
         $view = new \App\View\View();
-        $view->renderAdmin(['template' => 'editActivite', 'data' => ['token' => $token, 'tokenError' => $tokenError,'countM' => $countMessage,'countA' => $countActivites,'countP' => $countProfessionnel,'result' => $result,'userId' => $userId,'error' => $error,'form' => $form]]);
+        $view->renderAdmin(['template' => 'editActivite', 'data' => ['photoExtension' => $photoExtension,'photoTaille' => $photoTaille,'photoError' => $photoError,'token' => $token, 'tokenError' => $tokenError,'countM' => $countMessage,'countA' => $countActivites,'countP' => $countProfessionnel,'result' => $result,'userId' => $userId,'error' => $error,'form' => $form]]);
     }
 
     public function getEditProfessionnel(): void
@@ -482,19 +516,54 @@ class BackManager
         $error = false;
         $result = false;
         $tokenError = false;
+        $photoError =false;
+        $photoExtension = false;
+        $photoTaille = false;
 
         if (!empty($_POST)) {
             if (isset($tokenGet) && $tokenGet === $tokenSession) {
                 if (!empty($nom) && !empty($titre)) {
-                    $res = $table->createActivite([
-                        
+                    if (isset($_FILES['photo']) && !empty($_FILES['photo']['name'])) {
+                        $tailleMax = 2097152;
+                        $extensionsValides = ['jpg','jpeg','gif','png'];
+                        if ($_FILES['photo']['size'] <= $tailleMax) {
+                            $extensionUpload = mb_strtolower(mb_substr(mb_strrchr($_FILES['photo']['name'], '.'), 1));
+                            if (in_array($extensionUpload, $extensionsValides, true)) {
+                                $path = "images/" . $nom . "." . $extensionUpload ;
+                                $res = move_uploaded_file($_FILES['photo']['tmp_name'], $path);
+                                if ($res) {
+                                    $resultat = $table->createActivite([
+                                    
+                                        'activite' => $nom,
+                                        'titre' => $titre,
+                                        'description' => $description,
+                                        'photo' => $nom . "." . $extensionUpload
+            
+                                    ]);
+                                    if ($resultat) {
+                                        $result = true;
+                                    }
+                                } else {
+                                    $photoError = true;
+                                }
+                            } else {
+                                $photoExtension = true;
+                            }
+                        } else {
+                            $photoTaille = true;
+                        }
+                    } else {
+                        $resultat = $table->createActivite([
+                                    
                             'activite' => $nom,
                             'titre' => $titre,
-                            'description' => $description
-
+                            'description' => $description,
+                            'photo' => ''
+        
                         ]);
-                    if ($res) {
-                        $result = true;
+                        if ($resultat) {
+                            $result = true;
+                        }
                     }
                 } else {
                     $error = true;
@@ -503,10 +572,11 @@ class BackManager
                 $tokenError =true;
             }
         }
+        
         $request->getSession()->set('token', $token);
         $form = new \App\Service\BootstrapForm($_POST);
         $view = new \App\View\View();
-        $view->renderAdmin(['template' => 'addActivite', 'data' => ['token' => $token, 'tokenError' => $tokenError,'countM' => $countMessage,'countA' => $countActivites,'countP' => $countProfessionnel,'result' => $result, 'form' => $form, 'userId' => $userId,'error' => $error]]);
+        $view->renderAdmin(['template' => 'addActivite', 'data' => ['photoExtension' => $photoExtension,'photoTaille' => $photoTaille,'photoError' => $photoError,'token' => $token, 'tokenError' => $tokenError,'countM' => $countMessage,'countA' => $countActivites,'countP' => $countProfessionnel,'result' => $result, 'form' => $form, 'userId' => $userId,'error' => $error]]);
     }
 
     public function getAddProfessionnel(): void

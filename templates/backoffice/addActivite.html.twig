@@ -7,13 +7,17 @@
     <div class="card-body" style="padding-top:0px!important;padding-bottom:0px!important;">
     <h4 class="colorTitle">Ajouter une activité</h4>
     <hr/>
-        <form method="post">
+        <form method="post" enctype="multipart/form-data">
 
             <input type="hidden" name="token" id="token" value="{{ token|raw }}"/>
             {{ form.inputActivite('activite')|raw }}
+            <hr/>
             {{ form.inputTitre('titre')|raw }}
+            <hr/>
             {{ form.textAreaEditor('description')|raw }}
-            {{ form.inputFile('Photo')|raw }}
+            <hr/ style="margin-top:40px;">
+            {{ form.inputFile('photo')|raw }}
+            <hr/>
             {% if error == true %}
                 <div class="alert alert-danger text-center" style="margin-top:15px">Les champs sont vides !</div>
             {% endif %}
@@ -22,6 +26,15 @@
             {% endif %}
             {% if tokenError == true %}
                 <div class="alert alert-danger text-center" style="margin-top:15px">Token de sécurité périmé !</div>
+            {% endif %}
+            {% if photoTaille == true %}
+                <div class="alert alert-danger text-center" style="margin-top:15px">La taille de la photo ne peut dépasser 2Mo !</div>
+            {% endif %}
+            {% if photoError == true %}
+                <div class="alert alert-danger text-center" style="margin-top:15px">Erreur lors de l'importation de votre photo !</div>
+            {% endif %}
+            {% if photoExtension == true %}
+                <div class="alert alert-danger text-center" style="margin-top:15px">La photo ne peut être qu'au format jpg, jpeg, gif ou png !</div>
             {% endif %}
             
             <button class="btn btn-primary" style="margin-top:10px;">Ajouter l'activité</button>

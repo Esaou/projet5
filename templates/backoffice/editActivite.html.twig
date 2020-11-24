@@ -7,18 +7,32 @@
     <div class="card-body" style="padding-top:0px!important;padding-bottom:0px!important;">
     <h4 class="colorTitle">Modifier une activité</h4>
     <hr/>
-        <form method="post" style="margin-top:20px;">
+        <form method="post" style="margin-top:20px;" enctype="multipart/form-data">
 
             <input type="hidden" name="token" id="token" value="{{ token|raw }}"/>
             {{ form.inputActivite('activite')|raw }}
+            <hr/>
             {{ form.inputTitre('titre')|raw }}
+            <hr/>
             {{ form.textAreaEditor('description')|raw }}
+            <hr/ style="margin-top:40px;">
+            {{ form.inputFile('photo')|raw }}
+            <hr/>
 
             {% if result %}
                 <div class="alert alert-success text-center" style="margin-top:15px">Modifications sauvegardées !</div>
             {% endif %}
             {% if tokenError == true %}
                 <div class="alert alert-danger text-center" style="margin-top:15px">Token de sécurité périmé !</div>
+            {% endif %}
+            {% if photoTaille == true %}
+                <div class="alert alert-danger text-center" style="margin-top:15px">La taille de la photo ne peut dépasser 2Mo !</div>
+            {% endif %}
+            {% if photoError == true %}
+                <div class="alert alert-danger text-center" style="margin-top:15px">Erreur lors de l'importation de votre photo !</div>
+            {% endif %}
+            {% if photoExtension == true %}
+                <div class="alert alert-danger text-center" style="margin-top:15px">La photo ne peut être qu'au format jpg, jpeg, gif ou png !</div>
             {% endif %}
             
             <button class="btn btn-primary" style="margin-top:10px;">Sauvegarder</button>
