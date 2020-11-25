@@ -22,14 +22,14 @@ class BootstrapForm
     public function input(string $name):string
     {
         return $this->surround(
-            '<label style="font-size:15px;">' . ucfirst($name) . '</label><input style="font-family:sans-serif;" type="text" name="' . $name . '" value="' . $this->getValue($name) . '" class="form-control">'
+            '<label style="font-size:15px;" class="colorTitle">' . ucfirst($name) . '</label><input style="font-family:sans-serif;" type="text" name="' . $name . '" value="' . $this->getValue($name) . '" class="form-control">'
         );
     }
 
     public function password(string $name):string
     {
         return $this->surround(
-            '<label style="font-size:15px;">' . ucfirst($name) . '</label><input style="font-family:sans-serif;" type="password" name="' . $name . '" value="" class="form-control">'
+            '<label style="font-size:15px;" class="colorTitle">' . ucfirst($name) . '</label><input style="font-family:sans-serif;" type="password" name="' . $name . '" value="" class="form-control">'
         );
     }
 
@@ -71,7 +71,7 @@ class BootstrapForm
     public function textArea(string $name):string
     {
         return $this->surround(
-            '<label style="font-size:17px;">' . ucfirst($name) . '</label><textarea style="min-height:100px;" name="' . $name . '" class="form-control">' . $this->getValue($name) .'</textarea>'
+            '<label style="font-size:15px;" class="colorTitle">' . ucfirst($name) . '</label><textarea style="min-height:100px;" name="' . $name . '" class="form-control">' . $this->getValue($name) .'</textarea>'
         );
     }
 

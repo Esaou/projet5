@@ -17,6 +17,9 @@
             {{ form.textAreaEditor('description')|raw }}
             <hr/ style="margin-top:40px;">
             {{ form.inputFile('photo')|raw }}
+            {% for activite in activites %}
+            <img src="images/{{ activite.photo }}" alt="imageActuelle" style="border-radius:5px;border:1px solid rgb(150,150,150);width:100px;height:100px;object-fit:cover;"/>
+            {% endfor %}
             <hr/>
 
             {% if result %}

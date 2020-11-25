@@ -229,6 +229,11 @@ class GlobalManager
         return $this->database->getDb()->query("SELECT * FROM messages WHERE id = $getId", 'App\Models\BackManager');
     }
 
+    public function idActivite($getId)
+    {
+        return $this->database->getDb()->query("SELECT * FROM activites WHERE id = $getId", 'App\Models\BackManager');
+    }
+
     // FIND
 
     public function find(string $id):object

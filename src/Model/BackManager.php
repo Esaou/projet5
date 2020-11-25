@@ -380,6 +380,7 @@ class BackManager
         $titre = $request->getPost()->get('titre');
         $description = $request->getPost()->getWithoutHtml('description');
         $id = $request->getGet()->get('id');
+        $idActivites = $table->idActivite($id);
         
         $error = false;
         $result = false;
@@ -441,7 +442,7 @@ class BackManager
         $post = $table->find($id);
         $form = new \App\Service\BootstrapForm($post);
         $view = new \App\View\View();
-        $view->renderAdmin(['template' => 'editActivite', 'data' => ['photoExtension' => $photoExtension,'photoTaille' => $photoTaille,'photoError' => $photoError,'token' => $token, 'tokenError' => $tokenError,'countM' => $countMessage,'countA' => $countActivites,'countP' => $countProfessionnel,'result' => $result,'userId' => $userId,'error' => $error,'form' => $form]]);
+        $view->renderAdmin(['template' => 'editActivite', 'data' => ['activites' => $idActivites,'photoExtension' => $photoExtension,'photoTaille' => $photoTaille,'photoError' => $photoError,'token' => $token, 'tokenError' => $tokenError,'countM' => $countMessage,'countA' => $countActivites,'countP' => $countProfessionnel,'result' => $result,'userId' => $userId,'error' => $error,'form' => $form]]);
     }
 
     public function getEditProfessionnel(): void
