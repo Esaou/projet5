@@ -1004,7 +1004,7 @@ header{
 
 }
 
-@media screen and (max-width: 852px) {
+@media screen and (max-width: 844px) {
 
     .carousel{
         height: 300px;
@@ -1027,7 +1027,7 @@ header{
 
     .presentation{
 
-        padding-top:130px;
+        padding-top:100px;
     
     }
 
@@ -1164,7 +1164,7 @@ header{
 
     .presentation{
 
-        padding-top:70px;
+        padding-top:50px;
     
     }
 
