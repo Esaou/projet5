@@ -24,10 +24,33 @@
                             <td>le {{ message.date|date("d/m/Y") }} à {{ message.date|date("H") }}h{{ message.date|date("i") }}</td>
                             <td class="text-center">
                                 <a href="?action=showMessage&id={{ message.id|raw }}" class="btn btn-primary">Ouvrir</a>
-                                <form action="?action=deleteMessage&id={{ message.id|raw }}" method="post" style="display:inline;">
-                                    <input type="hidden" name="token" id="token" value="{{ token|raw }}"/>
-                                    <button type="submit" class="btn btn-danger"><i class="fas fa-trash"></i></button>
-                                </form>
+                                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal{{ message.id|raw }}">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                                <div class="modal fade" id="exampleModal{{ message.id|raw }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">Confirmation</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+
+                                                Confirmez la supression du message de : {{ message.nom|raw }}
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                                                <form action="?action=deleteMessage&id={{ message.id|raw }}" method="post" style="display:inline;">
+                                                    <input type="hidden" name="token" id="token" value="{{ token|raw }}"/>
+                                                    <button type="submit" class="btn btn-danger">Supprimer</button>
+                                                </form>
+                                            </div>
+                                                
+                                        </div>
+                                    </div>
+                                </div>
                             </td>
                         </tr>
                     {% endfor %}
