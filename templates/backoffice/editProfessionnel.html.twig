@@ -14,7 +14,9 @@
             <div class="form-group" style="margin-bottom:25px;">
                 <label style="font-size:17px;font-family:RobotoMedium;" class="colorTitle">Activité</label>
                 <select name="activite" class="form-control" >
-                <option value='' hidden selected>Sélectionner une activité</option> 
+                {% for idProfessionnel in idProfessionnels %}
+                    <option value='{{ idProfessionnel.id|raw }}' hidden>{{ idProfessionnel.activite|raw }}</option>
+                {% endfor %}
                 {% for activite in activites %}
                     <option value='{{ activite.id|raw }}'>{{ activite.activite|raw }}</option>
                 {% endfor %}

@@ -463,6 +463,8 @@ class BackManager
         $nom = $request->getPost()->get('nom');
         $activite = $request->getPost()->get('activite');
         $id = $request->getGet()->get('id');
+        $idActivite = $request->getGet()->get('id_activite');
+        $idProfessionnel = $table->idProfessionnel($id);
         
         $error = false;
         $result = false;
@@ -488,11 +490,11 @@ class BackManager
             }
         }
         $request->getSession()->set('token', $token);
-        $dataActivite = $table->allActivites();
+        $dataActivite = $table->allActivitesEditPro($idActivite);
         $post = $table->findPro($id);
         $form = new \App\Service\BootstrapForm($post);
         $view = new \App\View\View();
-        $view->renderAdmin(['template' => 'editProfessionnel', 'data' => ['token' => $token, 'tokenError' => $tokenError,'countM' => $countMessage,'countA' => $countActivites,'countP' => $countProfessionnel,'result' => $result,'activites' => $dataActivite, 'userId' => $userId,'error' => $error,'form' => $form]]);
+        $view->renderAdmin(['template' => 'editProfessionnel', 'data' => ['idProfessionnels' => $idProfessionnel,'token' => $token, 'tokenError' => $tokenError,'countM' => $countMessage,'countA' => $countActivites,'countP' => $countProfessionnel,'result' => $result,'activites' => $dataActivite, 'userId' => $userId,'error' => $error,'form' => $form]]);
     }
 
     public function getAddActivite(): void

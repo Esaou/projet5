@@ -22,7 +22,7 @@
                             <td>{{ professionnel.nom|raw }}</td>
                             <td>{{ professionnel.activite|raw }}</td>
                             <td class="text-center">
-                                <a href="?action=editProfessionnel&id={{ professionnel.id|raw }}" class="btn btn-primary">Modifier</a>
+                                <a href="?action=editProfessionnel&id={{ professionnel.id|raw }}&id_activite={{ professionnel.id_activites|raw }}" class="btn btn-primary">Modifier</a>
                                 <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal{{ professionnel.id|raw }}">
                                     <i class="fas fa-trash"></i>
                                 </button>

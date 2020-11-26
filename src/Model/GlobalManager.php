@@ -179,6 +179,11 @@ class GlobalManager
         return $this->database->getDb()->query("SELECT * FROM activites ORDER BY id DESC", 'App\Models\BackManager');
     }
 
+    public function allActivitesEditPro($id)
+    {
+        return $this->database->getDb()->query("SELECT * FROM activites WHERE activites.id != $id", 'App\Models\BackManager');
+    }
+
     public function allMessages()
     {
         return $this->database->getDb()->query("SELECT * FROM messages ORDER BY id DESC", 'App\Models\BackManager');
@@ -232,6 +237,11 @@ class GlobalManager
     public function idActivite($getId)
     {
         return $this->database->getDb()->query("SELECT * FROM activites WHERE id = $getId", 'App\Models\BackManager');
+    }
+
+    public function idProfessionnel($id)
+    {
+        return $this->database->getDb()->query("SELECT * FROM professionnels LEFT JOIN activites ON activites.id = professionnels.id_activites WHERE professionnels.id=$id", 'App\Models\BackManager');
     }
 
     // FIND
