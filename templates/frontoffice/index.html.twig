@@ -4,10 +4,10 @@
 
 {% block content %}
 
-<section class="professionnels" style="padding-bottom:80px;">
+<section class="professionnels pad" style="padding-bottom:70px;">
     <div class="container">
         <div class="maxWidth container">
-        <h5 class="text-center animated fadeIn slow wow" style="padding-top:40px;padding-bottom:30px;"><span style="color:rgb(100, 203, 74);">Bienvenue</span> au Centre de Santé l'Étoile !</h5>
+        <h5 class="text-center animated fadeIn slow wow" style="padding-top:30px;padding-bottom:20px;"><span style="color:rgb(100, 203, 74);">Bienvenue</span> au Centre de Santé l'Étoile !</h5>
             <div id="carouselExampleIndicators" class="carousel slide carousel-fade slide animated fadeIn slow wow" data-ride="carousel">
                 <ol class="carousel-indicators">
                     <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
@@ -58,9 +58,11 @@
         <div class="container maxWidth" style="font-family:sans-serif;padding-top: 70px;">
             <h5 class="titleCenter animated fadeIn slow wow" style="color:rgb(100, 203, 74);"><i class="fas fa-exclamation-circle"></i> INFORMATION IMPORTANTE</h5> 
             <hr/>
+            <div class="animated fadeIn slow wow">
             {% for encadre in encadres %}
                 <p>{{ encadre.contenu|raw }}</p>
             {% endfor %}
+            </div>
         </div>
 
     </div>
@@ -87,9 +89,11 @@
         <div class="container maxWidth" style="font-family:sans-serif;padding-top:70px;">
             <h5 class="colorTitle titleCenter animated fadeIn slow wow">NOUS RECRUTONS</h5>
             <hr/>
+            <div class="animated fadeIn slow wow">
             <p>Vous êtes un professionnel de santé désireux de travailler au sein du centre de santé l'Étoile ?</p>
             <p>Nous sommes à votre disposition pour toute information complémentaire concernant l'intégration du centre.</p>
             <p>Merci de nous laisser vos coordonnées ainsi que votre activité via <a href="index.php?action=rejoindre" class="colorLink">notre formulaire</a>, afin que nous puissions entrer en contact.</p>
+            </div>  
         </div>
     </div>
 
