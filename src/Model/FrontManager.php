@@ -28,6 +28,7 @@ class FrontManager
         $result = false;
         $nameError = false;
         $tokenError = false;
+        $emailError = false;
 
         $nom = $request->getPost()->get('nom');
         $email = $request->getPost()->get('email');
@@ -38,33 +39,37 @@ class FrontManager
 
         if (!empty($_POST)) {
             if (isset($tokenGet) && $tokenGet === $tokenSession) {
-                //if(preg_match("/[a-z]/",$nom)){
-                if ((isset($nom,$email,$objet,$message) and !empty($nom) and !empty($email) and !empty($objet) and !empty($message))) {
-                    $pseudo = htmlspecialchars($nom);
-                    $email = htmlspecialchars($email);
-                    $objet = htmlspecialchars($objet);
-                    $message = htmlspecialchars($message);
+                if (preg_match("/^(?:[^\d\W][\-\s]{0,1}){2,40}$/i", $nom)) {
+                    if (preg_match("/^[^\W][a-zA-Z0-9_]+(\.[a-zA-Z0-9_]+)*\@[a-zA-Z0-9_]+(\.[a-zA-Z0-9_]+)*\.[a-zA-Z]{2,4}$/", $email)) {
+                        if ((isset($nom,$email,$objet,$message) and !empty($nom) and !empty($email) and !empty($objet) and !empty($message))) {
+                            $pseudo = htmlspecialchars($nom);
+                            $email = htmlspecialchars($email);
+                            $objet = htmlspecialchars($objet);
+                            $message = htmlspecialchars($message);
 
-                    if (mb_strlen($pseudo) < 25) {
-                        $postTable->createMessage([
-                        
-                                    'nom' => $pseudo,
-                                    'email' => $email,
-                                    'objet' => $objet,
-                                    'message' => $message
-                                    
-                        
-                                ]);
-                        $result = true;
+                            if (mb_strlen($pseudo) < 40) {
+                                $postTable->createMessage([
+                                
+                                            'nom' => $pseudo,
+                                            'email' => $email,
+                                            'objet' => $objet,
+                                            'message' => $message
+                                            
+                                
+                                        ]);
+                                $result = true;
+                            } else {
+                                $error = true;
+                            }
+                        } else {
+                            $errors= true;
+                        }
                     } else {
-                        $error = true;
+                        $emailError = true;
                     }
                 } else {
-                    $errors= true;
+                    $nameError = true;
                 }
-                //}else{
-                //    $nameError = true;
-                //}
             } else {
                 $tokenError = true;
             }
@@ -75,7 +80,7 @@ class FrontManager
         $dataForm = $this->form();
         $dataActivites = $this->activites();
         $view = new \App\View\View();
-        $view->render(['template' => 'rejoindre', 'data' => ['tokenSession' => $tokenSession, 'token' => $token, 'tokenError' => $tokenError,'nameError' => $nameError,'result' => $result, 'error' => $error,'errors' => $errors,'forms' => $dataForm, 'activites' => $dataActivites]]);
+        $view->render(['template' => 'rejoindre', 'data' => ['emailError' => $emailError,'tokenSession' => $tokenSession, 'token' => $token, 'tokenError' => $tokenError,'nameError' => $nameError,'result' => $result, 'error' => $error,'errors' => $errors,'forms' => $dataForm, 'activites' => $dataActivites]]);
     }
 
     public function encadre()

@@ -7,7 +7,7 @@
     <div class="card-body" style="padding-top:0px!important;padding-bottom:0px!important;">
     <h4 class="colorTitle">Ajouter une activité</h4>
     <hr/>
-        <form method="post" enctype="multipart/form-data">
+        <form method="post" action="#ancre" enctype="multipart/form-data">
 
             <input type="hidden" name="token" id="token" value="{{ token|raw }}"/>
             {{ form.inputActivite('activite')|raw }}
@@ -17,7 +17,7 @@
             {{ form.textAreaEditor('description')|raw }}
             <hr/ style="margin-top:40px;">
             {{ form.inputFile('photo')|raw }}
-            <hr/>
+            <hr/ id="ancre">
             {% if error == true %}
                 <div class="alert alert-danger text-center" style="margin-top:15px">Les champs sont vides !</div>
             {% endif %}

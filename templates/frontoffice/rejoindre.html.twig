@@ -8,7 +8,7 @@
 
     <div class="container maxWidth">
         <div style="margin-bottom:50px;">
-            <h5 class="colorTitle">Nous rejoindre</h5>
+            <h5 class="colorTitle" style="font-weight:normal;">Nous rejoindre</h5>
             <hr/>
             <p>Le centre de santé l'Étoile regroupe plusieurs métiers nécessaires à son fonctionnement :</p>
             <p>
@@ -20,9 +20,9 @@
         </div>
         <div>
             
-            <h5 class="colorTitle">Formulaire de contact</h5>
+            <h5 class="colorTitle" style="font-weight:normal;">Formulaire de contact</h5>
             <hr/>
-            <form class="bg-white text-secondary" method="post">
+            <form class="bg-white text-secondary" method="post" action="#ancre" id="ancre">
                 
                 <input type="hidden" name="token" id="token" value="{{ token|raw }}"/>
                 {{ forms.input('nom')|raw }}
@@ -31,7 +31,7 @@
                 {{ forms.textArea('message')|raw }}
                 <button class="btn btn-success btn-rounded" style="margin-top:10px">Envoyer mon message</button>
                 {% if error == true %}
-                    <div class="alert alert-danger text-center" style="margin-top:15px">Votre nom ne peut contenir plus de 25 caractères !</div>
+                    <div class="alert alert-danger text-center" style="margin-top:15px">Votre nom ne peut contenir plus de 40 caractères !</div>
                 {% endif %}
                 {% if errors == true %}
                     <div class="alert alert-danger text-center" style="margin-top:15px">Tous les champs doivent être complétés !</div>
@@ -44,6 +44,9 @@
                 {% endif %}
                 {% if tokenError == true %}
                     <div class="alert alert-danger text-center" style="margin-top:15px">Token de sécurité périmé !</div>
+                {% endif %}
+                {% if emailError == true %}
+                    <div class="alert alert-danger text-center" style="margin-top:15px">L'email renseigné est invalide !</div>
                 {% endif %}
                 
             </form>

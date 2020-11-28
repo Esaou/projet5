@@ -101,7 +101,7 @@ class GlobalManager
             $attributes[] = $v;
         }
         $sqlPart = implode(', ', $sqlParts);
-        return $this->query("UPDATE projetSoin SET $sqlPart WHERE id = $id", $attributes, true);
+        return $this->query("UPDATE projetsoin SET $sqlPart WHERE id = $id", $attributes, true);
     }
 
     public function updateActivite(string $id, array $fields):bool
@@ -221,7 +221,7 @@ class GlobalManager
 
     public function contenuProjetSoin()
     {
-        return $this->database->getDb()->query("SELECT * FROM projetSoin", 'App\Models\BackManager');
+        return $this->database->getDb()->query("SELECT * FROM projetsoin", 'App\Models\BackManager');
     }
 
     public function contenuPartenaires()

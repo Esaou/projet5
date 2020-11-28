@@ -115,8 +115,8 @@
     justify-content: space-around;
     align-items: center;
     min-width: 100%;
-    box-shadow: 0px 0px 15px rgba(180, 180, 180,0.3);
-    border-bottom: 1px solid rgba(180, 180, 180,0.5);
+    box-shadow: 0px 0px 10px rgba(180, 180, 180,0.2);
+    border-bottom: 1px solid rgba(180, 180, 180,0.4);
 
 }
 
@@ -137,9 +137,7 @@
 
 .checkBox{
 
-    position: absolute;
-    top: -5000px;
-    opacity: 0;
+    display: none;
 
 }
 
@@ -237,8 +235,7 @@
 .headerNav{
 
     color:rgb(100, 203, 74);
-    font-size: 18px;
-    font-family: RobotoMedium;
+    font-size: 17px;
     transition: color 0.2s linear;
 
 }
@@ -333,10 +330,16 @@
 .descriptif{
 
     background-color: rgba(120, 120, 120,0.9);
-    border-radius: 7px;
+    position: absolute;
+    bottom: 0px;
+    border-top-left-radius: 7px;
+    border-top-right-radius: 7px;
     margin-left: 20px;
     margin-right: 20px;
-    border: 1px solid rgb(180, 180, 180);
+    border-top: 1px solid rgb(180, 180, 180);
+    border-left: 1px solid rgb(180, 180, 180);
+    border-right: 1px solid rgb(180, 180, 180);
+    
 
 }
 
@@ -934,7 +937,6 @@ header{
 
     font-family: RobotoMedium;
     font-size: 17px;
-    color: rgb(100, 203, 74);
 
 }
 
@@ -1004,7 +1006,7 @@ header{
 
 }
 
-@media screen and (max-width: 844px) {
+@media screen and (max-width: 834px) {
 
     .carousel{
         height: 300px;
@@ -1219,6 +1221,12 @@ header{
     
     }
     
+    .label{
+
+        cursor: pointer;
+
+    }
+
     .checkBox:checked ~ .listeBtn{
     
         display: flex;
@@ -1283,7 +1291,7 @@ header{
     }
 
     .pad{
-        padding-top:0px;
+        padding-top:20px;
     }
 
 }
@@ -1291,19 +1299,28 @@ header{
 @media screen and (max-width: 600px) {
 
     .pad{
-        padding-top:20px;
+        padding-top:55px!important;
+    }
+
+    .label{
+
+        margin-bottom: 0px!important;
+
     }
 
     .nav{
 
         display: flex;
         flex-direction: column;
+        align-items: center;
+        justify-content: center;
 
     }
 
     .presentation{
 
         padding-top:80px;
+        max-width: 100%;
     
     }
 
@@ -1323,6 +1340,12 @@ header{
 
         padding-top: 60px;
     
+    }
+
+    .title{
+
+        margin-top: 10px;
+
     }
 
 }

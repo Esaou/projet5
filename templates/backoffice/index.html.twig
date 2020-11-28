@@ -14,6 +14,7 @@
                         <div class="card-body" style="font-size:16px;">
                         {% for activite in activites %}
                         <h6 class="card-title">{{ activite.activite|raw }}</h6>
+                        <hr/>
                         <p class="card-text">{{ activite.description|slice(0,75)|raw }} ...</p>
                         {% endfor %}
                         </div>
@@ -25,6 +26,7 @@
                         <div class="card-body" style="font-size:16px;">
                         {% for professionnel in professionnels %}
                         <h6 class="card-title">{{ professionnel.nom|raw }}</h6>
+                        <hr/>
                         <p class="card-text">{{ professionnel.activite|raw|slice(0,50) }}</p>
                         {% endfor %}
                         </div>
@@ -36,6 +38,7 @@
                         <div class="card-header titreCarte">Dernier message</div>
                         <div class="card-body" style="font-size:16px;">
                         <h6 class="card-title">de {{ message.nom|raw }}</h6>
+                        <hr/>
                         <p class="card-text">{{ message.message|raw|slice(0,50) }} ...</p>
                         {% endfor %}
                         </div>

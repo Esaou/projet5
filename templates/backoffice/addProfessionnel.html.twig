@@ -12,7 +12,7 @@
             <input type="hidden" name="token" id="token" value="{{ token|raw }}"/>
             {{ form.inputEditor('nom')|raw }}
             <div class="form-group" style="margin-bottom:25px;">
-                <label style="font-size:17px;font-family:RobotoMedium;" class="colorTitle">Activité</label>
+                <label style="font-size:16px;font-family:RobotoMedium;" class="colorTitle">Activité</label>
                 <select name="activite" class="form-control">
                 <option value='' hidden selected>Sélectionner une activité</option> 
                 {% for activite in activites %}

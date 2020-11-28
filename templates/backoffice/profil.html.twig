@@ -25,6 +25,9 @@
             {% if tokenError == true %}
                 <div class="alert alert-danger text-center" style="margin-top:15px">Token de sécurité périmé !</div>
             {% endif %}
+            {% if regexError == true %}
+                <div class="alert alert-danger text-center" style="margin-top:15px">Votre username doit contenir entre 2 et 20 caractères !</div>
+            {% endif %}
             <button class="btn btn-primary" style="margin-top:10px;">Sauvegarder</button>
             <a class="btn btn-outline-secondary" style="margin-top:10px;" href="index.php?action=indexAdmin">Retour accueil</a>
 

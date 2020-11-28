@@ -57,20 +57,25 @@ class BackManager
         $error = false;
         $result = false;
         $tokenError = false;
+        $regexError = false;
 
         if (!empty($_POST)) {
             if (isset($tokenGet) && $tokenGet === $tokenSession) {
                 if (!empty($username) && !empty($password) && !empty($confirm)) {
-                    if ($password === $confirm) {
-                        $table->updateProfil($id, [
-                        
-                            'username' => $username,
-                            'password' => sha1($confirm)
+                    if (mb_strlen($username) <= 20 && mb_strlen($username) >= 2) {
+                        if ($password === $confirm) {
+                            $table->updateProfil($id, [
+                            
+                                'username' => $username,
+                                'password' => sha1($confirm)
 
-                        ]);
-                        $result = true;
+                            ]);
+                            $result = true;
+                        } else {
+                            $errors = true;
+                        }
                     } else {
-                        $errors = true;
+                        $regexError = true;
                     }
                 } else {
                     $error = true;
@@ -82,7 +87,7 @@ class BackManager
         $request->getSession()->set('token', $token);
         $form = new \App\Service\BootstrapForm();
         $view = new \App\View\View();
-        $view->renderAdmin(['template' => 'profil', 'data' => ['token' => $token, 'tokenError' => $tokenError,'countM' => $countMessage,'countA' => $countActivites,'countP' => $countProfessionnel,'form' => $form,'errors' => $errors, 'error' => $error,'result'=>$result]]);
+        $view->renderAdmin(['template' => 'profil', 'data' => ['regexError' => $regexError,'token' => $token, 'tokenError' => $tokenError,'countM' => $countMessage,'countA' => $countActivites,'countP' => $countProfessionnel,'form' => $form,'errors' => $errors, 'error' => $error,'result'=>$result]]);
     }
 
     public function getActivitesManager(): void

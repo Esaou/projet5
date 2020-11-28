@@ -23,7 +23,7 @@ class Router
     public function __construct()
     {
         // dépendance
-        $this->database = new Database('etoile', 'root', '', 'localhost');
+        $this->database = new Database('dbs1060027', 'dbu86760', 'JaaH7Lzj.', 'db5001239317.hosting-data.io');
         $this->view = new View();
 
         // En attendent de mettre en place la class App\Service\Http\Request

@@ -18,7 +18,7 @@ class Database
     private $className;
 
 
-    public function __construct(string $dbName, string $dbUser = 'root', string $dbPass ='', string $dbHost='localhost')
+    public function __construct(string $dbName, string $dbUser = 'dbu86760', string $dbPass ='JaaH7Lzj.', string $dbHost='db5001239317.hosting-data.io')
     {
         $this->dbName = $dbName;
         $this->dbUser = $dbUser;
