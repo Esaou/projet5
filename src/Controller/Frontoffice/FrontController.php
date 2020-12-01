@@ -27,7 +27,6 @@ class FrontController
     {
         $dataEncadre = $this->frontManager->encadre();
         $dataActivites = $this->frontManager->activites();
-        
         $this->view->render(['template' => 'index', 'data' => ['encadres' => $dataEncadre,'activites' => $dataActivites]]);
     }
 
@@ -65,7 +64,67 @@ class FrontController
 
     public function rejoindre(): void
     {
-        $this->frontManager->getRejoindre();
+        $request = new Request();
+        $token = base_convert(hash('sha256', time() . mt_rand()), 16, 36);
+        $tokenSession = $request->getSession()->get('token');
+        $tokenGet = $request->getPost()->get('token');
+
+        $nom = $request->getPost()->get('nom');
+        $email = $request->getPost()->get('email');
+        $objet = $request->getPost()->get('objet');
+        $message = $request->getPost()->get('message');
+
+        $error = false;
+        $errors=false;
+        $result = false;
+        $nameError = false;
+        $tokenError = false;
+        $emailError = false;
+
+        if (!empty($_POST)) {
+            if (isset($tokenGet) && $tokenGet === $tokenSession) {
+                if (preg_match("/^(?:[^\d\W][\-\s]{0,1}){2,40}$/i", $nom)) {
+                    if (preg_match("/^[^\W][a-zA-Z0-9_]+(\.[a-zA-Z0-9_]+)*\@[a-zA-Z0-9_]+(\.[a-zA-Z0-9_]+)*\.[a-zA-Z]{2,4}$/", $email)) {
+                        if ((isset($nom,$email,$objet,$message) and !empty($nom) and !empty($email) and !empty($objet) and !empty($message))) {
+                            $pseudo = htmlspecialchars($nom);
+                            $email = htmlspecialchars($email);
+                            $objet = htmlspecialchars($objet);
+                            $message = htmlspecialchars($message);
+
+                            if (mb_strlen($pseudo) < 40) {
+                                $this->frontManager->createMessage([
+                                
+                                            'nom' => $pseudo,
+                                            'email' => $email,
+                                            'objet' => $objet,
+                                            'message' => $message
+                                            
+                                
+                                        ]);
+                                $result = true;
+                            } else {
+                                $error = true;
+                            }
+                        } else {
+                            $errors= true;
+                        }
+                    } else {
+                        $emailError = true;
+                    }
+                } else {
+                    $nameError = true;
+                }
+            } else {
+                $tokenError = true;
+            }
+        }
+
+        $request->getSession()->set('token', $token);
+
+        $dataActivites = $this->frontManager->activites();
+        $dataForm = $this->frontManager->form();
+
+        $this->view->render(['template' => 'rejoindre', 'data' => ['emailError' => $emailError,'tokenSession' => $tokenSession, 'token' => $token, 'tokenError' => $tokenError,'nameError' => $nameError,'result' => $result, 'error' => $error,'errors' => $errors,'forms' => $dataForm, 'activites' => $dataActivites]]);
     }
 
     public function contact(): void

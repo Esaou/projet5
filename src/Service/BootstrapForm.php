@@ -19,10 +19,24 @@ class BootstrapForm
         return "<div class=\"form-group\">{$html}</div>";
     }
 
-    public function input(string $name):string
+    public function input(string $name, string $id):string
     {
         return $this->surround(
-            '<label style="font-size:15px;" class="colorTitle">' . ucfirst($name) . '</label><input style="font-family:sans-serif;" type="text" name="' . $name . '" value="' . $this->getValue($name) . '" class="form-control">'
+            '<label style="font-size:15px;" class="colorTitle">' . ucfirst($name) . '</label><input style="font-family:sans-serif;" type="text" name="' . $name . '" id="'.$id.'" value="' . $this->getValue($name) . '" class="form-control">'
+        );
+    }
+
+    public function inputNom(string $name, string $id):string
+    {
+        return $this->surround(
+            '<label style="font-size:15px;" class="colorTitle">' . ucfirst($name) . '</label><input style="font-family:sans-serif;" type="text" name="' . $name . '" id="'.$id.'" value="" class="form-control">'
+        );
+    }
+
+    public function inputEmail(string $name, string $id):string
+    {
+        return $this->surround(
+            '<label style="font-size:15px;" class="colorTitle">' . ucfirst($name) . '</label><input style="font-family:sans-serif;" type="text" name="' . $name . '" id="'.$id.'" value="" class="form-control">'
         );
     }
 
@@ -33,17 +47,17 @@ class BootstrapForm
         );
     }
 
-    public function inputProfil(string $name):string
+    public function inputProfil(string $name, string $id):string
     {
         return $this->surround(
-            '<label style="font-size:16px;font-family:RobotoMedium;" class="colorTitle">' . ucfirst($name) . '</label><input style="font-family:sans-serif;" type="text" name="' . $name . '" value="' . $this->getValue($name) . '" class="form-control">'
+            '<label style="font-size:16px;font-family:RobotoMedium;" class="colorTitle">' . ucfirst($name) . '</label><input style="font-family:sans-serif;" type="text" name="' . $name . '" id="'.$id.'" value="" class="form-control">'
         );
     }
 
-    public function passwordProfil(string $name):string
+    public function passwordProfil(string $name, string $id):string
     {
         return $this->surround(
-            '<label style="font-size:16px;font-family:RobotoMedium;" class="colorTitle">' . ucfirst($name) . '</label><input style="font-family:sans-serif;" type="password" name="' . $name . '" value="" class="form-control">'
+            '<label style="font-size:16px;font-family:RobotoMedium;" class="colorTitle">' . ucfirst($name) . '</label><input style="font-family:sans-serif;" type="password" id="'.$id.'" name="' . $name . '" value="" class="form-control">'
         );
     }
 

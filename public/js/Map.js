@@ -41,5 +41,5 @@ class Map {
 }
 
 const carte = L.map('carte').setView([45.171749, 5.757089], 17);
-const veloClic = new Map(carte);
-veloClic.mapInit();
+const map = new Map(carte);
+map.mapInit();

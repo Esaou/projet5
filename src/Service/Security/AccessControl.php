@@ -25,7 +25,7 @@ class AccessControl
         $instance = new UsersManager($this->db);
         $user = $instance->getLogin($username);
         if ($user) {
-            if ($user->password === sha1($password)) {
+            if (password_verify($password, $user->password)) {
                 $this->request->getSession()->set('auth', $user->id);
                 return true;
             }

@@ -20,17 +20,18 @@
         </div>
         <div>
             
-            <h5 class="colorTitle" style="font-weight:normal;">Formulaire de contact</h5>
+            <h5 class="colorTitle" style="font-weight:normal;" id="test">Formulaire de contact</h5>
             <hr/>
             <form class="bg-white text-secondary" method="post" action="#ancre" id="ancre">
                 
                 <input type="hidden" name="token" id="token" value="{{ token|raw }}"/>
-                {{ forms.input('nom')|raw }}
-                {{ forms.input('email')|raw }}
-                {{ forms.input('objet')|raw }}
+                {{ forms.inputNom('nom','nom')|raw }}
+                {{ forms.inputEmail('email','email')|raw }}
+                {{ forms.input('objet','objet')|raw }}
                 {{ forms.textArea('message')|raw }}
-                <button class="btn btn-success btn-rounded" style="margin-top:10px">Envoyer mon message</button>
-                {% if error == true %}
+                <button class="btn btn-success btn-rounded" type="submit" id="submit" style="margin-top:10px">Envoyer mon message</button>
+                <div class="alert alert-danger text-center" id="error" style="margin-top:15px;display:none;"></div>
+                {% if validation == true %}
                     <div class="alert alert-danger text-center" style="margin-top:15px">Votre nom ne peut contenir plus de 40 caractères !</div>
                 {% endif %}
                 {% if errors == true %}

@@ -9,6 +9,16 @@
     }
 }
 
+.spanPass{
+
+    font-size:15px;
+    margin-bottom:30px;
+    padding-left:10px;
+    padding-right:10px;
+    display:block;
+
+}
+
 .maxWidth{
 
     width: 80%;
@@ -405,7 +415,7 @@
     justify-content: center;
     align-items: center;
     color: rgb(100, 100, 100);
-    transition:color 0.1s linear,transform 0.3s linear,border 0.3s linear;
+    transition:color 0.1s linear,border 0.3s linear;
     position: relative;
 
 }
@@ -438,7 +448,6 @@
 .activitesIndex:hover{
 
     color: rgb(100, 203, 74);
-    transform: scale(0.99);
 
 }
 
@@ -954,14 +963,22 @@ header{
 
 }
 
-.carteAdmin:hover{
+.carteAdmin{
 
-    transition: background-color 300ms ease;
+    transition: background-color 300ms ease,transform 300ms ease;
 
 }
 
 .carteAdmin:hover{
 
+    transform: scale(1.02);
+    background-color: rgba(240, 240, 240,1)!important;
+
+}
+
+.carteAdmin:active{
+
+    transform: scale(1);
     background-color: rgba(240, 240, 240,1)!important;
 
 }

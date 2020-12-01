@@ -7,7 +7,7 @@
     <form class="rounded shadow-sm p-3 mb-5 bg-white text-secondary text-center border border-muted" method="post">
         <input type="hidden" name="token" id="token" value="{{ token|raw }}"/>
         <div class="text-left">
-        {{ forms.input('username')|raw }}
+        {{ forms.input('username','login')|raw }}
         {{ forms.password('password')|raw }}
         </div>
         <button class="btn btn-success btn-rounded" style="margin-top:10px;font-family:sans-serif;">Se connecter</button>

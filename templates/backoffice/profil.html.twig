@@ -10,11 +10,15 @@
         <form method="post">
 
             <input type="hidden" name="token" id="token" value="{{ token|raw }}"/>
-            {{ form.inputProfil('Username')|raw }}
-            {{ form.passwordProfil('Password')|raw }}
-            {{ form.passwordProfil('Confirm')|raw }}
+            {{ form.inputProfil('Username' , 'profil')|raw }}
+            {{ form.passwordProfil('Password','profilPass')|raw }}
+            {{ form.passwordProfil('Confirm','profilPassConfirm')|raw }}
+            <span id="error" class="colorTitle spanPass">Votre mot de passe doit contenir au moins 1 chiffre, une lettre minuscule, majuscule, un caractère spécial et 8 caractères minimum !</span>
             {% if error == true %}
                 <div class="alert alert-danger text-center" style="margin-top:15px">Tous les champs doivent être complétés !</div>
+            {% endif %}
+            {% if passError == true %}
+                <div class="alert alert-danger text-center" style="margin-top:15px">Le mot de passe doit contenir au moins une majuscule, une minuscule, un chiffre, un caractère spécial et doit être supérieur à 10 caractères.</div>
             {% endif %}
             {% if errors == true %}
                 <div class="alert alert-danger text-center" style="margin-top:15px">Mots de passe non identiques !</div>
@@ -28,10 +32,36 @@
             {% if regexError == true %}
                 <div class="alert alert-danger text-center" style="margin-top:15px">Votre username doit contenir entre 2 et 20 caractères !</div>
             {% endif %}
-            <button class="btn btn-primary" style="margin-top:10px;">Sauvegarder</button>
-            <a class="btn btn-outline-secondary" style="margin-top:10px;" href="index.php?action=indexAdmin">Retour accueil</a>
-
+            <button class="btn btn-primary" id="submitProfil">Sauvegarder</button>
+            <a class="btn btn-outline-secondary" href="index.php?action=indexAdmin">Retour accueil</a>
         </form>
+        <button type="button" class="btn btn-outline-danger" style="margin-top:10px;" data-toggle="modal" data-target="#exampleModal{{ users.id|raw }}">
+            Supprimer mon compte
+        </button>
+        <div class="modal fade" id="exampleModal{{ users.id|raw }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Confirmation</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+
+                        Confirmez la supression du compte : {{ users.username|raw }}
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                        <form action="?action=deleteUser&id={{ users.id|raw }}" method="post" style="display:inline;">
+                            <input type="hidden" name="token" id="token" value="{{ token|raw }}"/>
+                            <button type="submit" class="btn btn-danger">Supprimer</button>
+                        </form>
+                    </div>
+                        
+                </div>
+            </div>
+        </div>
     </div>
 
 {%  endblock %}

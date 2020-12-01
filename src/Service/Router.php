@@ -23,7 +23,7 @@ class Router
     public function __construct()
     {
         // dépendance
-        $this->database = new Database('dbs1060027', 'dbu86760', 'JaaH7Lzj.', 'db5001239317.hosting-data.io');
+        $this->database = new Database('etoile', 'root', '', 'localhost');
         $this->view = new View();
 
         // En attendent de mettre en place la class App\Service\Http\Request
@@ -121,6 +121,12 @@ class Router
             $backManager = new BackManager($this->database);
             $controller = new BackController($postManager, $backManager, $this->view, $this->database);
             $controller->deleteMessage();
+        } elseif ($action === 'deleteUser') {
+            $postManager = new FrontManager($this->database);
+            $usersManager = new UsersManager($this->database);
+            $backManager = new BackManager($this->database);
+            $controller = new BackController($postManager, $backManager, $this->view, $this->database);
+            $controller->deleteUser();
         } elseif ($action === 'addActivite') {
             $postManager = new FrontManager($this->database);
             $usersManager = new UsersManager($this->database);

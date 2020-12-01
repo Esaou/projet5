@@ -16,147 +16,6 @@ class GlobalManager
         $this->database = $database;
     }
 
-    // CREATE
-
-    public function createMessage(array $fields):bool
-    {
-        $sqlParts = [];
-        $attributes = [];
-        foreach ($fields as $k => $v) {
-            $sqlParts[] = "$k = ?";
-            $attributes[] = $v;
-        }
-        $sqlPart = implode(', ', $sqlParts);
-        return $this->query("INSERT INTO messages SET $sqlPart", $attributes, true);
-    }
-
-    public function createActivite(array $fields):bool
-    {
-        $sqlParts = [];
-        $attributes = [];
-        foreach ($fields as $k => $v) {
-            $sqlParts[] = "$k = ?";
-            $attributes[] = $v;
-        }
-        $sqlPart = implode(', ', $sqlParts);
-        return $this->query("INSERT INTO activites SET $sqlPart", $attributes, true);
-    }
-
-    public function createProfessionnel(array $fields):bool
-    {
-        $sqlParts = [];
-        $attributes = [];
-        foreach ($fields as $k => $v) {
-            $sqlParts[] = "$k = ?";
-            $attributes[] = $v;
-        }
-        $sqlPart = implode(', ', $sqlParts);
-        return $this->query("INSERT INTO professionnels SET $sqlPart", $attributes, true);
-    }
-
-    // UPDATE
-
-    public function updateAccueil(string $id, array $fields):bool
-    {
-        $sqlParts = [];
-        $attributes = [];
-        foreach ($fields as $k => $v) {
-            $sqlParts[] = "$k = ?";
-            $attributes[] = $v;
-        }
-        $sqlPart = implode(', ', $sqlParts);
-        return $this->query("UPDATE accueil SET $sqlPart WHERE id = $id", $attributes, true);
-    }
-
-    public function updatePresentation(string $id, array $fields):bool
-    {
-        $sqlParts = [];
-        $attributes = [];
-        foreach ($fields as $k => $v) {
-            $sqlParts[] = "$k = ?";
-            $attributes[] = $v;
-        }
-        $sqlPart = implode(', ', $sqlParts);
-        return $this->query("UPDATE presentation SET $sqlPart WHERE id = $id", $attributes, true);
-    }
-
-    public function updatePartenaires(string $id, array $fields):bool
-    {
-        $sqlParts = [];
-        $attributes = [];
-        foreach ($fields as $k => $v) {
-            $sqlParts[] = "$k = ?";
-            $attributes[] = $v;
-        }
-        $sqlPart = implode(', ', $sqlParts);
-        return $this->query("UPDATE partenaires SET $sqlPart WHERE id = $id", $attributes, true);
-    }
-
-    public function updateProjetSoin(string $id, array $fields):bool
-    {
-        $sqlParts = [];
-        $attributes = [];
-        foreach ($fields as $k => $v) {
-            $sqlParts[] = "$k = ?";
-            $attributes[] = $v;
-        }
-        $sqlPart = implode(', ', $sqlParts);
-        return $this->query("UPDATE projetsoin SET $sqlPart WHERE id = $id", $attributes, true);
-    }
-
-    public function updateActivite(string $id, array $fields):bool
-    {
-        $sqlParts = [];
-        $attributes = [];
-        foreach ($fields as $k => $v) {
-            $sqlParts[] = "$k = ?";
-            $attributes[] = $v;
-        }
-        $sqlPart = implode(', ', $sqlParts);
-        return $this->query("UPDATE activites SET $sqlPart WHERE id = $id", $attributes, true);
-    }
-
-    public function updateProfessionnel(string $id, array $fields):bool
-    {
-        $sqlParts = [];
-        $attributes = [];
-        foreach ($fields as $k => $v) {
-            $sqlParts[] = "$k = ?";
-            $attributes[] = $v;
-        }
-        $sqlPart = implode(', ', $sqlParts);
-        return $this->query("UPDATE professionnels SET $sqlPart WHERE id = $id", $attributes, true);
-    }
-
-    public function updateProfil(string $id, array $fields):bool
-    {
-        $sqlParts = [];
-        $attributes = [];
-        foreach ($fields as $k => $v) {
-            $sqlParts[] = "$k = ?";
-            $attributes[] = $v;
-        }
-        $sqlPart = implode(', ', $sqlParts);
-        return $this->query("UPDATE users SET $sqlPart WHERE id = $id", $attributes, true);
-    }
-
-    // DELETE
-
-    public function deleteActivite(string $id):bool
-    {
-        return $this->query("DELETE FROM activites WHERE id = ?", [$id], true);
-    }
-
-    public function deleteMessage(string $id):bool
-    {
-        return $this->query("DELETE FROM messages WHERE id = ?", [$id], true);
-    }
-
-    public function deleteProfessionnel(string $id):bool
-    {
-        return $this->query("DELETE FROM professionnels WHERE id = ?", [$id], true);
-    }
-
     // CONTENT
 
     public function countActivites()
@@ -251,6 +110,11 @@ class GlobalManager
         return $this->database->getDb()->prepare("SELECT * FROM activites  WHERE id = ?", [$id], null, true);
     }
 
+    public function findUser(string $id):object
+    {
+        return $this->database->getDb()->prepare("SELECT * FROM users  WHERE id = ?", [$id], null, true);
+    }
+
     public function findPro(string $id):object
     {
         return $this->database->getDb()->prepare("SELECT * FROM professionnels  WHERE id = ?", [$id], null, true);
@@ -274,18 +138,5 @@ class GlobalManager
     public function findProjetSoin(string $id):object
     {
         return $this->database->getDb()->prepare("SELECT * FROM projetSoin  WHERE id = ?", [$id], null, true);
-    }
-
-    public function query($statement, array $attributes = null, bool $one = false):bool
-    {
-        if ($attributes) {
-            return $this->database->getDb()->prepare($statement, $attributes, str_replace('Table', 'Entity', get_class($this)), $one);
-        }
-
-        return $this->database->getDb()->query(
-            $statement,
-            str_replace('Table', 'Entity', get_class($this)),
-            $one
-        );
     }
 }
