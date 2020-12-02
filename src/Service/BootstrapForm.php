@@ -61,24 +61,24 @@ class BootstrapForm
         );
     }
 
-    public function inputActivite(string $name):string
+    public function inputActivite(string $name, string $id):string
     {
         return $this->surround(
-            '<label style="font-size:16px;font-family:RobotoMedium;" class="colorTitle">' . ucfirst($name) . ' <span style="font-family:sans-serif;font-size:15px;" class="colorTitle">(ex: Médecine générale)</span></label><input style="font-family:sans-serif;font-size:15px;margin-bottom:30px;" type="text" name="' . $name . '" value="' . $this->getValue($name) . '" class="form-control">'
+            '<label style="font-size:16px;font-family:RobotoMedium;" class="colorTitle">' . ucfirst($name) . ' <span style="font-family:sans-serif;font-size:15px;" class="colorTitle">(ex: Médecine générale)</span></label><input id="'.$id.'" style="font-family:sans-serif;font-size:15px;margin-bottom:30px;" type="text" name="' . $name . '" value="' . $this->getValue($name) . '" class="form-control">'
         );
     }
 
-    public function inputTitre(string $name):string
+    public function inputTitre(string $name, string $id):string
     {
         return $this->surround(
-            '<label style="font-size:16px;font-family:RobotoMedium;" class="colorTitle">' . ucfirst($name) . ' <span style="font-family:sans-serif;font-size:15px;" class="colorTitle">(ex: Médecins généralistes)</span></label><input style="font-family:sans-serif;font-size:15px;margin-bottom:30px;" type="text" name="' . $name . '" value="' . $this->getValue($name) . '" class="form-control">'
+            '<label style="font-size:16px;font-family:RobotoMedium;" class="colorTitle">' . ucfirst($name) . ' <span style="font-family:sans-serif;font-size:15px;" class="colorTitle">(ex: Médecins généralistes)</span></label><input id="'.$id.'" style="font-family:sans-serif;font-size:15px;margin-bottom:30px;" type="text" name="' . $name . '" value="' . $this->getValue($name) . '" class="form-control">'
         );
     }
 
-    public function inputEditor(string $name):string
+    public function inputEditor(string $name, string $id):string
     {
         return $this->surround(
-            '<label style="font-size:16px;font-family:RobotoMedium;" class="colorTitle">' . ucfirst($name) . '</label><input style="font-family:sans-serif;" type="text" name="' . $name . '" value="' . $this->getValue($name) . '" class="form-control">'
+            '<label style="font-size:16px;font-family:RobotoMedium;" class="colorTitle">' . ucfirst($name) . '</label><input style="font-family:sans-serif;" id="'.$id.'" type="text" name="' . $name . '" id="'.$id.'" value="' . $this->getValue($name) . '" class="form-control">'
         );
     }
 
@@ -89,10 +89,10 @@ class BootstrapForm
         );
     }
 
-    public function textAreaEditor(string $name):string
+    public function textAreaEditor(string $name, string $id):string
     {
         return $this->surround(
-            '<label style="font-size:16px;font-family:RobotoMedium;" class="colorTitle">' . ucfirst($name) . ' <span style="font-family:sans-serif;font-size:15px;" class="colorTitle">(s\'affichera dans la rubrique \'activité\' du site)</span></label><textarea style="min-height:300px;" name="' . $name . '" class="form-control" id="myEditor">' . $this->getValue($name) .'</textarea>'
+            '<label style="font-size:16px;font-family:RobotoMedium;" class="colorTitle">' . ucfirst($name) . ' <span style="font-family:sans-serif;font-size:15px;" class="colorTitle">(s\'affichera dans la rubrique \'activité\' du site)</span></label><textarea id="'.$id.'" style="min-height:300px;" name="' . $name . '" class="form-control" id="myEditor">' . $this->getValue($name) .'</textarea>'
         );
     }
 

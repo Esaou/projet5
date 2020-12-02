@@ -10,17 +10,18 @@
         <form method="post" action="#ancre" style="margin-top:20px;" enctype="multipart/form-data">
 
             <input type="hidden" name="token" id="token" value="{{ token|raw }}"/>
-            {{ form.inputActivite('activite')|raw }}
+            {{ form.inputActivite('activite','nom')|raw }}
             <hr/>
-            {{ form.inputTitre('titre')|raw }}
+            {{ form.inputTitre('titre','titre')|raw }}
             <hr/>
-            {{ form.textAreaEditor('description')|raw }}
+            {{ form.textAreaEditor('description','description')|raw }}
             <hr/ style="margin-top:40px;">
             {{ form.inputFile('photo')|raw }}
             {% for activite in activites %}
             <img src="images/{{ activite.photo }}" alt="imageActuelle" style="border-radius:5px;border:1px solid rgb(150,150,150);width:100px;height:100px;object-fit:cover;"/>
             {% endfor %}
             <hr/ id="ancre">
+            <span id="error" class="colorTitle spanPass"></span>
 
             {% if result %}
                 <div class="alert alert-success text-center" style="margin-top:15px">Modifications sauvegardées !</div>
@@ -38,8 +39,8 @@
                 <div class="alert alert-danger text-center" style="margin-top:15px">La photo ne peut être qu'au format jpg, jpeg, gif ou png !</div>
             {% endif %}
             
-            <button class="btn btn-primary" style="margin-top:10px;">Sauvegarder</button>
-            <a class="btn btn-outline-secondary" style="margin-top:10px;" href="index.php?action=activitesManager">Retour à la liste</a>
+            <button class="btn btn-primary" id="edit" style="margin-top:10px;">Sauvegarder</button>
+            <a class="btn btn-outline-secondary" style="margin-top:10px;" href="index.php?action=activitesManager">Retour à la liste des activités</a>
 
         </form>
     </div>

@@ -179,7 +179,7 @@ class BackController
         if (!empty($_POST)) {
             if (isset($tokenGet) && $tokenGet === $tokenSession) {
                 if (!empty($contenu)) {
-                    $res = $table->updateAccueil($id, [
+                    $res = $this->backManager->updateAccueil([
                     
                         'contenu' => $contenu,
 
@@ -231,7 +231,7 @@ class BackController
         if (!empty($_POST)) {
             if (isset($tokenGet) && $tokenGet === $tokenSession) {
                 if (!empty($contenu)) {
-                    $res = $this->backManager->updatePresentation($id, [
+                    $res = $this->backManager->updatePresentation([
                     
                         'contenu' => $contenu,
 
@@ -283,7 +283,7 @@ class BackController
         if (!empty($_POST)) {
             if (isset($tokenGet) && $tokenGet === $tokenSession) {
                 if (!empty($contenu)) {
-                    $res = $this->backManager->updateProjetSoin($id, [
+                    $res = $this->backManager->updateProjetSoin([
                     
                         'contenu' => $contenu,
 
@@ -335,7 +335,7 @@ class BackController
         if (!empty($_POST)) {
             if (isset($tokenGet) && $tokenGet === $tokenSession) {
                 if (!empty($contenu)) {
-                    $res = $this->backManager->updatePartenaires($id, [
+                    $res = $this->backManager->updatePartenaires([
                     
                         'contenu' => $contenu,
 
@@ -420,7 +420,7 @@ class BackController
                             $photoTaille = true;
                         }
                     } else {
-                        $resultat = $table->createActivite([
+                        $resultat = $this->backManager->createActivite([
                                     
                             'activite' => $nom,
                             'titre' => $titre,
@@ -658,7 +658,7 @@ class BackController
                         $photoTaille = true;
                     }
                 } else {
-                    $resultat = $table->updateActivite($id, [
+                    $resultat = $this->backManager->updateActivite($id, [
                                 
                         'activite' => $nom,
                         'titre' => $titre,

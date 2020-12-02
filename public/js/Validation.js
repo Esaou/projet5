@@ -2,16 +2,29 @@ class Validation {
     
     constructor() {
 
-        this.name = document.getElementById('nom');
         this.profilName = document.getElementById('profil');
         this.profilPass = document.getElementById('profilPass');
         this.profilPassConfirm = document.getElementById('profilPassConfirm');
+        this.submitProfil = document.getElementById('submitProfil');
+
+        this.name = document.getElementById('nom');
         this.email = document.getElementById('email');
         this.submit = document.getElementById('submit');
         this.submitProfil = document.getElementById('submitProfil');
-        this.error = document.getElementById('error');
         
-        this.nameCheck = /^[a-zA-ZáàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ\s-]{2,50}$/;
+        this.nomPro = document.getElementById('nomPro');
+        this.activitePro = document.getElementById('activite');
+        this.submitPro = document.getElementById('submitPro');
+        this.modifPro = document.getElementById('modifPro');
+
+        this.nomActivite = document.getElementById('nom');
+        this.titreActivite = document.getElementById('titre');
+        this.descriptionActivite = document.getElementById('description');
+        this.error = document.getElementById('error');
+        this.addActivite = document.getElementById('add');
+        this.editActivite = document.getElementById('edit');
+        
+        this.nameCheck = /^[a-zA-ZáàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ\s-\']{2,50}$/;
         this.emailCheck = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
         this.passCheck = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[-+!*$@%_])([-+!*$@%_\w]{8,100})$/;
 
@@ -24,6 +37,30 @@ class Validation {
         if(this.submitProfil){
             this.submitProfil.addEventListener('click', (event)=>{
                 this.validerProfil(event);
+            });
+        }
+
+        if(this.submitPro){
+            this.submitPro.addEventListener('click', (event)=>{
+                this.validerPro(event);
+            });
+        }
+
+        if(this.modifPro){
+            this.modifPro.addEventListener('click', (event)=>{
+                this.validerPro(event);
+            });
+        }
+
+        if(this.addActivite){
+            this.addActivite.addEventListener('click', (event)=>{
+                this.validerActivite(event);
+            });
+        }
+
+        if(this.editActivite){
+            this.editActivite.addEventListener('click', (event)=>{
+                this.validerActivite(event);
             });
         }
 
@@ -43,7 +80,7 @@ class Validation {
             if(!this.nameCheck.test(this.name.value)){
                 event.preventDefault();
                 this.error.style.display = 'flex';
-                this.error.innerHTML = 'Le nom ne peut contenir que des lettres majuscules, minuscules, des espaces et tirets !';      
+                this.error.innerHTML = 'Le nom ne peut contenir que des lettres majuscules, minuscules, des espaces et tirets. Il doit contenir entre 2 et 50 caractères !';      
             }else{
                 if(!this.emailCheck.test(this.email.value)){
                     event.preventDefault();
@@ -52,8 +89,6 @@ class Validation {
                 }
             }
         }
-        
-    
 
     }
 
@@ -80,9 +115,66 @@ class Validation {
             }
 
         }
-        
-    
 
+    }
+
+    validerPro(event){
+
+        if(this.nomPro.value == "" ){
+            event.preventDefault();
+            this.error.style.display = 'flex';
+            this.error.className = "alert alert-danger text-center";
+            this.error.innerHTML = 'Renseignez le nom du professionnel !';      
+        }else{
+            if(!this.nameCheck.test(this.nomPro.value)){
+                event.preventDefault();
+                this.error.style.display = 'flex';
+                this.error.innerHTML = 'Le nom ne peut contenir que des lettres majuscules, minuscules, des espaces et tirets. Il doit contenir entre 2 et 50 caractères !';      
+            }else{
+                if(this.activitePro.value == "" ){
+                    event.preventDefault();
+                    this.error.style.display = 'flex';
+                    this.error.className = "alert alert-danger text-center";
+                    this.error.innerHTML = 'Renseignez une activité';      
+                }
+            }
+        }
+
+    }
+
+    validerActivite(event){
+
+        if(this.nomActivite.value == ""){
+            event.preventDefault();
+            this.error.style.display = 'flex';
+            this.error.className = "alert alert-danger text-center";
+            this.error.innerHTML = 'Renseignez tous les champs !';   
+        } 
+        if(this.titreActivite.value == ""){
+            event.preventDefault();
+            this.error.style.display = 'flex';
+            this.error.className = "alert alert-danger text-center";
+            this.error.innerHTML = 'Renseignez tous les champs !';   
+        }
+        if(this.descriptionActivite.value == ""){
+            event.preventDefault();
+            this.error.style.display = 'flex';
+            this.error.className = "alert alert-danger text-center";
+            this.error.innerHTML = 'Renseignez tous les champs !';   
+        }  
+        if(!this.nameCheck.test(this.nomActivite.value)){
+            event.preventDefault();
+            this.error.style.display = 'flex';
+            this.error.className = "alert alert-danger text-center";
+            this.error.innerHTML = 'Le nom de l\'activité ne peut contenir que des lettres majuscules, minuscules, des espaces et tirets. Il doit contenir entre 2 et 50 caractères !';      
+        }
+
+        if(!this.nameCheck.test(this.titreActivite.value)){
+            event.preventDefault();
+            this.error.style.display = 'flex';
+            this.error.className = "alert alert-danger text-center";
+            this.error.innerHTML = 'Le titre de l\'activité ne peut contenir que des lettres majuscules, minuscules, des espaces et tirets. Il doit contenir entre 2 et 50 caractères !';      
+        }
     }
 
 }

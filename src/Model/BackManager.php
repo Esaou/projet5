@@ -44,7 +44,7 @@ class BackManager
 
     // UPDATE
 
-    public function updateAccueil(string $id, array $fields):bool
+    public function updateAccueil(array $fields):bool
     {
         $sqlParts = [];
         $attributes = [];
@@ -53,10 +53,10 @@ class BackManager
             $attributes[] = $v;
         }
         $sqlPart = implode(', ', $sqlParts);
-        return $this->query("UPDATE accueil SET $sqlPart WHERE id = $id", $attributes, true);
+        return $this->query("UPDATE pages SET $sqlPart WHERE nom = 'accueil'", $attributes, true);
     }
 
-    public function updatePresentation(string $id, array $fields):bool
+    public function updatePresentation(array $fields):bool
     {
         $sqlParts = [];
         $attributes = [];
@@ -65,10 +65,10 @@ class BackManager
             $attributes[] = $v;
         }
         $sqlPart = implode(', ', $sqlParts);
-        return $this->query("UPDATE presentation SET $sqlPart WHERE id = $id", $attributes, true);
+        return $this->query("UPDATE pages SET $sqlPart WHERE nom = 'presentation'", $attributes, true);
     }
 
-    public function updatePartenaires(string $id, array $fields):bool
+    public function updatePartenaires(array $fields):bool
     {
         $sqlParts = [];
         $attributes = [];
@@ -77,10 +77,10 @@ class BackManager
             $attributes[] = $v;
         }
         $sqlPart = implode(', ', $sqlParts);
-        return $this->query("UPDATE partenaires SET $sqlPart WHERE id = $id", $attributes, true);
+        return $this->query("UPDATE pages SET $sqlPart WHERE nom = 'partenaires'", $attributes, true);
     }
 
-    public function updateProjetSoin(string $id, array $fields):bool
+    public function updateProjetSoin(array $fields):bool
     {
         $sqlParts = [];
         $attributes = [];
@@ -89,7 +89,7 @@ class BackManager
             $attributes[] = $v;
         }
         $sqlPart = implode(', ', $sqlParts);
-        return $this->query("UPDATE projetsoin SET $sqlPart WHERE id = $id", $attributes, true);
+        return $this->query("UPDATE pages SET $sqlPart WHERE nom = 'projetSoin'", $attributes, true);
     }
 
     public function updateActivite(string $id, array $fields):bool

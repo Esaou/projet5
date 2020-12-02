@@ -10,14 +10,15 @@
         <form method="post" action="#ancre" enctype="multipart/form-data">
 
             <input type="hidden" name="token" id="token" value="{{ token|raw }}"/>
-            {{ form.inputActivite('activite')|raw }}
+            {{ form.inputActivite('activite','nom')|raw }}
             <hr/>
-            {{ form.inputTitre('titre')|raw }}
+            {{ form.inputTitre('titre','titre')|raw }}
             <hr/>
-            {{ form.textAreaEditor('description')|raw }}
+            {{ form.textAreaEditor('description','description')|raw }}
             <hr/ style="margin-top:40px;">
             {{ form.inputFile('photo')|raw }}
             <hr/ id="ancre">
+            <span id="error" class="colorTitle spanPass"></span>
             {% if error == true %}
                 <div class="alert alert-danger text-center" style="margin-top:15px">Les champs sont vides !</div>
             {% endif %}
@@ -37,8 +38,8 @@
                 <div class="alert alert-danger text-center" style="margin-top:15px">La photo ne peut être qu'au format jpg, jpeg, gif ou png !</div>
             {% endif %}
             
-            <button class="btn btn-primary" style="margin-top:10px;">Ajouter l'activité</button>
-            <a class="btn btn-outline-secondary" style="margin-top:10px;" href="index.php?action=activitesManager">Retour à la liste</a>
+            <button class="btn btn-primary" id="add" style="margin-top:10px;">Ajouter l'activité</button>
+            <a class="btn btn-outline-secondary" style="margin-top:10px;" href="index.php?action=activitesManager">Retour à la liste des activités</a>
 
         </form>
     </div>

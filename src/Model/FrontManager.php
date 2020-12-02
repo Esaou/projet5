@@ -34,7 +34,7 @@ class FrontManager
 
     public function encadre()
     {
-        return $this->database->getDb()->query("SELECT * FROM accueil ORDER BY id DESC", 'App\Models\BackOffice');
+        return $this->database->getDb()->query("SELECT * FROM pages WHERE nom = 'accueil'", 'App\Models\BackOffice');
     }
 
     public function activites()

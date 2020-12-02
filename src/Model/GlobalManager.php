@@ -70,22 +70,22 @@ class GlobalManager
 
     public function contenuAccueil()
     {
-        return $this->database->getDb()->query("SELECT * FROM accueil", 'App\Models\BackManager');
+        return $this->database->getDb()->query("SELECT * FROM pages  WHERE nom='accueil'", 'App\Models\BackManager');
     }
 
     public function contenuPresentation()
     {
-        return $this->database->getDb()->query("SELECT * FROM presentation", 'App\Models\BackManager');
+        return $this->database->getDb()->query("SELECT * FROM pages  WHERE nom='presentation'", 'App\Models\BackManager');
     }
 
     public function contenuProjetSoin()
     {
-        return $this->database->getDb()->query("SELECT * FROM projetsoin", 'App\Models\BackManager');
+        return $this->database->getDb()->query("SELECT * FROM pages  WHERE nom='projetSoin'", 'App\Models\BackManager');
     }
 
     public function contenuPartenaires()
     {
-        return $this->database->getDb()->query("SELECT * FROM partenaires", 'App\Models\BackManager');
+        return $this->database->getDb()->query("SELECT * FROM pages  WHERE nom='partenaires'", 'App\Models\BackManager');
     }
 
     public function showMessage($getId)
@@ -122,21 +122,21 @@ class GlobalManager
 
     public function findAccueil(string $id):object
     {
-        return $this->database->getDb()->prepare("SELECT * FROM accueil  WHERE id = ?", [$id], null, true);
+        return $this->database->getDb()->prepare("SELECT * FROM pages  WHERE nom = 'accueil'", [$id], null, true);
     }
 
     public function findPresentation(string $id):object
     {
-        return $this->database->getDb()->prepare("SELECT * FROM presentation  WHERE id = ?", [$id], null, true);
+        return $this->database->getDb()->prepare("SELECT * FROM pages  WHERE nom='presentation'", [$id], null, true);
     }
 
     public function findPartenaires(string $id):object
     {
-        return $this->database->getDb()->prepare("SELECT * FROM partenaires  WHERE id = ?", [$id], null, true);
+        return $this->database->getDb()->prepare("SELECT * FROM pages  WHERE nom='partenaires'", [$id], null, true);
     }
 
     public function findProjetSoin(string $id):object
     {
-        return $this->database->getDb()->prepare("SELECT * FROM projetSoin  WHERE id = ?", [$id], null, true);
+        return $this->database->getDb()->prepare("SELECT * FROM pages  WHERE nom='projetSoin'", [$id], null, true);
     }
 }

@@ -10,10 +10,10 @@
         <form method="post">
 
             <input type="hidden" name="token" id="token" value="{{ token|raw }}"/>
-            {{ form.inputEditor('nom')|raw }}
+            {{ form.inputEditor('nom', 'nomPro')|raw }}
             <div class="form-group" style="margin-bottom:25px;">
                 <label style="font-size:16px;font-family:RobotoMedium;" class="colorTitle">Activité</label>
-                <select name="activite" class="form-control" >
+                <select name="activite" id="activite" class="form-control" >
                 {% for idProfessionnel in idProfessionnels %}
                     <option value='{{ idProfessionnel.id|raw }}' hidden>{{ idProfessionnel.activite|raw }}</option>
                 {% endfor %}
@@ -22,7 +22,7 @@
                 {% endfor %}
                 </select>
             </div>
-
+            <span id="error" class="colorTitle spanPass"></span>
             {% if result %}
                 <div class="alert alert-success text-center" style="margin-top:15px">Modifications sauvegardées !</div>
             {% endif %}
@@ -34,8 +34,8 @@
                 <div class="alert alert-danger text-center" style="margin-top:15px">Token de sécurité périmé !</div>
             {% endif %}
             
-            <button class="btn btn-primary" style="margin-top:10px;">Sauvegarder</button>
-            <a class="btn btn-outline-secondary" style="margin-top:10px;" href="index.php?action=professionnelsManager">Retour à la liste</a>
+            <button class="btn btn-primary" id="modifPro" style="margin-top:10px;">Sauvegarder</button>
+            <a class="btn btn-outline-secondary" style="margin-top:10px;" href="index.php?action=professionnelsManager">Retour à la liste des professionnels</a>
 
         </form>
     </div>
