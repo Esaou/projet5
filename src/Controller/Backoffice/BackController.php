@@ -771,7 +771,7 @@ class BackController
             if (isset($tokenGet) && $tokenGet === $tokenSession) {
                 if (!empty($username) && !empty($password) && !empty($confirm)) {
                     if (mb_strlen($username) <= 20 && mb_strlen($username) >= 2) {
-                        if (preg_match("/^(?=.{10,}$)(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*\W).*$/", $password)) {
+                        if (preg_match("/^(?=.{8,}$)(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*\W).*$/", $password)) {
                             if ($password === $confirm) {
                                 $this->backManager->updateProfil($id, [
                                 

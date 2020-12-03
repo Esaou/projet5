@@ -79,19 +79,19 @@
 .btn-primary:active,
 .btn-primary:visited{
 
-    background-color: rgb(110, 110, 110)!important;
-    border-color: rgb(110, 110, 110)!important;
+    background-color:rgba(100,100,100,0.9)!important;
+    border-color:rgba(100,100,100,0.9)!important;
 }
 
 .btn-primary:hover{
 
-    background-color: rgb(90, 90, 90)!important;
+    background-color:rgba(120,120,120,0.9)!important;
 
 }
 
 .btn-primary:focus {
 
-    background-color: rgb(130, 130, 130)!important;
+    background-color: rgba(100, 100, 100,0.9)!important;
     box-shadow: 0 0 0 .2rem rgb(221, 221, 221)!important;
 }
 
@@ -353,7 +353,7 @@
 
 }
 
-.presentation,.notFound{
+.notFound{
 
     min-height: 500px;
 
@@ -363,7 +363,7 @@
 
     animation: page 1s;
     padding-top:40px;
-    padding-bottom:75px;
+    padding-bottom:40px;
     max-width: 80%;
     min-width: 80%;
     font-family: sans-serif;
@@ -381,7 +381,7 @@
 }
 .recrutement{
 
-    padding-bottom: 80px;
+    padding-bottom: 50px;
 
 }
 
@@ -544,6 +544,15 @@
 
 /* Contact Localisation */
 
+.logoTransport{
+
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+
+}
+
 .transports img{
 
     width: 45px;
@@ -569,13 +578,10 @@
 }
 
 #carte{
-    width: 100%;
     height: 350px;
-    background-color: rgb(235, 235, 235);
-    box-shadow: 0px 0px 4px rgba(120, 120, 120, 0.3);
-    margin-bottom: 25px;
-    border: 1px solid rgb(195, 195, 195);
-    border-radius: 5px;
+    width: 100%;
+    border: 1px solid rgb(200, 200, 200);
+    border-radius: 7px;
 }
 
 .containerIti{
@@ -965,14 +971,14 @@ header{
 
 .carteAdmin{
 
-    transition: background-color 300ms ease,transform 300ms ease;
+    background-color: rgba(255, 255, 255,1)!important;
+    transition: background-color 300ms ease;
 
 }
 
 .carteAdmin:hover{
 
-    transform: scale(1.02);
-    background-color: rgba(240, 240, 240,1)!important;
+    background-color: rgba(245, 245, 245,1)!important;
 
 }
 

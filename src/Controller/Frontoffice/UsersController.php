@@ -56,4 +56,5 @@ class UsersController
 
         $this->view->render(['template' => 'login', 'data' => ['token' => $token, 'tokenError' => $tokenError,'forms' => $dataForm, 'error' => $error,'activites' => $dataActivites]]);
     }
+    
 }

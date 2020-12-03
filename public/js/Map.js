@@ -1,5 +1,7 @@
 class Map {
+    
     constructor(carte) {
+        
         this.map = carte;   // map
         
         // Récupération des éléments HTML dans le DOM
@@ -18,6 +20,7 @@ class Map {
         this.btnRecentrer.addEventListener('click', ()=>{
             this.boutonRecentrer();
         });
+
     }
 
     // Les différentes méthodes pour le fonctionnement de la map
@@ -35,9 +38,11 @@ class Map {
         this.marqueurVert = L.marker([45.171905, 5.757263], {icon: this.marqueur}).addTo(this.map);
         this.marqueurVert.bindPopup('<p class="colorTitle" style="font-family:RobotoMedium;min-width:125px;">Centre de santé l\'Étoile</p>').openPopup();    
     } 
+
     boutonRecentrer(){
         this.map.setView([45.171905, 5.757263],17);
     }
+    
 }
 
 const carte = L.map('carte').setView([45.171749, 5.757089], 17);

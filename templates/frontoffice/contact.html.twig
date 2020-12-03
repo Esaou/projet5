@@ -6,44 +6,53 @@
 
 <section class="container presentation">
 
-    <div class="nousContacter container maxWidth" style="margin-bottom:25px;">
+    <div class="nousContacter maxWidth" style="margin-bottom:25px;">
 
-        <div>
-
+        <div class="container">
+            
             <h5 class="colorTitle" style="font-weight:normal;">Nous contacter</h5> 
-            <hr/>
+            <hr/ style="margin-bottom:25px;">
             <p>Vous pouvez nous contacter au 06.87.95.84.32 du lundi au vendredi de 8h à 18h. Sans réponse de notre part ? Laissez-nous un message nous vous rapelleront dès que possible !</p>
-
+            <div id="dateHeure" class="text-center rounded colorTitle" style="padding:15px;background-color:rgba(100,100,100,0.1);">
+                <span id="ouverture"></span>
+                <span id="date"></span>
+                <span id="heure"></span>
+            </div>
         </div>
 
     </div>
-    <div class="nousTrouver container maxWidth">
+    <div class="nousTrouver maxWidth">
 
-        <div style="margin-bottom:15px;">
-
+        <div class="container">
             <h5 class="colorTitle" style="font-weight:normal;">Nous trouver</h5> 
-            <hr/>
-            <p>4 avenue du 8 mai 1945, 38400 Saint Martin d'Hères - Auvergne-Rhône-Alpes</p>
+            <hr/ style="margin-bottom:25px;">
+            <p><span style="font-family:RobotoMedium;">Adresse</span> : 4 avenue du 8 mai 1945, 38400 Saint Martin d'Hères - Auvergne-Rhône-Alpes</p>
             <p>Situé face à la Poste Principale - Entrée côté place Étienne Grappe - En face du terminus Tram D</p>
-            <p>Parking du TRAM D avec place PMR - Pistes cyclables / Barres à vélo</p>
-            <p>Arrêt de tram et de bus : Étienne Grappe</p>
-
+            <p>Parking du TRAM D avec place PMR / Pistes cyclables / Barres à vélo</p>
+            <hr/ style="margin-top:25px;margin-bottom:25px;">
+            <p>Arrêt de tram et de bus : <span id="arret" style="font-family:RobotoMedium;"></span></p>
+            <p>Trafic routier : <span id="traficR" style="font-family:RobotoMedium;"></span> <a href="https://www.mobilites-m.fr/trafic.html" target="_blank"><i class="fas fa-question-circle" style="color:rgb(140,140,140);"></i></a></p>
+            <p>Trafic transport en commun : <span id="traficT" style="font-family:RobotoMedium;"></span> <a target="_blank" href="https://www.mobilites-m.fr/index.html?page=Evts"><i class="fas fa-question-circle" style="color:rgb(140,140,140);"></i></a></p>
         </div>
-        <div class="transports" style="margin-bottom:35px;">
-    
+        <div class="transports container" style="margin-bottom:25px;">
+            <hr/ style="margin-top:10px;margin-bottom:25px;">
+            <div class="logoTransport">
             <img src="/images/busUn.png" alt="transport">
             <img src="/images/busDeux.png" alt="transport">
             <img src="/images/busTrois.png" alt="transport">
             <img src="/images/tram.png" alt="transport">
-            
-        </div>
-        <div id="carte">
+            </div>
+            <hr/ style="margin-bottom:25px;margin-top:25px;">
+
+            <div id="carte">
 
             <div class="containerIti">
                 <a class="btn-sm btn-primary iti" style="color:white;" target="_blank" href="https://www.google.com/maps/dir//google++espace+sant%C3%A9+l'%C3%A9toile/@45.1718479,5.7521593,15z/data=!4m8!4m7!1m0!1m5!1m1!1s0x478af52238f415ef:0x5c35a791b9943c87!2m2!1d5.7570156!2d45.1717431">Itinéraire</a>
                 <p class="btn-sm btn-primary iti" style="cursor:pointer;" id="boutonRecentrer">Recentrer</p>
             </div>
                 
+            </div>
+            
         </div>
 
     </div>      
