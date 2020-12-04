@@ -23,9 +23,11 @@
 
                 <h5 class="colorTitle">Liste des {{ showActivites.titre|raw }} :</h5> 
                 <hr/>
+                <ul style="padding-left:20px;">
                 {% for professionnel in professionnels %}
                 <li style="margin-bottom:5px;">{{ professionnel.nom|raw }}</li>
                 {% endfor %}
+                </ul>
 
             </div>
 

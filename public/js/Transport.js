@@ -13,15 +13,15 @@ class Transport {
     
     async callAPI(){
             
-        this.stations = await fetch("http://data.mobilites-m.fr/api/bbox/json?xmin=5.756668&xmax=5.757988&ymin=45.171806&ymax=45.172366&types=arret");
+        this.stations = await fetch("https://data.mobilites-m.fr/api/bbox/json?xmin=5.756668&xmax=5.757988&ymin=45.171806&ymax=45.172366&types=arret");
         this.station = await this.stations.json();
         this.station = this.station.features;
         
-        this.trafics = await fetch("http://data.mobilites-m.fr/api/dyn/indiceTr/json");
+        this.trafics = await fetch("https://data.mobilites-m.fr/api/dyn/indiceTr/json");
         this.trafic = await this.trafics.json();
         this.trafic = this.trafic.IR1;
 
-        this.traficTcs = await fetch("http://data.mobilites-m.fr/api/dyn/indiceTc/json");
+        this.traficTcs = await fetch("https://data.mobilites-m.fr/api/dyn/indiceTc/json");
         this.traficTc = await this.traficTcs.json();
         this.traficTc = this.traficTc.ITC1;
 

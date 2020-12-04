@@ -9,6 +9,22 @@
     }
 }
 
+.padBottom{
+
+    padding-bottom: 60px!important;
+
+}
+
+.nav.hidden {
+    
+  }
+
+.padTop{
+
+    padding-top: 60px;
+
+}
+
 .spanPass{
 
     font-size:15px;
@@ -151,6 +167,24 @@
 
 }
 
+.check,.checking{
+
+    display: none;
+
+}
+
+.check:checked ~ .dropdown-child{
+    
+    display: block;
+
+}
+
+.checking:checked ~ .dropdown-child-activite{
+    
+    display: block;
+
+}
+
 .btnCandidature{
 
     margin-right: 10px;
@@ -206,7 +240,7 @@
 
 }
 
-.dropdown-child{
+.dropdown-child,.dropdown-child-activite{
 
     display: none;
     background-color: white;
@@ -219,7 +253,7 @@
 
 }
 
-.dropdown-child a{
+.dropdown-child a,.dropdown-child-activite a{
 
     color: rgb(100, 100, 100);
     font-size: 14px;
@@ -230,15 +264,9 @@
 
 }
 
-.dropdown-child a:hover{
+.dropdown-child a:hover,.dropdown-child-activite a:hover{
 
     color:rgb(100, 203, 74);
-
-}
-
-.dropDown:hover .dropdown-child{
-
-    display: block;
 
 }
 
@@ -556,6 +584,7 @@
 .transports img{
 
     width: 45px;
+    height: 45px;
     margin-right:15px;
 
 }
@@ -731,7 +760,9 @@ html{
 
 .bienvenue{
 
-    margin-bottom: 30px;
+    padding-top: 30px;
+    font-size:20px;
+    padding-bottom:25px;
 
 }
 
@@ -1111,12 +1142,6 @@ header{
     
     }
 
-    .bienvenue{
-
-        margin-bottom: 30px;
-
-    }
-
     .containerDefault{
 
         margin-top: 125px;
@@ -1221,7 +1246,18 @@ header{
     
     }
 
-    .dropDown:hover .dropdown-child{
+    .btnMenu,.dropDown{
+
+        border: none;
+    
+    }
+    
+    .btnMenu:hover,.dropDown:hover{
+    
+        border-top:none;
+    }
+
+    .dropDown .dropdown-child,.dropDown .dropdown-child-activite{
 
         position: relative;
         border:none;
@@ -1230,7 +1266,7 @@ header{
     
     }
 
-    .dropdown-child a{
+    .dropdown-child a,.dropdown-child-activite a{
 
         border-bottom: 1px solid rgb(180, 180, 180);
     
@@ -1370,6 +1406,45 @@ header{
         margin-top: 10px;
 
     }
+
+    .bienvenue{
+
+        padding-top: 20px;
+        padding-bottom: 15px;
+
+    }
+
+    .padTop{
+
+        padding-top: 40px;
+
+    }
+
+    .professionnels{
+
+        padding-bottom: 20px;
+    
+    }
+    .recrutement{
+    
+        padding-bottom: 40px;
+    
+    }
+    .infoImportante{
+
+        padding-bottom: 25px;
+
+    }
+
+    .padBottom{
+
+        padding-bottom: 50px!important;
+
+    }
+
+    .nav.hidden {
+        top: -45px;
+      }
 
 }
 

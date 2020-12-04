@@ -40,8 +40,9 @@
                     <label for="checkBox" class="label" style="padding:10px;"><i class="fas fa-bars"></i></label>
                     <input type="checkbox" class="checkBox" id="checkBox">
                     <div class="listeBtn">
-                            <div class="dropDown">
-                                <span class="btnDropdown">LE CENTRE DE SANTÉ<i style="margin-left:10px;" class="fas fa-caret-down"></i></span>
+                            <div class="dropDown">      
+                                <label for="check" class="labelDeux" style="margin:0px;"><span class="btnDropdown">LE CENTRE DE SANTÉ<i style="margin-left:10px;" class="fas fa-caret-down"></i></span></label>
+                                <input type="checkbox" class="check" id="check">
                                 <div class="dropdown-child">
                                     <a href="index.php?action=presentation">Présentation</a>
                                     <a href="index.php?action=projetSoin">Projet de soins</a>
@@ -49,8 +50,9 @@
                                 </div>
                             </div>
                             <div class="dropDown">
-                                <span class="btnDropdown">NOS ACTIVITÉS<i style="margin-left:10px;" class="fas fa-caret-down"></i></span>
-                                <div class="dropdown-child">
+                                <label for="checking" class="labelDeux" style="margin:0px;"><span class="btnDropdown">NOS ACTIVITÉS<i style="margin-left:10px;" class="fas fa-caret-down"></i></span></label>
+                                <input type="checkbox" class="checking" id="checking">
+                                <div class="dropdown-child-activite">
                                 {% for activite in activites %}
                                     <a href="index.php?action=activites&id={{ activite.id }}">{{ activite.activite }}</a>
                                 {% endfor %}
@@ -104,6 +106,7 @@
         <script src="/js/Map.js"></script>
         <script src="/js/Transport.js"></script>
         <script src="/js/Time.js"></script>
+        <script src="/js/Animation.js"></script>
 
     </body> 
 
