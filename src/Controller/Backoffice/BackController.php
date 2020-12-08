@@ -470,57 +470,6 @@ class BackController
             }
         }
 
-        /* if (!empty($_POST)) {
-             if (isset($tokenGet) && $tokenGet === $tokenSession) {
-                 if (!empty($nom) && !empty($titre)) {
-                     if (isset($_FILES['photo']) && !empty($_FILES['photo']['name'])) {
-                         $tailleMax = 2097152;
-                         $extensionsValides = ['jpg','jpeg','gif','png'];
-                         if ($_FILES['photo']['size'] <= $tailleMax) {
-                             $extensionUpload = mb_strtolower(mb_substr(mb_strrchr($_FILES['photo']['name'], '.'), 1));
-                             if (in_array($extensionUpload, $extensionsValides, true)) {
-                                 $path = "images/" . $nom . "." . $extensionUpload ;
-                                 $res = move_uploaded_file($_FILES['photo']['tmp_name'], $path);
-                                 if ($res) {
-                                     $resultat = $this->backManager->createActivite([
-
-                                         'activite' => $nom,
-                                         'titre' => $titre,
-                                         'description' => $description,
-                                         'photo' => $nom . "." . $extensionUpload
-
-                                     ]);
-                                     $result = true;
-                                 } else {
-                                     $photoError = true;
-                                 }
-                             } else {
-                                 $photoExtension = true;
-                             }
-                         } else {
-                             $photoTaille = true;
-                         }
-                     } else {
-                         $resultat = $this->backManager->createActivite([
-
-                             'activite' => $nom,
-                             'titre' => $titre,
-                             'description' => $description,
-                             'photo' => ''
-
-                         ]);
-                         if ($resultat) {
-                             $result = true;
-                         }
-                     }
-                 } else {
-                     $error = true;
-                 }
-             } else {
-                 $tokenError =true;
-             }
-         }*/
-        
         $request->getSession()->set('token', $token);
 
         $form = new \App\Service\BootstrapForm($_POST);
