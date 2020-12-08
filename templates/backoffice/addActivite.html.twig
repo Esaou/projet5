@@ -37,6 +37,9 @@
             {% if photoExtension == true %}
                 <div class="alert alert-danger text-center" style="margin-top:15px">La photo ne peut être qu'au format jpg, jpeg, gif ou png !</div>
             {% endif %}
+            {% if champs == true %}
+                <div class="alert alert-danger text-center" style="margin-top:15px">Renseignez tous les champs !</div>
+            {% endif %}
             
             <button class="btn btn-primary" id="add" style="margin-top:10px;">Ajouter l'activité</button>
             <a class="btn btn-outline-secondary" style="margin-top:10px;" href="index.php?action=activitesManager">Retour à la liste des activités</a>

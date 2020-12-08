@@ -221,14 +221,12 @@ class BackController
         if (!empty($_POST)) {
             if (isset($tokenGet) && $tokenGet === $tokenSession) {
                 if (!empty($contenu)) {
-                    $res = $this->backManager->updateAccueil([
+                    $this->backManager->updateAccueil([
                     
                         'contenu' => $contenu,
 
                     ]);
-                    if ($res) {
-                        $result = true;
-                    }
+                    $result = true;
                 } else {
                     $error = true;
                 }
@@ -278,9 +276,7 @@ class BackController
                         'contenu' => $contenu,
 
                     ]);
-                    if ($res) {
-                        $result = true;
-                    }
+                    $result = true;
                 } else {
                     $error = true;
                 }
@@ -330,9 +326,7 @@ class BackController
                         'contenu' => $contenu,
 
                     ]);
-                    if ($res) {
-                        $result = true;
-                    }
+                    $result = true;
                 } else {
                     $error = true;
                 }
@@ -382,9 +376,7 @@ class BackController
                         'contenu' => $contenu,
 
                     ]);
-                    if ($res) {
-                        $result = true;
-                    }
+                    $result = true;
                 } else {
                     $error = true;
                 }
@@ -428,65 +420,112 @@ class BackController
         $photoError =false;
         $photoExtension = false;
         $photoTaille = false;
+        $champs = false;
     
         if (!empty($_POST)) {
             if (isset($tokenGet) && $tokenGet === $tokenSession) {
-                if (!empty($nom) && !empty($titre)) {
-                    if (isset($_FILES['photo']) && !empty($_FILES['photo']['name'])) {
-                        $tailleMax = 2097152;
-                        $extensionsValides = ['jpg','jpeg','gif','png'];
-                        if ($_FILES['photo']['size'] <= $tailleMax) {
-                            $extensionUpload = mb_strtolower(mb_substr(mb_strrchr($_FILES['photo']['name'], '.'), 1));
-                            if (in_array($extensionUpload, $extensionsValides, true)) {
-                                $path = "images/" . $nom . "." . $extensionUpload ;
-                                $res = move_uploaded_file($_FILES['photo']['tmp_name'], $path);
-                                if ($res) {
-                                    $resultat = $this->backManager->createActivite([
-                                    
-                                        'activite' => $nom,
-                                        'titre' => $titre,
-                                        'description' => $description,
-                                        'photo' => $nom . "." . $extensionUpload
-            
-                                    ]);
-                                    if ($resultat) {
-                                        $result = true;
-                                    }
-                                } else {
-                                    $photoError = true;
-                                }
-                            } else {
-                                $photoExtension = true;
-                            }
-                        } else {
-                            $photoTaille = true;
-                        }
+                if (isset($_FILES['photo']) && !empty($_FILES['photo']['name'])) {
+                    $tailleMax = 2097152;
+                    $extensionsValides = ['jpg','jpeg','gif','png'];
+                    $extensionUpload = mb_strtolower(mb_substr(mb_strrchr($_FILES['photo']['name'], '.'), 1));
+                    $path = "images/" . $nom . "." . $extensionUpload ;
+
+                    if (!($_FILES['photo']['size'] <= $tailleMax)) {
+                        $photoTaille = true;
+                    } elseif (!in_array($extensionUpload, $extensionsValides, true)) {
+                        $photoExtension = true;
+                    } elseif (empty($nom) || empty($titre) || empty($description)) {
+                        $champs = true;
                     } else {
-                        $resultat = $this->backManager->createActivite([
-                                    
-                            'activite' => $nom,
-                            'titre' => $titre,
-                            'description' => $description,
-                            'photo' => ''
-        
-                        ]);
-                        if ($resultat) {
+                        $res = move_uploaded_file($_FILES['photo']['tmp_name'], $path);
+                        if ($res) {
+                            $resultat = $this->backManager->createActivite([
+                            
+                                'activite' => $nom,
+                                'titre' => $titre,
+                                'description' => $description,
+                                'photo' => $nom . "." . $extensionUpload
+
+                            ]);
                             $result = true;
+                        } else {
+                            $photoError = true;
                         }
                     }
+                } elseif (!empty($nom) && !empty($titre) && !empty($description)) {
+                    $resultat = $this->backManager->createActivite([
+                                
+                        'activite' => $nom,
+                        'titre' => $titre,
+                        'description' => $description
+                    
+    
+                    ]);
+                    $result = true;
                 } else {
-                    $error = true;
+                    $champs = true;
                 }
             } else {
                 $tokenError =true;
             }
         }
+
+        /* if (!empty($_POST)) {
+             if (isset($tokenGet) && $tokenGet === $tokenSession) {
+                 if (!empty($nom) && !empty($titre)) {
+                     if (isset($_FILES['photo']) && !empty($_FILES['photo']['name'])) {
+                         $tailleMax = 2097152;
+                         $extensionsValides = ['jpg','jpeg','gif','png'];
+                         if ($_FILES['photo']['size'] <= $tailleMax) {
+                             $extensionUpload = mb_strtolower(mb_substr(mb_strrchr($_FILES['photo']['name'], '.'), 1));
+                             if (in_array($extensionUpload, $extensionsValides, true)) {
+                                 $path = "images/" . $nom . "." . $extensionUpload ;
+                                 $res = move_uploaded_file($_FILES['photo']['tmp_name'], $path);
+                                 if ($res) {
+                                     $resultat = $this->backManager->createActivite([
+
+                                         'activite' => $nom,
+                                         'titre' => $titre,
+                                         'description' => $description,
+                                         'photo' => $nom . "." . $extensionUpload
+
+                                     ]);
+                                     $result = true;
+                                 } else {
+                                     $photoError = true;
+                                 }
+                             } else {
+                                 $photoExtension = true;
+                             }
+                         } else {
+                             $photoTaille = true;
+                         }
+                     } else {
+                         $resultat = $this->backManager->createActivite([
+
+                             'activite' => $nom,
+                             'titre' => $titre,
+                             'description' => $description,
+                             'photo' => ''
+
+                         ]);
+                         if ($resultat) {
+                             $result = true;
+                         }
+                     }
+                 } else {
+                     $error = true;
+                 }
+             } else {
+                 $tokenError =true;
+             }
+         }*/
         
         $request->getSession()->set('token', $token);
 
         $form = new \App\Service\BootstrapForm($_POST);
 
-        $this->view->renderAdmin(['template' => 'addActivite', 'data' => ['photoExtension' => $photoExtension,'photoTaille' => $photoTaille,'photoError' => $photoError,'token' => $token, 'tokenError' => $tokenError,'countM' => $countMessage,'countA' => $countActivites,'countP' => $countProfessionnel,'result' => $result, 'form' => $form, 'userId' => $userId,'error' => $error]]);
+        $this->view->renderAdmin(['template' => 'addActivite', 'data' => ['champs' => $champs,'photoExtension' => $photoExtension,'photoTaille' => $photoTaille,'photoError' => $photoError,'token' => $token, 'tokenError' => $tokenError,'countM' => $countMessage,'countA' => $countActivites,'countP' => $countProfessionnel,'result' => $result, 'form' => $form, 'userId' => $userId,'error' => $error]]);
     }
 
     public function addProfessionnel(): void
@@ -523,9 +562,7 @@ class BackController
                             'id_activites' => $activite,
 
                         ]);
-                    if ($res) {
-                        $result = true;
-                    }
+                    $result = true;
                 } else {
                     $error = true;
                 }
@@ -656,36 +693,34 @@ class BackController
         $photoExtension = false;
         $photoTaille = false;
 
+
         if (!empty($_POST)) {
             if (isset($tokenGet) && $tokenGet === $tokenSession) {
                 if (isset($_FILES['photo']) && !empty($_FILES['photo']['name'])) {
                     $tailleMax = 2097152;
                     $extensionsValides = ['jpg','jpeg','gif','png'];
-                    if ($_FILES['photo']['size'] <= $tailleMax) {
-                        $extensionUpload = mb_strtolower(mb_substr(mb_strrchr($_FILES['photo']['name'], '.'), 1));
-                        if (in_array($extensionUpload, $extensionsValides, true)) {
-                            $path = "images/" . $nom . "." . $extensionUpload ;
-                            $res = move_uploaded_file($_FILES['photo']['tmp_name'], $path);
-                            if ($res) {
-                                $resultat = $this->backManager->updateActivite($id, [
-                                
-                                    'activite' => $nom,
-                                    'titre' => $titre,
-                                    'description' => $description,
-                                    'photo' => $nom . "." . $extensionUpload
-        
-                                ]);
-                                if ($resultat) {
-                                    $result = true;
-                                }
-                            } else {
-                                $photoError = true;
-                            }
-                        } else {
-                            $photoExtension = true;
-                        }
-                    } else {
+                    $extensionUpload = mb_strtolower(mb_substr(mb_strrchr($_FILES['photo']['name'], '.'), 1));
+                    $path = "images/" . $nom . "." . $extensionUpload ;
+
+                    if (!($_FILES['photo']['size'] <= $tailleMax)) {
                         $photoTaille = true;
+                    } elseif (!in_array($extensionUpload, $extensionsValides, true)) {
+                        $photoExtension = true;
+                    } else {
+                        $res = move_uploaded_file($_FILES['photo']['tmp_name'], $path);
+                        if ($res) {
+                            $resultat = $this->backManager->updateActivite($id, [
+                            
+                                'activite' => $nom,
+                                'titre' => $titre,
+                                'description' => $description,
+                                'photo' => $nom . "." . $extensionUpload
+
+                            ]);
+                            $result = true;
+                        } else {
+                            $photoError = true;
+                        }
                     }
                 } else {
                     $resultat = $this->backManager->updateActivite($id, [
@@ -695,9 +730,7 @@ class BackController
                         'description' => $description,
     
                     ]);
-                    if ($resultat) {
-                        $result = true;
-                    }
+                    $result = true;
                 }
             } else {
                 $tokenError =true;
@@ -743,22 +776,18 @@ class BackController
         $tokenError = false;
 
         if (!empty($_POST)) {
-            if (isset($tokenGet) && $tokenGet === $tokenSession) {
-                if (!empty($activite) && !empty($nom)) {
-                    $res = $this->backManager->updateProfessionnel($id, [
-                        
-                            'nom' => $nom,
-                            'id_activites' => $activite,
-
-                        ]);
-                    if ($res) {
-                        $result = true;
-                    }
-                } else {
-                    $error = true;
-                }
-            } else {
+            if (!isset($tokenGet) && $tokenGet !== $tokenSession) {
                 $tokenError =true;
+            } elseif (empty($activite) || empty($nom)) {
+                $error = true;
+            } else {
+                $res = $this->backManager->updateProfessionnel($id, [
+                        
+                    'nom' => $nom,
+                    'id_activites' => $activite,
+
+                ]);
+                $result = true;
             }
         }
 
@@ -798,32 +827,24 @@ class BackController
         $passError = false;
 
         if (!empty($_POST)) {
-            if (isset($tokenGet) && $tokenGet === $tokenSession) {
-                if (!empty($username) && !empty($password) && !empty($confirm)) {
-                    if (mb_strlen($username) <= 20 && mb_strlen($username) >= 2) {
-                        if (preg_match("/^(?=.{8,}$)(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*\W).*$/", $password)) {
-                            if ($password === $confirm) {
-                                $this->backManager->updateProfil($id, [
-                                
-                                    'username' => $username,
-                                    'password' => password_hash($confirm, PASSWORD_DEFAULT)
-
-                                ]);
-                                $result = true;
-                            } else {
-                                $errors = true;
-                            }
-                        } else {
-                            $passError = true;
-                        }
-                    } else {
-                        $regexError = true;
-                    }
-                } else {
-                    $error = true;
-                }
-            } else {
+            if (!isset($tokenGet) && $tokenGet !== $tokenSession) {
                 $tokenError = true;
+            } elseif (empty($username) && empty($password) && empty($confirm)) {
+                $error=true;
+            } elseif (!(mb_strlen($username) <= 20 && mb_strlen($username) >= 2)) {
+                $regexError = true;
+            } elseif (!preg_match("/^(?=.{8,}$)(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*\W).*$/", $password)) {
+                $passError = true;
+            } elseif ($password !== $confirm) {
+                $errors = true;
+            } else {
+                $this->backManager->updateProfil($id, [
+                                
+                    'username' => $username,
+                    'password' => password_hash($confirm, PASSWORD_DEFAULT)
+
+                ]);
+                $result = true;
             }
         }
 

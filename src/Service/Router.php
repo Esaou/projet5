@@ -33,7 +33,10 @@ class Router
 
     public function run(): void
     {
-        $action = $this->request->getGet()->get('action') ?? 'index';
+        $action = $this->request->getGet()->get('action');
+        if (!$action) {
+            $action = 'index';
+        }
 
         if ($action === 'index') {
             $postManager = new FrontManager($this->database);
