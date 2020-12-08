@@ -64,13 +64,27 @@ class BackController
         $countMessage = $table->countMessages();
         $countProfessionnel = $table->countProfessionnels();
         $countActivites = $table->countActivites();
-        $dataActivite = $table->allActivites();
         
         $app = $this->database->getInstance();
         $auth = new \App\Service\Security\AccessControl($app->getDb());
         $userId = $auth->getUserId();
 
-        $this->view->renderAdmin(['template' => 'activitesManager', 'data' => ['token' => $token,'countM' => $countMessage,'countA' => $countActivites,'countP' => $countProfessionnel,'userId' => $userId,'activites' => $dataActivite]]);
+        $page = $request->getGet()->get('page');
+        $episodesParPage = 6;
+        $episodesTotalReq = $table->countActivites();
+        $episodesTotal = $episodesTotalReq[0]['nb'];
+        $pagesTotales = ceil($episodesTotal/$episodesParPage);
+        if (isset($page) and !empty($page) and $page > 0 and $page <= $pagesTotales) {
+            $page = intval($page);
+            $pageCourante = $page;
+        } else {
+            $pageCourante = 1;
+        }
+
+        $depart = ($pageCourante - 1)*$episodesParPage;
+        $dataActivite = $table->paginationActivites($depart, $episodesParPage);
+        
+        $this->view->renderAdmin(['template' => 'activitesManager', 'data' => ['pageCourante' => $pageCourante, 'pagesTotales' => $pagesTotales, 'token' => $token,'countM' => $countMessage,'countA' => $countActivites,'countP' => $countProfessionnel,'userId' => $userId,'activites' => $dataActivite]]);
     }
 
     public function professionnelsManager(): void
@@ -84,13 +98,27 @@ class BackController
         $countMessage = $table->countMessages();
         $countProfessionnel = $table->countProfessionnels();
         $countActivites = $table->countActivites();
-        $dataProfessionnels = $table->allProfessionnels();
         
         $app = $this->database->getInstance();
         $auth = new \App\Service\Security\AccessControl($app->getDb());
         $userId = $auth->getUserId();
 
-        $this->view->renderAdmin(['template' => 'professionnelsManager', 'data' => ['token' => $token,'countM' => $countMessage,'countA' => $countActivites,'countP' => $countProfessionnel,'userId' => $userId,'professionnels' => $dataProfessionnels]]);
+        $page = $request->getGet()->get('page');
+        $episodesParPage = 6;
+        $episodesTotalReq = $table->countProfessionnels();
+        $episodesTotal = $episodesTotalReq[0]['nb'];
+        $pagesTotales = ceil($episodesTotal/$episodesParPage);
+        if (isset($page) and !empty($page) and $page > 0 and $page <= $pagesTotales) {
+            $page = intval($page);
+            $pageCourante = $page;
+        } else {
+            $pageCourante = 1;
+        }
+
+        $depart = ($pageCourante - 1)*$episodesParPage;
+        $dataProfessionnels = $table->paginationProfessionnels($depart, $episodesParPage);
+
+        $this->view->renderAdmin(['template' => 'professionnelsManager', 'data' => ['pageCourante' => $pageCourante, 'pagesTotales' => $pagesTotales,'token' => $token,'countM' => $countMessage,'countA' => $countActivites,'countP' => $countProfessionnel,'userId' => $userId,'professionnels' => $dataProfessionnels]]);
     }
 
     public function pagesManager(): void
@@ -123,13 +151,27 @@ class BackController
         $countMessage = $table->countMessages();
         $countProfessionnel = $table->countProfessionnels();
         $countActivites = $table->countActivites();
-        $dataMessages = $table->allMessages();
         
         $app = $this->database->getInstance();
         $auth = new \App\Service\Security\AccessControl($app->getDb());
         $userId = $auth->getUserId();
+
+        $page = $request->getGet()->get('page');
+        $episodesParPage = 6;
+        $episodesTotalReq = $table->countMessages();
+        $episodesTotal = $episodesTotalReq[0]['nb'];
+        $pagesTotales = ceil($episodesTotal/$episodesParPage);
+        if (isset($page) and !empty($page) and $page > 0 and $page <= $pagesTotales) {
+            $page = intval($page);
+            $pageCourante = $page;
+        } else {
+            $pageCourante = 1;
+        }
+
+        $depart = ($pageCourante - 1)*$episodesParPage;
+        $dataMessages = $table->paginationMessages($depart, $episodesParPage);
       
-        $this->view->renderAdmin(['template' => 'messagesManager', 'data' => ['token' => $token,'countM' => $countMessage,'countA' => $countActivites,'countP' => $countProfessionnel,'userId' => $userId,'messages' => $dataMessages]]);
+        $this->view->renderAdmin(['template' => 'messagesManager', 'data' => ['pageCourante' => $pageCourante, 'pagesTotales' => $pagesTotales,'token' => $token,'countM' => $countMessage,'countA' => $countActivites,'countP' => $countProfessionnel,'userId' => $userId,'messages' => $dataMessages]]);
     }
 
     public function showMessage(): void
@@ -386,7 +428,7 @@ class BackController
         $photoError =false;
         $photoExtension = false;
         $photoTaille = false;
-
+    
         if (!empty($_POST)) {
             if (isset($tokenGet) && $tokenGet === $tokenSession) {
                 if (!empty($nom) && !empty($titre)) {
@@ -511,10 +553,6 @@ class BackController
         if (!empty($_POST)) {
             if (isset($tokenGet) && $tokenGet === $tokenSession) {
                 $result = $this->backManager->deleteActivite($activiteId);
-                if ($result) {
-                    header("Location: index?action=activitesManager");
-                    exit();
-                }
                 header("Location: index?action=activitesManager");
                 exit();
             }
@@ -535,10 +573,6 @@ class BackController
         if (!empty($_POST)) {
             if (isset($tokenGet) && $tokenGet === $tokenSession) {
                 $res = $this->backManager->deleteProfessionnel($proId);
-                if ($res) {
-                    header("Location: index?action=professionnelsManager");
-                    exit();
-                }
                 header("Location: index?action=professionnelsManager");
                 exit();
             }
@@ -559,10 +593,6 @@ class BackController
         if (!empty($_POST)) {
             if (isset($tokenGet) && $tokenGet === $tokenSession) {
                 $res =  $this->backManager->deleteMessage($msgId);
-                if ($res) {
-                    header("Location: index?action=messagesManager");
-                    exit();
-                }
                 header("Location: index?action=messagesManager");
                 exit();
             }

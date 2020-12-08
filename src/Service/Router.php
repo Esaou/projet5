@@ -12,13 +12,14 @@ use App\Model\CommentManager;
 use App\Model\FrontManager;
 use App\Model\UsersManager;
 use App\Service\Database;
+use App\Service\Http\Request;
 use App\View\View;
 
 class Router
 {
     private Database $database;
     private View $view;
-    private array $get;
+    private $request;
 
     public function __construct()
     {
@@ -27,12 +28,12 @@ class Router
         $this->view = new View();
 
         // En attendent de mettre en place la class App\Service\Http\Request
-        $this->get = $_GET;
+        $this->request = new Request();
     }
 
     public function run(): void
     {
-        $action = $this->get['action'] ?? 'index';
+        $action = $this->request->getGet()->get('action') ?? 'index';
 
         if ($action === 'index') {
             $postManager = new FrontManager($this->database);

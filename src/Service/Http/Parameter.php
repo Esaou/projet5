@@ -19,6 +19,7 @@ class Parameter
             $res = addslashes(htmlspecialchars($this->parameter[$name]));
             return $res;
         }
+        return false;
     }
 
     public function getWithoutHtml(string $name)
@@ -27,6 +28,7 @@ class Parameter
             $res = $this->parameter[$name];
             return $res;
         }
+        return false;
     }
     
     public function set(string $name, string $value): void

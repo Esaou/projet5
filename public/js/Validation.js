@@ -129,6 +129,7 @@ class Validation {
             if(!this.nameCheck.test(this.nomPro.value)){
                 event.preventDefault();
                 this.error.style.display = 'flex';
+                this.error.className = "alert alert-danger text-center";
                 this.error.innerHTML = 'Le nom ne peut contenir que des lettres majuscules, minuscules, des espaces et tirets. Il doit contenir entre 2 et 50 caractères !';      
             }else{
                 if(this.activitePro.value == "" ){

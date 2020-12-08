@@ -53,6 +53,16 @@
                     {% endfor %}
                 </tbody>
             </table>
+            <div class="d-flex justify-content-center colorTitle">
+            Pages :
+            {% for i in 1.. pagesTotales %}
+                {% if i == pageCourante %}
+                <span class="page" style='display:flex;justify-content:flex-end;min-width:20px;font-size:18px;text-decoration:underline;'>{{ i }}</span>
+                {% else %}
+                <a class="page" href='index.php?action=activitesManager&page={{ i }}' style='display:flex;justify-content:flex-end;min-width:20px;font-size:18px;'>{{ i }}</a>
+                {% endif %}
+            {% endfor %}
+            </div>
         </div>
 
 {%  endblock %}

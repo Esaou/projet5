@@ -18,9 +18,24 @@ class GlobalManager
 
     // CONTENT
 
+    public function paginationActivites($depart, $episodesParPage)
+    {
+        return $this->database->getDb()->query("SELECT * FROM activites ORDER BY id DESC LIMIT $depart , $episodesParPage", 'App\Models\BackManager');
+    }
+
+    public function paginationProfessionnels($depart, $episodesParPage)
+    {
+        return $this->database->getDb()->query("SELECT * FROM activites LEFT JOIN professionnels ON activites.id = professionnels.id_activites WHERE id_activites IS NOT NULL ORDER BY professionnels.id DESC LIMIT $depart , $episodesParPage", 'App\Models\BackManager');
+    }
+
+    public function paginationMessages($depart, $episodesParPage)
+    {
+        return $this->database->getDb()->query("SELECT * FROM messages ORDER BY id DESC LIMIT $depart , $episodesParPage", 'App\Models\BackManager');
+    }
+
     public function countActivites()
     {
-        return $this->database->getDb()->query("SELECT count(*) as nb FROM activites", 'App\Models\BackManager');
+        return $this->database->getDb()->query('SELECT count(*) as nb FROM activites', 'App\Models\BackManager');
     }
 
     public function countProfessionnels()

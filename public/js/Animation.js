@@ -5,8 +5,8 @@ $( document ).ready(function() {
 let nav = document.querySelector(".nav");
 let lastScrollValue = 0;
 
-document.addEventListener('scroll',() => {
-		let top  = document.documentElement.scrollTop;
+document.addEventListener('scroll',() => { 
+        let top  = document.documentElement.scrollTop;
     if(lastScrollValue < top) {
     	nav.classList.add("hidden");
     } else {

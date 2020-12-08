@@ -80,39 +80,32 @@ class FrontController
         $nameError = false;
         $tokenError = false;
         $emailError = false;
-
+        
         if (!empty($_POST)) {
             if (isset($tokenGet) && $tokenGet === $tokenSession) {
-                if (preg_match("/^(?:[^\d\W][\-\s]{0,1}){2,40}$/i", $nom)) {
-                    if (preg_match("/^[^\W][a-zA-Z0-9_]+(\.[a-zA-Z0-9_]+)*\@[a-zA-Z0-9_]+(\.[a-zA-Z0-9_]+)*\.[a-zA-Z]{2,4}$/", $email)) {
-                        if ((isset($nom,$email,$objet,$message) and !empty($nom) and !empty($email) and !empty($objet) and !empty($message))) {
-                            $pseudo = htmlspecialchars($nom);
-                            $email = htmlspecialchars($email);
-                            $objet = htmlspecialchars($objet);
-                            $message = htmlspecialchars($message);
-
-                            if (mb_strlen($pseudo) < 40) {
-                                $this->frontManager->createMessage([
-                                
-                                            'nom' => $pseudo,
-                                            'email' => $email,
-                                            'objet' => $objet,
-                                            'message' => $message
-                                            
-                                
-                                        ]);
-                                $result = true;
-                            } else {
-                                $error = true;
-                            }
-                        } else {
-                            $errors= true;
-                        }
-                    } else {
-                        $emailError = true;
-                    }
-                } else {
+                if (!preg_match("/^(?:[^\d\W][\-\s]{0,1}){2,40}$/i", $nom)) {
                     $nameError = true;
+                } elseif (!preg_match("/^[^\W][a-zA-Z0-9_]+(\.[a-zA-Z0-9_]+)*\@[a-zA-Z0-9_]+(\.[a-zA-Z0-9_]+)*\.[a-zA-Z]{2,4}$/", $email)) {
+                    $emailError = true;
+                } elseif ((!isset($nom,$email,$objet,$message) and empty($nom) and empty($email) and empty($objet) and empty($message))) {
+                    $errors = true;
+                } elseif (!(mb_strlen($nom) < 40)) {
+                    $error = true;
+                } else {
+                    $pseudo = htmlspecialchars($nom);
+                    $email = htmlspecialchars($email);
+                    $objet = htmlspecialchars($objet);
+                    $message = htmlspecialchars($message);
+                    $this->frontManager->createMessage([
+                                
+                        'nom' => $pseudo,
+                        'email' => $email,
+                        'objet' => $objet,
+                        'message' => $message
+                        
+            
+                    ]);
+                    $result = true;
                 }
             } else {
                 $tokenError = true;
