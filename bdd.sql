@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : mer. 02 déc. 2020 à 13:38
+-- Généré le : mer. 09 déc. 2020 à 16:32
 -- Version du serveur :  5.7.31
 -- Version de PHP : 7.3.21
 
@@ -33,9 +33,9 @@ CREATE TABLE IF NOT EXISTS `activites` (
   `activite` varchar(255) NOT NULL,
   `description` longtext NOT NULL,
   `titre` varchar(255) NOT NULL,
-  `photo` varchar(255) NOT NULL,
+  `photo` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `activites`
@@ -47,7 +47,7 @@ INSERT INTO `activites` (`id`, `activite`, `description`, `titre`, `photo`) VALU
 (5, 'MÃ©decine gÃ©nÃ©rale', '<p>La m&eacute;decine g&eacute;n&eacute;rale, ou m&eacute;decine familiale, est une sp&eacute;cialit&eacute; m&eacute;dicale prenant en charge le suivi durable, le bien-&ecirc;tre et les soins de sant&eacute; g&eacute;n&eacute;raux primaires d\'une communaut&eacute;, sans se limiter &agrave; des groupes de maladies relevant d\'un organe, d\'un &acirc;ge, ou d\'un sexe particulier.</p>\r\n<p>Le m&eacute;decin g&eacute;n&eacute;raliste, aussi appel&eacute; m&eacute;decin omnipraticien ou m&eacute;decin de famille, est donc souvent consult&eacute; pour diagnostiquer les sympt&ocirc;mes avant de traiter la maladie ou de r&eacute;f&eacute;rer le patient &agrave; un autre m&eacute;decin sp&eacute;cialiste.</p>\r\n<p>Dans la plupart des cas, le m&eacute;decin traitant d\'une personne est un m&eacute;decin g&eacute;n&eacute;raliste. Un exemple d\'une exception serait un jeune qui a un p&eacute;diatre (m&eacute;decin sp&eacute;cialiste) pour m&eacute;decin traitant. Les m&eacute;decins omnipraticiens, cependant, ont aussi toutes les comp&eacute;tences n&eacute;cessaires pour les traiter de fa&ccedil;on efficace.</p>', 'MÃ©decins gÃ©nÃ©ralistes', 'MÃ©decine gÃ©nÃ©rale.jpg'),
 (7, 'Infirmerie', '<p>Une infirmerie est un endroit o&ugrave; sont dispens&eacute;s des soins pratiqu&eacute;s par des infirmiers ou des infirmi&egrave;res.</p>\r\n<p>Ce lieu est, en g&eacute;n&eacute;ral, situ&eacute; dans un b&acirc;timent et &agrave; proximit&eacute; d\'activit&eacute; r&eacute;unissant un personnel suffisamment nombreux.</p>\r\n<p>Il existe toutefois des infirmeries mobiles par nature (bateau) ou temporaires. Ces derni&egrave;res sont install&eacute;es lors de grands rassemblements de personnes (manifestations, spectacles, sports) ainsi que sur les lieux d\'un sinistre ou d\'une catastrophe. Elles sont souvent mises en place par la Croix-Rouge ou les services de s&eacute;curit&eacute; civile.</p>', 'InfirmiÃ¨res', 'Infirmerie.jpg'),
 (8, 'Osteopathie', '<p>L&rsquo;ost&eacute;opathie est bas&eacute;e sur des manipulations osseuses ou musculaires.</p>\r\n<p>L&rsquo;ost&eacute;opathie est une th&eacute;rapeutique manuelle fond&eacute;e sur des manipulations osseuses ou musculaires.</p>\r\n<p>Cette technique est apparue au XIXe si&egrave;cle aux Etats- Unis. Son fondateur, le Dr Andrew Taylor Still, partait du principe que le bien-&ecirc;tre du corps humain est li&eacute; au bon fonctionnement de son appareil locomoteur (squelette, articulations, muscles, tendons, nerfs).</p>\r\n<p>En effet, toutes les parties du corps &eacute;tant reli&eacute;es entre elles par l\'interm&eacute;diaire des tissus organiques qui le composent, le corps constitue une unit&eacute; fonctionnelle indissociable. D&egrave;s qu\'une structure du corps pr&eacute;sente une perturbation dans son fonctionnement, cela retentit sur le fonctionnement de structures situ&eacute;es &agrave; distance par le biais de ces corr&eacute;lations tissulaires.</p>\r\n<p>L\'ost&eacute;opathie est une pratique exclusivement manuelle qui l&egrave;ve en particulier les blocages articulaires du corps pour lui permettre de mieux fonctionner.</p>\r\n<p>Elle agit &agrave; distance &agrave; partir du syst&egrave;me musculo-squelettique sur les principaux organes du corps humain en utilisant des techniques de pression, d&rsquo;&eacute;longation ou de torsion.</p>\r\n<p>Les meilleurs r&eacute;sultats sont obtenus sur les probl&egrave;mes dits &laquo; fonctionnels &raquo;, c&rsquo;est-&agrave;-dire les douleurs dont on ne trouve pas la cause, mais qui g&ecirc;nent parfois depuis tr&egrave;s longtemps la vie quotidienne : douleurs vert&eacute;brales, costales et articulaires, tendinites, douleurs et traumatismes musculaires, maux de t&ecirc;te, migraines et vertiges&hellip;</p>', 'Osteopathes', 'Osteopathie.jpg'),
-(9, 'Hypnose', '<p>En fran&ccedil;ais, le terme hypnose d&eacute;signe &agrave; la fois des &eacute;tats modifi&eacute;s de conscience, les pratiques th&eacute;rapeutiques utilis&eacute;es pendant cet &eacute;tat, et les techniques permettant de cr&eacute;er cet &eacute;tat (appel&eacute;es techniques d&rsquo;inductions).</p>\r\n<p>Lorsqu&rsquo;un individu est dans un &eacute;tat d&rsquo;hypnose, ses perceptions sont modifi&eacute;es par rapport &agrave; son &eacute;tat ordinaire. Les caract&eacute;ristiques de ces &eacute;tats sont vari&eacute;s, notamment : perte des rep&egrave;res spatio-temporels, hallucinations, analg&eacute;sies, anesth&eacute;sies, etc. L\'exp&eacute;rience hypnotique d\'une personne d&eacute;pend de sa personnalit&eacute;, du contexte, de la m&eacute;thode employ&eacute;e, des suggestions qui lui sont faites, de la profondeur de l\'induction hypnotique, et d\'autres param&egrave;tres.</p>\r\n<p>Une personne peut &eacute;galement d&eacute;velopper une hypnose spontan&eacute;e ou provoquer soi-m&ecirc;me sa propre hypnose. On parle alors d&rsquo;autohypnose.</p>', 'HypnothÃ©rapeutes', 'Hypnose.jpg');
+(9, 'Hypnose', '<p>En franÃ§ais, le terme hypnose dÃ©signe Ã  la fois des Ã©tats modifiÃ©s de conscience, les pratiques thÃ©rapeutiques utilisÃ©es pendant cet Ã©tat, et les techniques permettant de crÃ©er cet Ã©tat (appelÃ©es techniques dâ€™inductions).</p>\r\n<p>Lorsquâ€™un individu est dans un Ã©tat dâ€™hypnose, ses perceptions sont modifiÃ©es par rapport Ã  son Ã©tat ordinaire. Les caractÃ©ristiques de ces Ã©tats sont variÃ©s, notamment : perte des repÃ¨res spatio-temporels, hallucinations, analgÃ©sies, anesthÃ©sies, etc. L\'expÃ©rience hypnotique d\'une personne dÃ©pend de sa personnalitÃ©, du contexte, de la mÃ©thode employÃ©e, des suggestions qui lui sont faites, de la profondeur de l\'induction hypnotique, et d\'autres paramÃ¨tres.</p>\r\n<p>Une personne peut Ã©galement dÃ©velopper une hypnose spontanÃ©e ou provoquer soi-mÃªme sa propre hypnose. On parle alors dâ€™autohypnose.</p>', 'HypnothÃ©rapeutes', 'Hypnose.jpg');
 
 -- --------------------------------------------------------
 
@@ -64,7 +64,7 @@ CREATE TABLE IF NOT EXISTS `messages` (
   `message` longtext NOT NULL,
   `date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=67 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=46 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `messages`
@@ -110,7 +110,7 @@ CREATE TABLE IF NOT EXISTS `professionnels` (
   `id_activites` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `professionnels_ibfk_1` (`id_activites`)
-) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `professionnels`
@@ -148,7 +148,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `password`) VALUES
-(1, 'admin', '$2y$10$UpcvLQ.vs/7qtC3qjdjPcu1RbueNFggZWMzIjVpRTBrVBwydRnuIO');
+(1, 'admin', '$2y$10$b5OxDem9mFzORruLI3dRzOXcc/zmFMN1JowqW.jNMr4Zb3pZd/u.2');
 
 --
 -- Contraintes pour les tables déchargées
