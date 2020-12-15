@@ -15,12 +15,14 @@ class FrontController
     private FrontManager $frontManager;
     private View $view;
     private Database $database;
+    private Request $request;
 
-    public function __construct(FrontManager $frontManager, View $view, Database $database)
+    public function __construct(FrontManager $frontManager, View $view, Database $database, Request $request)
     {
         $this->frontManager = $frontManager;
         $this->database = $database;
         $this->view = $view;
+        $this->request = $request;
     }
 
     public function index(): void
@@ -64,15 +66,14 @@ class FrontController
 
     public function rejoindre(): void
     {
-        $request = new Request();
         $token = base_convert(hash('sha256', time() . mt_rand()), 16, 36);
-        $tokenSession = $request->getSession()->get('token');
-        $tokenGet = $request->getPost()->get('token');
+        $tokenSession = $this->request->getSession()->get('token');
+        $tokenGet = $this->request->getPost()->get('token');
 
-        $nom = $request->getPost()->get('nom');
-        $email = $request->getPost()->get('email');
-        $objet = $request->getPost()->get('objet');
-        $message = $request->getPost()->get('message');
+        $nom = $this->request->getPost()->get('nom');
+        $email = $this->request->getPost()->get('email');
+        $objet = $this->request->getPost()->get('objet');
+        $message = $this->request->getPost()->get('message');
 
         $error = false;
         $errors=false;
@@ -87,11 +88,11 @@ class FrontController
                     $nameError = true;
                 } elseif (!preg_match("/^[^\W][a-zA-Z0-9_]+(\.[a-zA-Z0-9_]+)*\@[a-zA-Z0-9_]+(\.[a-zA-Z0-9_]+)*\.[a-zA-Z]{2,4}$/", $email)) {
                     $emailError = true;
-                } elseif ((!isset($nom,$email,$objet,$message) and empty($nom) and empty($email) and empty($objet) and empty($message))) {
+                } elseif ((empty($nom) || empty($email) || empty($objet) || empty($message))) {
                     $errors = true;
                 } elseif (!(mb_strlen($nom) < 40)) {
                     $error = true;
-                } else {
+                } elseif (!empty($nom) and !empty($email) and !empty($objet) and !empty($message)) {
                     $pseudo = htmlspecialchars($nom);
                     $email = htmlspecialchars($email);
                     $objet = htmlspecialchars($objet);
@@ -112,7 +113,7 @@ class FrontController
             }
         }
 
-        $request->getSession()->set('token', $token);
+        $this->request->getSession()->set('token', $token);
 
         $dataActivites = $this->frontManager->activites();
         $dataForm = $this->frontManager->form();

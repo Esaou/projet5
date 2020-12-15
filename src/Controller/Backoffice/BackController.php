@@ -18,13 +18,15 @@ class BackController
     private Database $database;
     private BackManager $backManager;
     private View $view;
+    private Request $request;
 
-    public function __construct(FrontManager $postManager, BackManager $backManager, View $view, Database $database)
+    public function __construct(FrontManager $postManager, BackManager $backManager, View $view, Database $database, Request $request)
     {
         $this->postManager = $postManager;
         $this->view = $view;
         $this->backManager = $backManager;
         $this->database = $database;
+        $this->request = $request;
 
         $app = $this->database->getInstance();
 
@@ -55,9 +57,8 @@ class BackController
 
     public function activitesManager(): void
     {
-        $request = new Request();
         $token = base_convert(hash('sha256', time() . mt_rand()), 16, 36);
-        $request->getSession()->set('token', $token);
+        $this->request->getSession()->set('token', $token);
         
         $table = $this->database->getInstance()->getTable('GlobalManager');
         
@@ -69,7 +70,7 @@ class BackController
         $auth = new \App\Service\Security\AccessControl($app->getDb());
         $userId = $auth->getUserId();
 
-        $page = $request->getGet()->get('page');
+        $page = $this->request->getGet()->get('page');
         $episodesParPage = 6;
         $episodesTotalReq = $table->countActivites();
         $episodesTotal = $episodesTotalReq[0]['nb'];
@@ -89,9 +90,8 @@ class BackController
 
     public function professionnelsManager(): void
     {
-        $request = new Request();
         $token = base_convert(hash('sha256', time() . mt_rand()), 16, 36);
-        $request->getSession()->set('token', $token);
+        $this->request->getSession()->set('token', $token);
         
         $table = $this->database->getInstance()->getTable('GlobalManager');
         
@@ -103,7 +103,7 @@ class BackController
         $auth = new \App\Service\Security\AccessControl($app->getDb());
         $userId = $auth->getUserId();
 
-        $page = $request->getGet()->get('page');
+        $page = $this->request->getGet()->get('page');
         $episodesParPage = 6;
         $episodesTotalReq = $table->countProfessionnels();
         $episodesTotal = $episodesTotalReq[0]['nb'];
@@ -142,9 +142,8 @@ class BackController
 
     public function messagesManager(): void
     {
-        $request = new Request();
         $token = base_convert(hash('sha256', time() . mt_rand()), 16, 36);
-        $request->getSession()->set('token', $token);
+        $this->request->getSession()->set('token', $token);
         
         $table = $this->database->getInstance()->getTable('GlobalManager');
         
@@ -156,7 +155,7 @@ class BackController
         $auth = new \App\Service\Security\AccessControl($app->getDb());
         $userId = $auth->getUserId();
 
-        $page = $request->getGet()->get('page');
+        $page = $this->request->getGet()->get('page');
         $episodesParPage = 6;
         $episodesTotalReq = $table->countMessages();
         $episodesTotal = $episodesTotalReq[0]['nb'];
@@ -178,8 +177,7 @@ class BackController
     {
         $table = $this->database->getInstance()->getTable('GlobalManager');
         
-        $request = new Request();
-        $id = $request->getGet()->get('id');
+        $id = $this->request->getGet()->get('id');
 
         $countMessage = $table->countMessages();
         $countProfessionnel = $table->countProfessionnels();
@@ -206,13 +204,12 @@ class BackController
         $countActivites = $table->countActivites();
         $contenuAccueil = $table->contenuAccueil();
 
-        $request = new Request();
         $token = base_convert(hash('sha256', time() . mt_rand()), 16, 36);
-        $tokenSession = $request->getSession()->get('token');
-        $tokenGet = $request->getPost()->get('token');
+        $tokenSession = $this->request->getSession()->get('token');
+        $tokenGet = $this->request->getPost()->get('token');
     
-        $contenu = $request->getPost()->getWithoutHtml('contenu');
-        $id = $request->getGet()->get('id');
+        $contenu = $this->request->getPost()->getWithoutHtml('contenu');
+        $id = $this->request->getGet()->get('id');
         
         $tokenError = false;
         $error = false;
@@ -235,7 +232,7 @@ class BackController
             }
         }
 
-        $request->getSession()->set('token', $token);
+        $this->request->getSession()->set('token', $token);
 
         $post = $table->findAccueil($id);
         $form = new \App\Service\BootstrapForm($post);
@@ -256,13 +253,12 @@ class BackController
         $countActivites = $table->countActivites();
         $contenuAccueil = $table->contenuAccueil();
 
-        $request = new Request();
         $token = base_convert(hash('sha256', time() . mt_rand()), 16, 36);
-        $tokenSession = $request->getSession()->get('token');
-        $tokenGet = $request->getPost()->get('token');
+        $tokenSession = $this->request->getSession()->get('token');
+        $tokenGet = $this->request->getPost()->get('token');
     
-        $contenu = $request->getPost()->getWithoutHtml('contenu');
-        $id = $request->getGet()->get('id');
+        $contenu = $this->request->getPost()->getWithoutHtml('contenu');
+        $id = $this->request->getGet()->get('id');
         
         $error = false;
         $result = false;
@@ -285,7 +281,7 @@ class BackController
             }
         }
 
-        $request->getSession()->set('token', $token);
+        $this->request->getSession()->set('token', $token);
 
         $post = $table->findPresentation($id);
         $form = new \App\Service\BootstrapForm($post);
@@ -306,13 +302,12 @@ class BackController
         $countActivites = $table->countActivites();
         $contenuAccueil = $table->contenuAccueil();
 
-        $request = new Request();
         $token = base_convert(hash('sha256', time() . mt_rand()), 16, 36);
-        $tokenSession = $request->getSession()->get('token');
-        $tokenGet = $request->getPost()->get('token');
+        $tokenSession = $this->request->getSession()->get('token');
+        $tokenGet = $this->request->getPost()->get('token');
     
-        $contenu = $request->getPost()->getWithoutHtml('contenu');
-        $id = $request->getGet()->get('id');
+        $contenu = $this->request->getPost()->getWithoutHtml('contenu');
+        $id = $this->request->getGet()->get('id');
         
         $error = false;
         $result = false;
@@ -335,7 +330,7 @@ class BackController
             }
         }
         
-        $request->getSession()->set('token', $token);
+        $this->request->getSession()->set('token', $token);
 
         $post = $table->findProjetSoin($id);
         $form = new \App\Service\BootstrapForm($post);
@@ -356,13 +351,12 @@ class BackController
         $countActivites = $table->countActivites();
         $contenuAccueil = $table->contenuAccueil();
 
-        $request = new Request();
         $token = base_convert(hash('sha256', time() . mt_rand()), 16, 36);
-        $tokenSession = $request->getSession()->get('token');
-        $tokenGet = $request->getPost()->get('token');
+        $tokenSession = $this->request->getSession()->get('token');
+        $tokenGet = $this->request->getPost()->get('token');
     
-        $contenu = $request->getPost()->getWithoutHtml('contenu');
-        $id = $request->getGet()->get('id');
+        $contenu = $this->request->getPost()->getWithoutHtml('contenu');
+        $id = $this->request->getGet()->get('id');
         
         $error = false;
         $result = false;
@@ -388,7 +382,7 @@ class BackController
         $post = $table->findPartenaires($id);
         $form = new \App\Service\BootstrapForm($post);
 
-        $request->getSession()->set('token', $token);
+        $this->request->getSession()->set('token', $token);
 
         $this->view->renderAdmin(['template' => 'editPartenaires', 'data' => ['token' => $token, 'tokenError' => $tokenError,'contenus' => $contenuAccueil,'form' => $form, 'error' => $error,'result' => $result,'countM' => $countMessage,'userId' => $userId,'countA' => $countActivites,'countP' => $countProfessionnel]]);
     }
@@ -405,14 +399,13 @@ class BackController
         $auth = new \App\Service\Security\AccessControl($app->getDb());
         $userId = $auth->getUserId();
         
-        $request = new Request();
         $token = base_convert(hash('sha256', time() . mt_rand()), 16, 36);
-        $tokenSession = $request->getSession()->get('token');
-        $tokenGet = $request->getPost()->get('token');
+        $tokenSession = $this->request->getSession()->get('token');
+        $tokenGet = $this->request->getPost()->get('token');
         
-        $nom = $request->getPost()->get('activite');
-        $titre = $request->getPost()->get('titre');
-        $description = $request->getPost()->getWithoutHtml('description');
+        $nom = $this->request->getPost()->get('activite');
+        $titre = $this->request->getPost()->get('titre');
+        $description = $this->request->getPost()->getWithoutHtml('description');
         
         $error = false;
         $result = false;
@@ -428,7 +421,8 @@ class BackController
                     $tailleMax = 2097152;
                     $extensionsValides = ['jpg','jpeg','gif','png'];
                     $extensionUpload = mb_strtolower(mb_substr(mb_strrchr($_FILES['photo']['name'], '.'), 1));
-                    $path = "images/" . $nom . "." . $extensionUpload ;
+                    $nomPhoto = str_replace(" ", "", $nom);
+                    $path = "images/" . $nomPhoto . "." . $extensionUpload ;
 
                     if (!($_FILES['photo']['size'] <= $tailleMax)) {
                         $photoTaille = true;
@@ -438,13 +432,13 @@ class BackController
                         $champs = true;
                     } else {
                         $res = move_uploaded_file($_FILES['photo']['tmp_name'], $path);
-                        if ($res) {
+                        if ($res and !empty($nom) && !empty($titre) && !empty($description)) {
                             $resultat = $this->backManager->createActivite([
-                            
+                                
                                 'activite' => $nom,
                                 'titre' => $titre,
                                 'description' => $description,
-                                'photo' => $nom . "." . $extensionUpload
+                                'photo' => $nomPhoto . "." . $extensionUpload
 
                             ]);
                             $result = true;
@@ -470,7 +464,7 @@ class BackController
             }
         }
 
-        $request->getSession()->set('token', $token);
+        $this->request->getSession()->set('token', $token);
 
         $form = new \App\Service\BootstrapForm($_POST);
 
@@ -490,13 +484,12 @@ class BackController
         $auth = new \App\Service\Security\AccessControl($app->getDb());
         $userId = $auth->getUserId();
 
-        $request = new Request();
         $token = base_convert(hash('sha256', time() . mt_rand()), 16, 36);
-        $tokenSession = $request->getSession()->get('token');
-        $tokenGet = $request->getPost()->get('token');
+        $tokenSession = $this->request->getSession()->get('token');
+        $tokenGet = $this->request->getPost()->get('token');
         
-        $nom = $request->getPost()->get('nom');
-        $activite = $request->getPost()->get('activite');
+        $nom = $this->request->getPost()->get('nom');
+        $activite = $this->request->getPost()->get('activite');
         
         $error = false;
         $result = false;
@@ -520,7 +513,7 @@ class BackController
             }
         }
 
-        $request->getSession()->set('token', $token);
+        $this->request->getSession()->set('token', $token);
         
         $form = new \App\Service\BootstrapForm($_POST);
 
@@ -531,13 +524,12 @@ class BackController
     {
         $table = $this->database->getInstance()->getTable('GlobalManager');
 
-        $request = new Request();
-        $tokenSession = $request->getSession()->get('token');
-        $tokenGet = $request->getPost()->get('token');
-        $activiteId = $request->getGet()->get('id');
+        $tokenSession = $this->request->getSession()->get('token');
+        $tokenGet = $this->request->getPost()->get('token');
+        $activiteId = $this->request->getGet()->get('id');
         
         if (!empty($_POST)) {
-            if (isset($tokenGet) && $tokenGet === $tokenSession) {
+            if (isset($tokenGet) && $tokenGet === $tokenSession and !empty($activiteId)) {
                 $result = $this->backManager->deleteActivite($activiteId);
                 header("Location: index?action=activitesManager");
                 exit();
@@ -551,13 +543,12 @@ class BackController
     {
         $table = $this->database->getInstance()->getTable('GlobalManager');
 
-        $request = new Request();
-        $tokenSession = $request->getSession()->get('token');
-        $tokenGet = $request->getPost()->get('token');
-        $proId = $request->getGet()->get('id');
+        $tokenSession = $this->request->getSession()->get('token');
+        $tokenGet = $this->request->getPost()->get('token');
+        $proId = $this->request->getGet()->get('id');
 
         if (!empty($_POST)) {
-            if (isset($tokenGet) && $tokenGet === $tokenSession) {
+            if (isset($tokenGet) && $tokenGet === $tokenSession and !empty($proId)) {
                 $res = $this->backManager->deleteProfessionnel($proId);
                 header("Location: index?action=professionnelsManager");
                 exit();
@@ -571,13 +562,12 @@ class BackController
     {
         $table = $this->database->getInstance()->getTable('GlobalManager');
 
-        $request = new Request();
-        $tokenSession = $request->getSession()->get('token');
-        $tokenGet = $request->getPost()->get('token');
-        $msgId = $request->getGet()->get('id');
+        $tokenSession = $this->request->getSession()->get('token');
+        $tokenGet = $this->request->getPost()->get('token');
+        $msgId = $this->request->getGet()->get('id');
         
         if (!empty($_POST)) {
-            if (isset($tokenGet) && $tokenGet === $tokenSession) {
+            if (isset($tokenGet) && $tokenGet === $tokenSession and !empty($msgId)) {
                 $res =  $this->backManager->deleteMessage($msgId);
                 header("Location: index?action=messagesManager");
                 exit();
@@ -591,13 +581,12 @@ class BackController
     {
         $table = $this->database->getInstance()->getTable('GlobalManager');
 
-        $request = new Request();
-        $tokenSession = $request->getSession()->get('token');
-        $tokenGet = $request->getPost()->get('token');
-        $userId = $request->getGet()->get('id');
+        $tokenSession = $this->request->getSession()->get('token');
+        $tokenGet = $this->request->getPost()->get('token');
+        $userId = $this->request->getGet()->get('id');
         
         if (!empty($_POST)) {
-            if (isset($tokenGet) && $tokenGet === $tokenSession) {
+            if (isset($tokenGet) && $tokenGet === $tokenSession and !empty($userId)) {
                 $res = $this->backManager->deleteUser($userId);
                 if ($res) {
                     $this->deconnecter();
@@ -624,15 +613,15 @@ class BackController
         $auth = new \App\Service\Security\AccessControl($app->getDb());
         $userId = $auth->getUserId();
         
-        $request = new Request();
         $token = base_convert(hash('sha256', time() . mt_rand()), 16, 36);
-        $tokenSession = $request->getSession()->get('token');
-        $tokenGet = $request->getPost()->get('token');
+        $tokenSession = $this->request->getSession()->get('token');
+        $tokenGet = $this->request->getPost()->get('token');
 
-        $nom = $request->getPost()->get('activite');
-        $titre = $request->getPost()->get('titre');
-        $description = $request->getPost()->getWithoutHtml('description');
-        $id = $request->getGet()->get('id');
+        $nom = $this->request->getPost()->get('activite');
+        $titre = $this->request->getPost()->get('titre');
+        $description = $this->request->getPost()->getWithoutHtml('description');
+
+        $id = $this->request->getGet()->get('id');
         $idActivites = $table->idActivite($id);
         
         $error = false;
@@ -642,14 +631,14 @@ class BackController
         $photoExtension = false;
         $photoTaille = false;
 
-
         if (!empty($_POST)) {
             if (isset($tokenGet) && $tokenGet === $tokenSession) {
                 if (isset($_FILES['photo']) && !empty($_FILES['photo']['name'])) {
                     $tailleMax = 2097152;
                     $extensionsValides = ['jpg','jpeg','gif','png'];
                     $extensionUpload = mb_strtolower(mb_substr(mb_strrchr($_FILES['photo']['name'], '.'), 1));
-                    $path = "images/" . $nom . "." . $extensionUpload ;
+                    $nomPhoto = str_replace(" ", "", $nom);
+                    $path = "images/" . $nomPhoto . "." . $extensionUpload ;
 
                     if (!($_FILES['photo']['size'] <= $tailleMax)) {
                         $photoTaille = true;
@@ -657,13 +646,13 @@ class BackController
                         $photoExtension = true;
                     } else {
                         $res = move_uploaded_file($_FILES['photo']['tmp_name'], $path);
-                        if ($res) {
+                        if ($res and !empty($nom) && !empty($titre) && !empty($description)) {
                             $resultat = $this->backManager->updateActivite($id, [
                             
                                 'activite' => $nom,
                                 'titre' => $titre,
                                 'description' => $description,
-                                'photo' => $nom . "." . $extensionUpload
+                                'photo' => $nomPhoto . "." . $extensionUpload
 
                             ]);
                             $result = true;
@@ -671,7 +660,7 @@ class BackController
                             $photoError = true;
                         }
                     }
-                } else {
+                } elseif (!empty($nom) && !empty($titre) && !empty($description)) {
                     $resultat = $this->backManager->updateActivite($id, [
                                 
                         'activite' => $nom,
@@ -688,7 +677,7 @@ class BackController
             $error = true;
         }
 
-        $request->getSession()->set('token', $token);
+        $this->request->getSession()->set('token', $token);
 
         $post = $table->find($id);
         $form = new \App\Service\BootstrapForm($post);
@@ -700,15 +689,14 @@ class BackController
     {
         $table = $this->database->getInstance()->getTable('GlobalManager');
 
-        $request = new Request();
         $token = base_convert(hash('sha256', time() . mt_rand()), 16, 36);
-        $tokenSession = $request->getSession()->get('token');
-        $tokenGet = $request->getPost()->get('token');
+        $tokenSession = $this->request->getSession()->get('token');
+        $tokenGet = $this->request->getPost()->get('token');
 
-        $nom = $request->getPost()->get('nom');
-        $activite = $request->getPost()->get('activite');
-        $id = $request->getGet()->get('id');
-        $idActivite = $request->getGet()->get('id_activite');
+        $nom = $this->request->getPost()->get('nom');
+        $activite = $this->request->getPost()->get('activite');
+        $id = $this->request->getGet()->get('id');
+        $idActivite = $this->request->getGet()->get('id_activite');
         $idProfessionnel = $table->idProfessionnel($id);
 
         $countMessage = $table->countMessages();
@@ -740,7 +728,7 @@ class BackController
             }
         }
 
-        $request->getSession()->set('token', $token);
+        $this->request->getSession()->set('token', $token);
         
         $post = $table->findPro($id);
         $form = new \App\Service\BootstrapForm($post);
@@ -756,15 +744,14 @@ class BackController
         $countProfessionnel = $table->countProfessionnels();
         $countActivites = $table->countActivites();
         
-        $request = new Request();
         $token = base_convert(hash('sha256', time() . mt_rand()), 16, 36);
-        $tokenSession = $request->getSession()->get('token');
-        $tokenGet = $request->getPost()->get('token');
+        $tokenSession = $this->request->getSession()->get('token');
+        $tokenGet = $this->request->getPost()->get('token');
         
-        $username = $request->getPost()->get('Username');
-        $password = $request->getPost()->get('Password');
-        $confirm = $request->getPost()->get('Confirm');
-        $id = $request->getGet()->get('id');
+        $username = $this->request->getPost()->get('Username');
+        $password = $this->request->getPost()->get('Password');
+        $confirm = $this->request->getPost()->get('Confirm');
+        $id = $this->request->getGet()->get('id');
         
         $idUser = $table->findUser($id);
         
@@ -776,7 +763,7 @@ class BackController
         $passError = false;
 
         if (!empty($_POST)) {
-            if (!isset($tokenGet) && $tokenGet !== $tokenSession) {
+            if (!isset($tokenGet) && $tokenGet !== $tokenSession and !empty($id)) {
                 $tokenError = true;
             } elseif (empty($username) && empty($password) && empty($confirm)) {
                 $error=true;
@@ -797,7 +784,7 @@ class BackController
             }
         }
 
-        $request->getSession()->set('token', $token);
+        $this->request->getSession()->set('token', $token);
 
         $form = new \App\Service\BootstrapForm();
 
