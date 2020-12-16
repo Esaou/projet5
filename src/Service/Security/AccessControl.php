@@ -31,25 +31,23 @@ class AccessControl
         return false;
     }
 
-    public static function logged():bool
+    public function logged():bool
     {
-        $request = new Request();
-        $isConnect = $request->getSession()->get('auth');
+        $isConnect = $this->request->getSession()->get('auth');
         return isset($isConnect);
     }
 
-    public static function disconnect(): void
+    public function disconnect(): void
     {
-        $request = new Request();
-        $isConnect = $request->getSession()->get('auth');
-        $isToken = $request->getSession()->get('token');
+        $isConnect = $this->request->getSession()->get('auth');
+        $isToken = $this->request->getSession()->get('token');
         if (isset($isConnect)) {
             unset($isToken);
             session_destroy();
-        }
+        };
     }
 
-    public static function getUserId()
+    public function getUserId()
     {
         $request = new Request();
         $isConnect = $request->getSession()->get('auth');

@@ -215,7 +215,7 @@ class BackController
         $error = false;
         $result = false;
 
-        if (!empty($_POST)) {
+        if (!empty($_POST && !empty($contenu))) {
             if (isset($tokenGet) && $tokenGet === $tokenSession) {
                 if (!empty($contenu)) {
                     $this->backManager->updateAccueil([
@@ -267,7 +267,7 @@ class BackController
         if (!empty($_POST)) {
             if (isset($tokenGet) && $tokenGet === $tokenSession) {
                 if (!empty($contenu)) {
-                    $res = $this->backManager->updatePresentation([
+                    $this->backManager->updatePresentation([
                     
                         'contenu' => $contenu,
 
@@ -316,7 +316,7 @@ class BackController
         if (!empty($_POST)) {
             if (isset($tokenGet) && $tokenGet === $tokenSession) {
                 if (!empty($contenu)) {
-                    $res = $this->backManager->updateProjetSoin([
+                    $this->backManager->updateProjetSoin([
                     
                         'contenu' => $contenu,
 
@@ -365,7 +365,7 @@ class BackController
         if (!empty($_POST)) {
             if (isset($tokenGet) && $tokenGet === $tokenSession) {
                 if (!empty($contenu)) {
-                    $res = $this->backManager->updatePartenaires([
+                    $this->backManager->updatePartenaires([
                     
                         'contenu' => $contenu,
 
@@ -447,7 +447,7 @@ class BackController
                         }
                     }
                 } elseif (!empty($nom) && !empty($titre) && !empty($description)) {
-                    $resultat = $this->backManager->createActivite([
+                    $this->backManager->createActivite([
                                 
                         'activite' => $nom,
                         'titre' => $titre,
@@ -498,7 +498,7 @@ class BackController
         if (!empty($_POST)) {
             if (isset($tokenGet) && $tokenGet === $tokenSession) {
                 if (!empty($nom) && !empty($activite)) {
-                    $res = $this->backManager->createProfessionnel([
+                    $this->backManager->createProfessionnel([
                         
                             'nom' => $nom,
                             'id_activites' => $activite,
@@ -530,7 +530,7 @@ class BackController
         
         if (!empty($_POST)) {
             if (isset($tokenGet) && $tokenGet === $tokenSession and !empty($activiteId)) {
-                $result = $this->backManager->deleteActivite($activiteId);
+                $this->backManager->deleteActivite($activiteId);
                 header("Location: index?action=activitesManager");
                 exit();
             }
@@ -549,7 +549,7 @@ class BackController
 
         if (!empty($_POST)) {
             if (isset($tokenGet) && $tokenGet === $tokenSession and !empty($proId)) {
-                $res = $this->backManager->deleteProfessionnel($proId);
+                $this->backManager->deleteProfessionnel($proId);
                 header("Location: index?action=professionnelsManager");
                 exit();
             }
@@ -568,7 +568,7 @@ class BackController
         
         if (!empty($_POST)) {
             if (isset($tokenGet) && $tokenGet === $tokenSession and !empty($msgId)) {
-                $res =  $this->backManager->deleteMessage($msgId);
+                $this->backManager->deleteMessage($msgId);
                 header("Location: index?action=messagesManager");
                 exit();
             }
@@ -587,13 +587,8 @@ class BackController
         
         if (!empty($_POST)) {
             if (isset($tokenGet) && $tokenGet === $tokenSession and !empty($userId)) {
-                $res = $this->backManager->deleteUser($userId);
-                if ($res) {
-                    $this->deconnecter();
-                } else {
-                    header("Location: index?action=profil");
-                    exit();
-                }
+                $this->backManager->deleteUser($userId);
+                $this->deconnecter();
             } else {
                 header("Location: index?action=profil");
                 exit();
@@ -718,7 +713,7 @@ class BackController
             } elseif (empty($activite) || empty($nom)) {
                 $error = true;
             } else {
-                $res = $this->backManager->updateProfessionnel($id, [
+                $this->backManager->updateProfessionnel($id, [
                         
                     'nom' => $nom,
                     'id_activites' => $activite,
