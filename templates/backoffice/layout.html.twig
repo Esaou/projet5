@@ -64,7 +64,7 @@
                 
                     <div class="col-md-9">
 
-                        <a href="?action=indexAdmin" class="dashTitle"><h2><i class="fas fa-cog" style="margin-right:15px;"></i>Dashboard <small>Gérez votre site !</a></small></h2>
+                        <a href="?action=indexAdmin" class="dashTitle"><h2><i class="fas fa-cog boulon" style="margin-right:15px;"></i>Dashboard <small>Gérez votre site !</a></small></h2>
 
                     </div>
                     <div class="col-md-2">
@@ -94,8 +94,8 @@
                 <div class="row">
                     <div class="col-md-3">
                         <div class="list-group">
-                            <a href="?action=indexAdmin" class="list-group-item list-group-item-action active" style="background-color:rgb(100,100,100);">
-                                <i class="fas fa-cog"></i> Dashboard
+                            <a href="?action=indexAdmin" class="list-group-item list-group-item-action active" style="background-color:rgb(100,100,100);border:none;">
+                                <i class="fas fa-cog boulonDeux" style="margin-right:5px;"></i> Dashboard
                             </a>
                             <a href="?action=activitesManager" class="list-group-item list-group-item-action"><i class="fas fa-stethoscope" style="margin-right:10px;"></i>Activités <span class="badge badge-secondary">{% for count in countA %}{{ count.nb|raw }}{% endfor %}</span></a>
                             <a href="?action=professionnelsManager" class="list-group-item list-group-item-action"><i class="fas fa-user-alt" style="margin-right:10px;"></i>Professionnels <span class="badge badge-secondary">{% for count in countP %}{{ count.nb|raw }}{% endfor %}</span></a>

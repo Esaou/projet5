@@ -9,6 +9,18 @@
     }
 }
 
+@keyframes boulon {
+    0%{
+        transform: rotate(360deg);
+    }  
+}
+
+@keyframes boulonDeux {
+    0%{
+        transform: rotate(-360deg);
+    }  
+}
+
 .padBottom{
 
     padding-bottom: 60px!important;
@@ -185,6 +197,12 @@
 
 }
 
+.bordure{
+
+    border-left: 1px solid rgba(100, 100, 100,0.3);
+
+}
+
 .btnCandidature{
 
     margin-right: 10px;
@@ -197,6 +215,7 @@
     font-size: 13px;
     border-top: 2px solid white;
     color: rgb(100, 100, 100);
+    border-right: 1px solid rgba(100, 100, 100,0.3);
 
 }
 
@@ -204,7 +223,7 @@
 
     border-top:2px solid rgb(100, 203, 74);
     text-decoration: none;
-    color: rgb(100, 203, 74);
+    color:rgb(100, 203, 74);
     cursor: pointer;
 
 }
@@ -228,6 +247,7 @@
 
     display: inline-block;
     border-top: 2px solid white;
+    border-right: 1px solid rgba(100, 100, 100,0.3);
     color: rgb(108, 117, 125);
     transition: color 150ms linear,border-top 150ms linear;
 
@@ -235,7 +255,7 @@
 
 .dropDown:hover{
 
-    border-top:2px solid rgb(100, 203, 74);
+    border-top:2px solid rgb(94, 212, 65);
     color:rgb(100, 203, 74);
 
 }
@@ -272,8 +292,8 @@
 
 .headerNav{
 
-    color:rgb(100, 203, 74);
-    font-size: 17px;
+    color:rgb(105, 208, 79);
+    font-size: 18px;
     transition: color 0.2s linear;
 
 }
@@ -483,7 +503,7 @@
 .colorLink{
 
     text-decoration: underline;
-    color: rgb(100, 203, 74);
+    color: rgb(105, 208, 79);
     font-family: RobotoMedium;
     transition: text-decoration 0.2s linear, color 0.2s linear;
 
@@ -1011,6 +1031,23 @@ header{
 
 }
 
+.boulon{
+
+    animation: boulon 1s linear;
+    transition: transform 0.3s linear;
+
+}
+
+.boulonDeux{
+    animation: boulonDeux 1s linear;
+}
+
+.boulon:hover{
+
+    transform: rotate(180deg);
+
+}
+
 .carteAdmin{
 
     background-color: rgba(255, 255, 255,1)!important;
@@ -1262,6 +1299,12 @@ header{
 
         border: none;
     
+    }
+
+    .bordure{
+
+        border:none;
+        
     }
     
     .btnMenu:hover,.dropDown:hover{

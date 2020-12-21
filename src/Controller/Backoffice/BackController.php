@@ -215,7 +215,7 @@ class BackController
         $error = false;
         $result = false;
 
-        if (!empty($_POST && !empty($contenu))) {
+        if (!empty($_POST)) {
             if (isset($tokenGet) && $tokenGet === $tokenSession) {
                 if (!empty($contenu)) {
                     $this->backManager->updateAccueil([
