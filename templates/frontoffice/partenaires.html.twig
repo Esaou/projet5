@@ -13,7 +13,7 @@
             <h5 class="colorTitle">Partenaires</h5> 
             <hr/>
             {% for partenaire in partenaires %}
-                <p>{{ partenaire.contenu|raw }}</p>
+                {{ partenaire.contenu|raw }}
             {% endfor %}
 
         </div>

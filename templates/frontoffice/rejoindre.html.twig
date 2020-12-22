@@ -8,21 +8,19 @@
 
     <div class="container maxWidth">
         <div style="margin-bottom:50px;">
-            <h5 class="colorTitle" style="font-weight:normal;">Nous rejoindre</h5>
+            <h5 class="colorTitle">Nous rejoindre</h5>
             <hr/>
             <p>Le centre de santé l'Étoile regroupe plusieurs métiers nécessaires à son fonctionnement :</p>
-            <p>
             <ul>
                 <li>des métiers de la santé : personnels soignants médicaux et paramédicaux ;</li>
                 <li>des métiers de l’accueil en établissement de santé : secrétaires médicales ;</li>
             </ul>
-            </p>
             <p>N’hésitez pas à nous transmettre votre candidature spontanée à l’attention du directeur du centre de santé l'Étoile :</p>
             <p>4 avenue du 8 mai 1945, 38400 Saint Martin d'Hères ou via le formulaire ci-dessous</p>
         </div>
         <div>
             
-            <h5 class="colorTitle" style="font-weight:normal;" id="test">Formulaire de contact</h5>
+            <h5 class="colorTitle" id="test">Formulaire de contact</h5>
             <hr/>
             <form class="bg-white text-secondary" method="post" action="#ancre" id="ancre" style="margin-bottom:25px;">
                 
@@ -31,7 +29,7 @@
                 {{ forms.inputEmail('email','email')|raw }}
                 {{ forms.input('objet','objet')|raw }}
                 {{ forms.textArea('message')|raw }}
-                <button class="btn btn-success btn-rounded" type="submit" id="submit" style="margin-top:10px">Envoyer mon message</button>
+                <button class="btn btn-success message" type="submit" id="submit" style="margin-top:10px">Envoyer mon message</button>
                 <div class="alert alert-danger text-center" id="error" style="margin-top:15px;display:none;"></div>
                 {% if validation == true %}
                     <div class="alert alert-danger text-center" style="margin-top:15px">Votre nom ne peut contenir plus de 40 caractères !</div>

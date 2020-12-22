@@ -81,7 +81,7 @@ class FrontController
         $nameError = false;
         $tokenError = false;
         $emailError = false;
-        
+
         if (!empty($_POST)) {
             if (isset($tokenGet) && $tokenGet === $tokenSession) {
                 if (!preg_match("/^(?:[^\d\W][\-\s]{0,1}){2,40}$/i", $nom)) {

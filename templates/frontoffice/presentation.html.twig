@@ -13,7 +13,7 @@
             <h5 class="colorTitle">Présentation</h5> 
             <hr/>
             {% for pres in presentation %}
-                <p>{{ pres.contenu|raw }}</p>
+                {{ pres.contenu|raw }}
             {% endfor %}
 
         </div>

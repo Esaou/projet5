@@ -26,8 +26,6 @@ class Router
         // dépendance
         $this->database = new Database('etoile', 'root', '', 'localhost');
         $this->view = new View();
-
-        // En attendent de mettre en place la class App\Service\Http\Request
         $this->request = new Request();
     }
 

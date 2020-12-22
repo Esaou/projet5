@@ -13,7 +13,7 @@
             <h5 class="colorTitle">Projet de soin</h5> 
             <hr/>
             {% for projetSoin in projetSoins %}
-                <p>{{ projetSoin.contenu|raw }}</p>
+                {{ projetSoin.contenu|raw }}
             {% endfor %}
 
         </div>
