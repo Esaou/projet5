@@ -1072,6 +1072,36 @@ header{
     background-color: 	rgb(92, 184, 92)!important;
 }
 
+.connecter{
+
+    background-color: 	rgb(92, 184, 92)!important;
+    margin: 0px!important;
+    margin-top: 15px!important;
+    box-shadow: none;
+    text-transform: none;
+    font-size: 15px;
+    border-radius: 50px;
+    padding:10px;
+    padding-left: 15px;
+    padding-right:15px;
+    transition: background-color 0.5s linear;
+
+}
+
+.connecter:hover{
+    box-shadow: none;
+    background-color: 	rgb(77, 169, 77)!important;
+}
+
+.connecter:focus{
+    box-shadow: none;
+}
+
+.connecter:active{
+    box-shadow: none!important;
+    background-color: 	rgb(92, 184, 92)!important;
+}
+
 .boulon{
 
     animation: boulon 1s linear;
