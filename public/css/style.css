@@ -153,8 +153,8 @@
     justify-content: space-between;
     align-items: center;
     min-width: 100%;
-    box-shadow: 0px 0px 8px rgba(180, 180, 180,0.4);
-    border-bottom: 1px solid rgba(180, 180, 180,0.4);
+    box-shadow: 0px 0px 8px rgba(180, 180, 180,0.3);
+    border-bottom: 1px solid rgba(180, 180, 180,0.5);
 
 }
 
@@ -166,12 +166,14 @@
 
 .listeBtn{
 
+    border-right: 1px solid rgb(230, 230, 230);
     display: flex;
     flex-direction: row;
     list-style-type: none;
     font-family: sans-serif;
+    background-color: rgb(250, 250, 250);
 
-} 
+}
 
 .checkBox{
 
@@ -185,13 +187,13 @@
 
 }
 
-.check:checked ~ .dropdown-child{
+.dropDown:hover > .dropdown-child{
     
     display: block;
 
 }
 
-.checking:checked ~ .dropdown-child-activite{
+.dropDown:hover > .dropdown-child-activite{
     
     display: block;
 
@@ -216,12 +218,10 @@
     padding-top: 18px;
     padding-bottom: 18px;
     font-size: 12.2px;
-    margin-left: 10px;
-    margin-right: 10px;
-    border-top: 2px solid white;
+    border-left: 1px solid rgb(220, 220, 220);
+    border-top: 2px solid  rgb(245, 245, 245);
     color: rgb(100, 100, 100);
-    border-right: 1px solid rgba(100, 100, 100,0.3);
-    border-left: 1px solid rgba(100, 100, 100,0.3);
+    transition: background-color 500ms ease,color 500ms ease,border-top 500ms ease;
 
 }
 
@@ -230,6 +230,7 @@
     border-top:2px solid rgb(100, 203, 74);
     text-decoration: none;
     color:rgb(100, 203, 74);
+    background-color: rgb(252, 252, 252);;
     cursor: pointer;
 
 }
@@ -255,18 +256,17 @@
 .dropDown{
 
     display: inline-block;
-    border-top: 2px solid white;
-    margin-left: 10px;
-    margin-right: 10px;
-    border-right: 1px solid rgba(100, 100, 100,0.3);
-    border-left: 1px solid rgba(100, 100, 100,0.3);
+    border-top: 2px solid  rgb(245, 245, 245);
     color: rgb(108, 117, 125);
-    transition: color 150ms linear,border-top 150ms linear;
+    transition: color 500ms ease,border-top 500ms ease;
+    transition: background-color 500ms ease;
+    border-left: 1px solid rgb(220, 220, 220);
 
 }
 
 .dropDown:hover{
 
+    background-color: rgb(252, 252, 252);
     border-top:2px solid rgb(94, 212, 65);
     color:rgb(100, 203, 74);
 
@@ -275,10 +275,11 @@
 .dropdown-child,.dropdown-child-activite{
 
     display: none;
-    background-color: white;
+    background-color: rgba(255, 255, 255,1);
     border: 1px solid rgb(197, 197, 197);
     min-width: 200px;
     padding: 10px;
+    padding-top:5px;
     z-index:10;
     font-family: sans-serif;
     position: absolute;
@@ -293,6 +294,7 @@
     text-decoration: none;
     display: block;
     transition: color 150ms linear;
+    border-bottom: 1px solid rgb(220, 220, 220);
 
 }
 
@@ -436,13 +438,14 @@
 
 .professionnels{
 
-    background-color: rgb(245, 245, 245);
+    background-color: white;
     padding-bottom: 30px;
 
 }
 .recrutement{
 
     padding-bottom: 50px;
+    background-color: rgb(245, 245, 245);
 
 }
 
@@ -530,7 +533,7 @@
 
 .infoImportante{
 
-    background-color: white;
+    background-color: rgb(245, 245, 245);
     padding-bottom: 50px;
 
 }
@@ -1371,9 +1374,17 @@ header{
         
     }
     
+    .btnMenu, .btnDropdown{
+    
+        padding-left: 0px;
+        padding-right: 0px;
+
+    }
+
     .btnMenu:hover,.dropDown:hover{
     
         border-top:none;
+        background-color: white;
     }
 
     .dropDown .dropdown-child,.dropDown .dropdown-child-activite{
@@ -1385,9 +1396,45 @@ header{
     
     }
 
+    .dropdown-child,.dropdown-child-activite{
+
+        padding-top:0px;
+    
+    }
+
     .dropdown-child a,.dropdown-child-activite a{
 
         border-bottom: 1px solid rgb(180, 180, 180);
+    
+    }
+
+    .dropdown-child,.dropdown-child-activite{
+
+        min-width: none;
+    
+    }
+
+    .dropDown:hover > .dropdown-child{
+    
+        display: none;
+    
+    }
+
+    .dropDown:hover > .dropdown-child-activite{
+    
+        display: none;
+    
+    }
+
+    .check:checked ~ .dropdown-child{
+    
+        display: block;
+    
+    }
+
+    .checking:checked ~ .dropdown-child-activite{
+    
+        display: block;
     
     }
 
@@ -1396,6 +1443,8 @@ header{
         display: none;
         list-style-type: none;
         font-family: sans-serif;
+        background-color: white;
+        border: none;
     
     }
     
