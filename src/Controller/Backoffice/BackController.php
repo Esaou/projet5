@@ -489,6 +489,7 @@ class BackController
         $tokenGet = $this->request->getPost()->get('token');
         
         $nom = $this->request->getPost()->get('nom');
+        $titre = $this->request->getPost()->getWithoutHtml('titre');
         $activite = $this->request->getPost()->get('activite');
         
         $error = false;
@@ -516,10 +517,11 @@ class BackController
                         $champs = true;
                     } else {
                         $res = move_uploaded_file($_FILES['photo']['tmp_name'], $path);
-                        if ($res and !empty($nom) && !empty($activite)) {
+                        if ($res and !empty($nom) && !empty($activite) && !empty($titre)) {
                             $resultat = $this->backManager->createProfessionnel([
                                 
                                 'nom' => $nom,
+                                'titre' => $titre,
                                 'id_activites' => $activite,
                                 'photo' => $nomPhoto . "." . $extensionUpload
 
@@ -529,10 +531,11 @@ class BackController
                             $photoError = true;
                         }
                     }
-                } elseif (!empty($nom) && !empty($activite)) {
+                } elseif (!empty($nom) && !empty($activite) && !empty($titre)) {
                     $this->backManager->createProfessionnel([
                         
                             'nom' => $nom,
+                            'titre' => $titre,
                             'id_activites' => $activite,
 
                         ]);
@@ -721,6 +724,7 @@ class BackController
         $tokenGet = $this->request->getPost()->get('token');
 
         $nom = $this->request->getPost()->get('nom');
+        $titre = $this->request->getPost()->getWithoutHtml('titre');
         $activite = $this->request->getPost()->get('activite');
         $id = $this->request->getGet()->get('id');
         $idActivite = $this->request->getGet()->get('id_activite');
@@ -757,10 +761,11 @@ class BackController
                         $photoExtension = true;
                     } else {
                         $res = move_uploaded_file($_FILES['photo']['tmp_name'], $path);
-                        if ($res and !empty($nom) && !empty($activite)) {
+                        if ($res and !empty($nom) && !empty($activite) && !empty($titre)) {
                             $resultat = $this->backManager->updateProfessionnel($id, [
                             
                                 'nom' => $nom,
+                                'titre' => $titre,
                                 'id_activites' => $activite,
                                 'photo' => $nomPhoto . "." . $extensionUpload
 
@@ -770,10 +775,11 @@ class BackController
                             $photoError = true;
                         }
                     }
-                } elseif (!empty($nom) && !empty($activite)) {
+                } elseif (!empty($nom) && !empty($activite) && !empty($titre)) {
                     $resultat = $this->backManager->updateProfessionnel($id, [
                                 
                         'nom' => $nom,
+                        'titre' => $titre,
                         'id_activites' => $activite
     
                     ]);

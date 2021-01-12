@@ -11,6 +11,7 @@
 
             <input type="hidden" name="token" id="token" value="{{ token|raw }}"/>
             {{ form.inputEditor('nom', 'nomPro')|raw }}
+            {{ form.inputTitrePro('titre','titre')|raw }}
             <div class="form-group" style="margin-bottom:25px;">
                 <label style="font-size:16px;font-family:RobotoMedium;" class="colorTitle">Activité</label>
                 <select name="activite" id="activite" class="form-control" >

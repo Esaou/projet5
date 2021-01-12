@@ -75,6 +75,13 @@ class BootstrapForm
         );
     }
 
+    public function inputTitrePro(string $name, string $id):string
+    {
+        return $this->surround(
+            '<label for="'.$id.'" style="font-size:16px;font-family:RobotoMedium;" class="colorTitle">' . ucfirst($name) . ' <span style="font-family:sans-serif;font-size:15px;" class="colorTitle">(ex: Médecin généraliste conventionné secteur 1)</span></label><input id="'.$id.'" style="font-family:sans-serif;font-size:15px;margin-bottom:30px;" type="text" name="' . $name . '" value="' . $this->getValue($name) . '" class="form-control">'
+        );
+    }
+
     public function inputEditor(string $name, string $id):string
     {
         return $this->surround(
