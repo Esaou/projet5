@@ -110,6 +110,13 @@ class BootstrapForm
         );
     }
 
+    public function inputFilePro(string $name):string
+    {
+        return $this->surround(
+            '<label style="font-size:16px;font-family:RobotoMedium;margin-bottom:15px;" class="colorTitle">' . ucfirst($name) . '</label><input style="font-family:sans-serif;font-size:15px;margin-bottom:20px;display:block;" type="file" name="' . $name . '" value="' . $this->getValue($name) . '">'
+        );
+    }
+
     public function getValue($index)
     {
         if (is_object($this->data)) {

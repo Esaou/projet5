@@ -494,10 +494,42 @@ class BackController
         $error = false;
         $result = false;
         $tokenError = false;
+        $photoError =false;
+        $photoExtension = false;
+        $photoTaille = false;
+        $champs = false;
 
         if (!empty($_POST)) {
             if (isset($tokenGet) && $tokenGet === $tokenSession) {
-                if (!empty($nom) && !empty($activite)) {
+                if (isset($_FILES['photo']) && !empty($_FILES['photo']['name'])) {
+                    $tailleMax = 2097152;
+                    $extensionsValides = ['jpg','jpeg','gif','png'];
+                    $extensionUpload = mb_strtolower(mb_substr(mb_strrchr($_FILES['photo']['name'], '.'), 1));
+                    $nomPhoto = str_replace(" ", "", $nom);
+                    $path = "images/" . $nomPhoto . "." . $extensionUpload ;
+
+                    if (!($_FILES['photo']['size'] <= $tailleMax)) {
+                        $photoTaille = true;
+                    } elseif (!in_array($extensionUpload, $extensionsValides, true)) {
+                        $photoExtension = true;
+                    } elseif (empty($nom) || empty($activite)) {
+                        $champs = true;
+                    } else {
+                        $res = move_uploaded_file($_FILES['photo']['tmp_name'], $path);
+                        if ($res and !empty($nom) && !empty($activite)) {
+                            $resultat = $this->backManager->createProfessionnel([
+                                
+                                'nom' => $nom,
+                                'id_activites' => $activite,
+                                'photo' => $nomPhoto . "." . $extensionUpload
+
+                            ]);
+                            $result = true;
+                        } else {
+                            $photoError = true;
+                        }
+                    }
+                } elseif (!empty($nom) && !empty($activite)) {
                     $this->backManager->createProfessionnel([
                         
                             'nom' => $nom,
@@ -517,7 +549,7 @@ class BackController
         
         $form = new \App\Service\BootstrapForm($_POST);
 
-        $this->view->renderAdmin(['template' => 'addProfessionnel', 'data' => ['token' => $token, 'tokenError' => $tokenError,'countM' => $countMessage,'countA' => $countActivites,'countP' => $countProfessionnel,'activites' => $dataActivite,'result' => $result, 'form' => $form, 'userId' => $userId,'error' => $error]]);
+        $this->view->renderAdmin(['template' => 'addProfessionnel', 'data' => ['champs' => $champs,'photoExtension' => $photoExtension,'photoTaille' => $photoTaille,'photoError' => $photoError,'token' => $token, 'tokenError' => $tokenError,'countM' => $countMessage,'countA' => $countActivites,'countP' => $countProfessionnel,'activites' => $dataActivite,'result' => $result, 'form' => $form, 'userId' => $userId,'error' => $error]]);
     }
 
     public function deleteActivite():void
@@ -706,20 +738,51 @@ class BackController
         $error = false;
         $result = false;
         $tokenError = false;
+        $photoError =false;
+        $photoExtension = false;
+        $photoTaille = false;
 
         if (!empty($_POST)) {
-            if (!isset($tokenGet) && $tokenGet !== $tokenSession) {
-                $tokenError =true;
-            } elseif (empty($activite) || empty($nom)) {
-                $error = true;
-            } else {
-                $this->backManager->updateProfessionnel($id, [
-                        
-                    'nom' => $nom,
-                    'id_activites' => $activite,
+            if (isset($tokenGet) && $tokenGet === $tokenSession) {
+                if (isset($_FILES['photo']) && !empty($_FILES['photo']['name'])) {
+                    $tailleMax = 2097152;
+                    $extensionsValides = ['jpg','jpeg','gif','png'];
+                    $extensionUpload = mb_strtolower(mb_substr(mb_strrchr($_FILES['photo']['name'], '.'), 1));
+                    $nomPhoto = str_replace(" ", "", $nom);
+                    $path = "images/" . $nomPhoto . "." . $extensionUpload ;
 
-                ]);
-                $result = true;
+                    if (!($_FILES['photo']['size'] <= $tailleMax)) {
+                        $photoTaille = true;
+                    } elseif (!in_array($extensionUpload, $extensionsValides, true)) {
+                        $photoExtension = true;
+                    } else {
+                        $res = move_uploaded_file($_FILES['photo']['tmp_name'], $path);
+                        if ($res and !empty($nom) && !empty($activite)) {
+                            $resultat = $this->backManager->updateProfessionnel($id, [
+                            
+                                'nom' => $nom,
+                                'id_activites' => $activite,
+                                'photo' => $nomPhoto . "." . $extensionUpload
+
+                            ]);
+                            $result = true;
+                        } else {
+                            $photoError = true;
+                        }
+                    }
+                } elseif (!empty($nom) && !empty($activite)) {
+                    $resultat = $this->backManager->updateProfessionnel($id, [
+                                
+                        'nom' => $nom,
+                        'id_activites' => $activite
+    
+                    ]);
+                    $result = true;
+                } else {
+                    $error = true;
+                }
+            } else {
+                $tokenError =true;
             }
         }
 
@@ -728,7 +791,7 @@ class BackController
         $post = $table->findPro($id);
         $form = new \App\Service\BootstrapForm($post);
 
-        $this->view->renderAdmin(['template' => 'editProfessionnel', 'data' => ['idProfessionnels' => $idProfessionnel,'token' => $token, 'tokenError' => $tokenError,'countM' => $countMessage,'countA' => $countActivites,'countP' => $countProfessionnel,'result' => $result,'activites' => $dataActivite, 'userId' => $userId,'error' => $error,'form' => $form]]);
+        $this->view->renderAdmin(['template' => 'editProfessionnel', 'data' => ['photoExtension' => $photoExtension,'photoTaille' => $photoTaille,'photoError' => $photoError,'idProfessionnels' => $idProfessionnel,'token' => $token, 'tokenError' => $tokenError,'countM' => $countMessage,'countA' => $countActivites,'countP' => $countProfessionnel,'result' => $result,'activites' => $dataActivite, 'userId' => $userId,'error' => $error,'form' => $form]]);
     }
 
     public function profil(): void

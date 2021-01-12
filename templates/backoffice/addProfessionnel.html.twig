@@ -7,7 +7,7 @@
     <div class="card-body" style="padding-top:0px!important;padding-bottom:0px!important;">
     <h4 class="colorTitle">Ajouter un professionnel</h4>
     <hr/>
-        <form method="post">
+        <form method="post" enctype="multipart/form-data">
 
             <input type="hidden" name="token" id="token" value="{{ token|raw }}"/>
             {{ form.inputEditor('nom', 'nomPro')|raw }}
@@ -20,6 +20,7 @@
                 {% endfor %}
                 </select>
             </div>
+            {{ form.inputFilePro('photo')|raw }}
             <span id="error" class="colorTitle spanPass"></span>
 
             {% if result %}
@@ -30,6 +31,18 @@
             {% endif %}
             {% if tokenError == true %}
                 <div class="alert alert-danger text-center" style="margin-top:15px">Token de sécurité périmé !</div>
+            {% endif %}
+            {% if photoTaille == true %}
+                <div class="alert alert-danger text-center" style="margin-top:15px">La taille de la photo ne peut dépasser 2Mo !</div>
+            {% endif %}
+            {% if photoError == true %}
+                <div class="alert alert-danger text-center" style="margin-top:15px">Erreur lors de l'importation de votre photo !</div>
+            {% endif %}
+            {% if photoExtension == true %}
+                <div class="alert alert-danger text-center" style="margin-top:15px">La photo ne peut être qu'au format jpg, jpeg, gif ou png !</div>
+            {% endif %}
+            {% if champs == true %}
+                <div class="alert alert-danger text-center" style="margin-top:15px">Renseignez tous les champs !</div>
             {% endif %}
             
             <button class="btn btn-primary" id="submitPro" style="margin-top:10px;">Ajouter le professionnel</button>

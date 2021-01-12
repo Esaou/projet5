@@ -53,7 +53,7 @@ class FrontManager
     {
         $request = new Request();
         $getId = $request->getGet()->get('id');
-        return $this->database->getDb()->query("SELECT * FROM professionnels WHERE id_activites = $getId", 'App\Models\FrontManager');
+        return $this->database->getDb()->query("SELECT * FROM activites LEFT JOIN professionnels ON activites.id = professionnels.id_activites WHERE id_activites = $getId", 'App\Models\FrontManager');
     }
 
     // FORM

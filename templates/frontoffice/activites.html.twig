@@ -23,11 +23,21 @@
 
                 <h5 class="colorTitle">Liste des {{ showActivites.titre|raw }} :</h5> 
                 <hr/>
-                <ul style="padding-left:20px;">
                 {% for professionnel in professionnels %}
-                <li style="margin-bottom:5px;">{{ professionnel.nom|raw }}</li>
+                <article class="psy">
+                {% if professionnel.photo == null %}
+                    <img src="images/id.jpg" alt="photoID" class="photoId">
+                {% else %}
+                    <img src="images/{{ professionnel.photo }}" alt="photoID" class="photoId">
+                {% endif %}
+                    <div class="infoPro">
+                        <span class="nomPro">{{ professionnel.nom|raw }}</span>
+                        <span class="statutPro">{{ professionnel.activite|raw }}</span>
+                        <span class="emplacement">Rez-de-chaussée</span>
+                        <span class="surRdv">Sur rendez-vous</span>
+                    </div>
+                </article>
                 {% endfor %}
-                </ul>
 
             </div>
 
