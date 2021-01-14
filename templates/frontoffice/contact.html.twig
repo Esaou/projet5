@@ -4,35 +4,54 @@
 
 {% block content %}
 
-<section class="container presentation">
+<section class="presentation" style="padding-left:25px;padding-right:25px;background-color:rgb(245,245,245);border-right:1px solid rgb(220,220,220);border-left:1px solid rgb(220,220,220);">
 
-    <div class="nousContacter maxWidth" style="margin-bottom:30px;">
+    <div class="nousContacter" style="text-align:justify;margin-bottom:30px;">
 
         <div class="container">
             
             <h5 class="colorTitle">Nous contacter</h5> 
             <hr/>
-            <p>Vous pouvez nous contacter au 06.87.95.84.32 du lundi au vendredi de 8h à 18h. Sans réponse de notre part ? Laissez-nous un message nous vous rapelleront dès que possible !</p>
-            <div id="dateHeure" class="text-center rounded colorTitle" style="padding:15px;background-color:rgba(100,100,100,0.1);">
-                <span id="ouverture"></span>
-                <span id="date"></span>
-                <span id="heure"></span>
+            <p>Vous pouvez nous contacter au 04.76.62.27.95 du lundi au vendredi de 8h à 18h. Sans réponse de notre part ? Laissez-nous un message nous vous rapelleront dès que possible !</p>
+            <div id="dateHeure" class="marquee-rtl text-center colorTitle" style="padding:15px;background-color:white;">
+                <div>
+                    <span id="ouverture"></span>
+                    <span id="date"></span>
+                    <span id="heure"></span>
+                </div>
             </div>
         </div>
 
     </div>
-    <div class="nousTrouver maxWidth">
+    <div class="nousTrouver">
 
-        <div class="container">
+        <div class="container" style="text-align:justify;">
             <h5 class="colorTitle">Nous localiser</h5> 
             <hr/>
             <p><span style="font-family:RobotoMedium;">Adresse</span> : 4 avenue du 8 mai 1945, 38400 Saint Martin d'Hères - Auvergne-Rhône-Alpes</p>
-            <p>Situé face à la Poste Principale - Entrée côté place Étienne Grappe - En face du terminus Tram D</p>
+            <p>Situé face à la Poste Principale - <span style="font-family:RobotoMedium;">Entrée côté place Étienne Grappe</span> - En face du terminus Tram D</p>
             <p>Parking du TRAM D avec place PMR / Pistes cyclables / Barres à vélo</p>
             <hr/>
-            <p>Arrêt de tram et de bus : <span id="arret" style="font-family:RobotoMedium;"></span></p>
-            <p>Trafic routier : <span id="traficR" style="font-family:RobotoMedium;"></span> <a href="https://www.mobilites-m.fr/trafic.html" target="_blank"><i class="fas fa-question-circle" style="color:rgb(140,140,140);"></i></a></p>
-            <p>Trafic transport en commun : <span id="traficT" style="font-family:RobotoMedium;"></span> <a target="_blank" href="https://www.mobilites-m.fr/index.html?page=Evts"><i class="fas fa-question-circle" style="color:rgb(140,140,140);"></i></a></p>
+            <div class="blocContact">
+                <div class="sousBlocContact">
+                    <p>Arrêt de tram et de bus : <span id="arret" style="font-family:RobotoMedium;"></span></p>
+                    <p>Trafic routier : <span id="traficR" style="font-family:RobotoMedium;"></span> <a href="https://www.mobilites-m.fr/trafic.html" target="_blank"><i class="fas fa-question-circle" style="color:rgb(140,140,140);"></i></a></p>
+                    <p>Trafic transport en commun : <span id="traficT" style="font-family:RobotoMedium;"></span> <a target="_blank" href="https://www.mobilites-m.fr/index.html?page=Evts"><i class="fas fa-question-circle" style="color:rgb(140,140,140);"></i></a></p>
+                </div>
+                <div id="carouselExampleSlidesOnly" class="carousel slide modifCarousel" data-ride="carousel">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                        <img class="d-block w-100" src="images/maison.jpg" alt="First slide" style="width:300px;height:200px;">
+                        </div>
+                        <div class="carousel-item">
+                        <img class="d-block w-100" src="images/facadePoste.jpg" style="width:300px;height:200px;" alt="Second slide">
+                        </div>
+                        <div class="carousel-item">
+                        <img class="d-block w-100" src="images/facadePosteDeux.jpg" style="width:300px;height:200px;" alt="Third slide">
+                        </div>
+                    </div>
+                </div>
+            </div>
             <hr/>
         </div>
         <div class="transports container" style="margin-bottom:25px;">
@@ -46,10 +65,10 @@
 
             <div id="carte">
 
-            <div class="containerIti">
-                <a class="btn-sm btn-primary iti" style="color:white;" target="_blank" href="https://www.google.com/maps/dir//google++espace+sant%C3%A9+l'%C3%A9toile/@45.1718479,5.7521593,15z/data=!4m8!4m7!1m0!1m5!1m1!1s0x478af52238f415ef:0x5c35a791b9943c87!2m2!1d5.7570156!2d45.1717431">Itinéraire</a>
-                <p class="btn-sm btn-primary iti" style="cursor:pointer;" id="boutonRecentrer">Recentrer</p>
-            </div>
+                <div class="containerIti">
+                    <a class="btn-sm btn-success text-center" style="margin-bottom:10px;width:100px;color:white;font-family:RobotoMedium;padding:12px;background-color:rgb(105, 208, 79)!important;box-shadow:0px 0px 4px rgba(100,100,100,0.3)!important;" target="_blank" href="https://www.google.com/maps/dir//google++espace+sant%C3%A9+l'%C3%A9toile/@45.1718479,5.7521593,15z/data=!4m8!4m7!1m0!1m5!1m1!1s0x478af52238f415ef:0x5c35a791b9943c87!2m2!1d5.7570156!2d45.1717431">Itinéraire</a>
+                    <p class="btn-sm btn-success text-center" style="width:100px;cursor:pointer;font-family:RobotoMedium;padding:12px;background-color:rgb(105, 208, 79)!important;box-shadow:0px 0px 4px rgba(100,100,100,0.3)!important;" id="boutonRecentrer">Recentrer</p>
+                </div>
                 
             </div>
             

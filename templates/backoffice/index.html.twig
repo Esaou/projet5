@@ -32,6 +32,8 @@
                         </div>
                 </div>
                 </a>
+                
+                {% if messages %}
                 {% for message in messages %}
                 <a href="?action=showMessage&id={{ message.id|raw }}" class="linkCarte colorTitle" style="display:flex;text-decoration:none;">
                 <div class="card bg-light mb-3 carteAdmin" style="width: 18rem;margin:15px;">
@@ -40,10 +42,22 @@
                         <h6 class="card-title">de {{ message.nom|raw }}</h6>
                         <hr/>
                         <p class="card-text">{{ message.message|raw|slice(0,50) }} ...</p>
-                        {% endfor %}
                         </div>
                 </div>
                 </a>
+                {% endfor %}
+                {% else %}
+                <a href="?action=messagesManager" class="linkCarte colorTitle" style="display:flex;text-decoration:none;">
+                <div class="card bg-light mb-3 carteAdmin" style="width: 18rem;margin:15px;">
+                        <div class="card-header titreCarte">Dernier message</div>
+                        <div class="card-body" style="font-size:16px;display:flex;flex-direction:raw;align-items:center;">
+                                <p class="card-title">Vous n'avez aucun message. <img src="images/triste.png" alt="triste" style="width:25px;"/></p>
+                        </div>
+                        
+                </div>
+                </a>
+                {% endif %}
+                
                 <a href="?action=pagesManager" style="display:flex;text-decoration:none;" class="linkCarte colorTitle">
                 <div class="card bg-light mb-3 carteAdmin" style="width: 18rem;margin:15px;">
                         <div class="card-header titreCarte">Gestion des pages</div>

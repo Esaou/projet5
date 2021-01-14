@@ -1,7 +1,16 @@
 /* Animations */
 
+@keyframes defilement-rtl {
+    0% {
+      transform: translate3d(0,0,0);      /* position initiale à droite */
+    }
+    100% {
+      transform: translate3d(-100%,0,0);  /* position finale à gauche */
+    }
+  }
+
 @keyframes page {
-    0%{
+    0%{ 
         opacity: 0.2;
     }  
     100%{
@@ -19,6 +28,40 @@
     0%{
         transform: rotate(-360deg);
     }  
+}
+
+@keyframes couleur {
+    0%{
+        color: rgb(50, 50, 50);
+    }
+    50%{
+        color: rgb(150, 150, 150);
+    }
+    100%{
+        color: rgb(50, 50, 50);
+    }
+}
+
+.redirection{
+    animation: couleur 5s ease infinite;
+    transition: color 1s ease;
+    color: rgb(75, 75, 75);
+    text-decoration: underline;
+}
+
+.marquee-rtl {
+    box-shadow: 0px 0px 6px rgba(100, 100, 100,0.2);
+    border:1px solid rgb(200, 200, 200);
+    font-family: RobotoMedium;
+    overflow: hidden;                     /* masque tout ce qui dépasse */
+}
+
+.marquee-rtl > :first-child {
+    display: inline-block;                /* modèle de boîte en ligne */
+    padding-right: 2em;                   /* un peu d'espace pour la transition */
+    padding-left: 100%;                   /* placement à droite du conteneur */
+    white-space: nowrap;                  /* pas de passage à la ligne */
+    animation: defilement-rtl 15s infinite linear;
 }
 
 .padBottom{
@@ -164,6 +207,17 @@
 
 }
 
+.menuResponsive{
+
+    display: flex;
+    flex-direction: row;
+
+}
+
+.responsiveMenu{
+    display: flex;
+}
+
 .listeBtn{
 
     border-right: 1px solid rgb(230, 230, 230);
@@ -230,7 +284,7 @@
     border-top:2px solid rgb(100, 203, 74);
     text-decoration: none;
     color:rgb(100, 203, 74);
-    background-color: rgb(252, 252, 252);;
+    background-color: white;
     cursor: pointer;
 
 }
@@ -266,7 +320,7 @@
 
 .dropDown:hover{
 
-    background-color: rgb(252, 252, 252);
+    background-color: white;
     border-top:2px solid rgb(94, 212, 65);
     color:rgb(100, 203, 74);
 
@@ -335,25 +389,74 @@
 
 .carousel{
     max-height: 450px;
-    width: 100%;
+    min-width: 80%;
     object-fit: cover;
-    border-radius: 7px;
     box-shadow: 0px 0px 15px rgba(50, 50, 50,0.2);
     border:1px solid rgb(180, 180, 180);
 }
+
+.blocContact{
+
+    display:flex;
+    flex-direction:row;
+    justify-content:space-between;
+    align-items:center;
+
+}
+
+.modifCarousel{
+    height: 202px!important;
+    min-width: 300px!important;
+    width: 300px!important;
+    margin-left: 10px;
+    border: 1px solid white;
+    box-shadow: 0px 0px 6px rgba(100, 100, 100,0.8)!important;
+}
+
+.sousBlocContact{
+
+    margin-right: 10px;
+
+}
+
+.blocRejoindre{
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 20px;
+
+}
+
+.blocForm{
+
+    width: 45%;
+    box-shadow: 0px 0px 6px rgba(100, 100, 100,0.2);
+    padding: 15px;
+    border: 1px solid rgb(220, 220, 220);
+
+}
+
+.modifCarouselRejoindre{
+
+    height: 270px!important;
+    width: 100%!important;
+    box-shadow: 0px 0px 6px rgba(100, 100, 100,0.8)!important;
+    border: 1px solid white;
+
+}
+
 
 .overlayCarousel{
     width: 100%;
     max-height: 100%;
     background-color: rgba(50, 50, 50,0.1);
-    border-radius: 5px;
     position: absolute;
     z-index: 100;
     transition:background-color 0.3s linear,box-shadow 0.3s linear;
 }
 
 .carousel-item{
-    border-radius: 8px;
     text-align: center;
     max-height: 448px;
     width: 100%;
@@ -386,20 +489,6 @@
     z-index: 175;
 }
 
-.carousel-control-prev{
-
-    border-top-left-radius: 7px;
-    border-bottom-left-radius: 7px;
-
-}
-
-.carousel-control-next{
-
-    border-top-right-radius: 7px;
-    border-bottom-right-radius: 7px;
-
-}
-
 .descriptif{
 
     background-color: rgba(120, 120, 120,0.9);
@@ -427,8 +516,8 @@
     animation: page 1s;
     padding-top:40px;
     padding-bottom:40px;
-    max-width: 80%;
-    min-width: 80%;
+    max-width: 70%;
+    min-width: 70%;
     min-height: 100%;
     font-family: sans-serif;
     display: flex;
@@ -438,12 +527,14 @@
 
 .professionnels{
 
+    width: 100%;
     background-color: white;
     padding-bottom: 30px;
 
 }
 .recrutement{
 
+    width: 100%;
     padding-bottom: 50px;
     background-color: rgb(245, 245, 245);
 
@@ -469,7 +560,6 @@
 .activitesIndex{
 
     border:1px solid rgb(180, 180, 180);
-    border-radius: 5px!important;
     background-color: white;
     width: 250px;
     height:175px;
@@ -533,6 +623,7 @@
 
 .infoImportante{
 
+    width: 100%;
     background-color: rgb(245, 245, 245);
     padding-bottom: 50px;
 
@@ -630,6 +721,7 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    width: 100%;
 
 }
 
@@ -646,8 +738,8 @@
 #carte{
     height: 350px;
     width: 100%;
-    border: 1px solid rgb(200, 200, 200);
-    border-radius: 7px;
+    border: 1px solid white;
+    box-shadow: 0px 0px 6px rgba(100, 100, 100,0.8);
 }
 
 .containerIti{
@@ -862,19 +954,27 @@ html{
 
 }
 
+.blocCarousel{
+
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    width:45%;
+    justify-content:space-between;
+
+}
+
 .psy{
-    min-height: 350px;
-    padding-left: 25px;
-    padding-right: 25px;
+
     background-color: rgba(245, 245, 245, 1);
+    box-shadow: 0px 0px 4px rgba(100, 100, 100,0.3);
     border: 1px solid rgb(200, 200, 200);
-    border-radius:5px;
-    margin-bottom: 20px;
     display: flex;
     flex-direction: row-reverse;
     align-items: center;
-    justify-content: space-around;
+    justify-content: space-between;
     margin: 20px;
+    width: 450px;
     animation: imageEspace 500ms linear;
     transition: background-color 500ms linear;
 }
@@ -927,11 +1027,10 @@ html{
 }
 
 .photoId{
-    width: 200px;
-    height: 250px;
+    height: 200px;
+    width: 150px;
     box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.2);
     object-fit: cover;
-    border-radius:450px;
     border: 1px solid rgb(250, 250, 250);
     margin: 10px;
 }
@@ -1239,9 +1338,16 @@ header{
 
 }
 
+.itemModif{
+
+    height: 250px!important;
+
+}
+
 /* MEDIA QUERRIES */
 
 @media screen and (max-width: 995px) {
+
 
     .carousel{
         height: 350px;
@@ -1255,20 +1361,33 @@ header{
         height: 348px;
     }
 
+    .itemModif{
+
+        height: 450px;
+
+    }
+
 }
 
 @media screen and (max-width: 834px) {
 
     .carousel{
-        height: 300px;
+        height: 400px;
     }
+
     
     .overlayCarousel{
         height: 100%;
     }
 
     .carousel-item{
-        height: 298px;
+        height: 398px;
+    }
+
+    .itemModif{
+
+        height: 300x!important;
+
     }
     
     .presentation{
@@ -1386,12 +1505,59 @@ header{
 
   }
 
-  @media screen and (max-width: 950px) {
+  @media screen and (max-width: 1050px) {
 
     .navAdmin{
 
         padding-top: 25px;
 
+    }
+
+    .blocContact{
+
+        display:flex;
+        flex-direction:column;
+        justify-content:space-between;
+        align-items: flex-start;
+    
+    }
+
+    .blocRejoindre{
+
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    
+    }
+
+    .blocCarousel{
+        width: 100%;
+    }
+
+    .blocForm{
+
+        width: 100%;
+        margin-bottom: 40px;
+
+    }
+
+    .modifCarouselRejoindre{
+
+        width: 100%!important;
+        margin-bottom: 25px;
+
+    }
+
+    .modifCarousel{
+        margin: 0px;
+        margin-top: 10px;
+    }
+    
+    .sousBlocContact{
+    
+        margin: 0px;
+        margin-bottom: 10px;
+    
     }
 
     .nav{
@@ -1597,6 +1763,7 @@ header{
     }
 
     .psy{
+        width: 90%;
         display: flex;
         flex-direction: column;
         padding-top: 25px;
@@ -1657,13 +1824,14 @@ header{
 
     .containerDefaultLogin{
 
-        padding-top: 60px;
+        padding-top: 80px;
     
     }
 
     .title{
 
-        margin-top: 20px;
+        margin-top: 15px;
+        margin-bottom: 10px;
 
     }
 
@@ -1671,6 +1839,7 @@ header{
 
         padding-top: 20px;
         padding-bottom: 15px;
+        font-size: 18px;
 
     }
 
@@ -1706,6 +1875,9 @@ header{
         top: -45px;
       }
 
+    .headerNav{
+        font-size: 18px;
+    }
 }
 
 

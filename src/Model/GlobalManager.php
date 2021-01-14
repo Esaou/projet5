@@ -25,7 +25,7 @@ class GlobalManager
 
     public function paginationProfessionnels($depart, $episodesParPage)
     {
-        return $this->database->getDb()->query("SELECT * FROM activites LEFT JOIN professionnels ON activites.id = professionnels.id_activites WHERE id_activites IS NOT NULL ORDER BY professionnels.id DESC LIMIT $depart , $episodesParPage", 'App\Models\BackManager');
+        return $this->database->getDb()->query("SELECT * FROM activites LEFT JOIN professionnels ON activites.id = professionnels.id_activites WHERE id_activites IS NOT NULL ORDER BY professionnels.nom LIMIT $depart , $episodesParPage", 'App\Models\BackManager');
     }
 
     public function paginationMessages($depart, $episodesParPage)

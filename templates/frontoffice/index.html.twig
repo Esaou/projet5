@@ -7,14 +7,14 @@
 <section class="professionnels pad padBottom">
     <div class="container">
         <div class="maxWidth container">
-        <h5 class="text-center animated fadeIn slow wow bienvenue"><span style="color:rgb(105, 208, 79);">Bienvenue</span> au Centre de Santé l'Étoile !</h5>
+        <h5 class="text-center animated fadeIn slow wow bienvenue"><span style="color:rgb(105, 208, 79);">Bienvenue</span> au Centre de Santé l'Étoile&nbsp;!</h5>
             <div id="carouselExampleIndicators" class="carousel slide carousel-fade slide animated fadeIn slow wow" data-ride="carousel">
                 <ol class="carousel-indicators">
                     <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active" style="position:relative;top:10px;"></li>
                     <li data-target="#carouselExampleIndicators" data-slide-to="1" style="position:relative;top:10px;"></li>
                     <li data-target="#carouselExampleIndicators" data-slide-to="2" style="position:relative;top:10px;"></li>
                 </ol>
-                <div class="carousel-inner" style="border-radius:5px;font-family:sans-serif;">
+                <div class="carousel-inner" style="font-family:sans-serif;">
                     <div class="carousel-item active">
                         <img class="d-block w-100" src="images/santeTous.jpg" alt="First slide">
                         <div class="carousel-caption d-none d-md-block descriptif">
@@ -76,16 +76,16 @@
             <hr>
             <div class="container containerActivites">
                 {% for activite in activites %}
-                <a style="text-decoration: none;" href="index.php?action=activites&id={{ activite.id }}" class="rounded animated fadeIn slow wow">
-                    <div class="activitesIndex rounded">
+                <a style="text-decoration: none;" href="index.php?action=activites&id={{ activite.id }}" class="animated fadeIn slow wow">
+                    <div class="activitesIndex">
                         {% if activite.photo == null %}
-                            <img src="images/activiteDefault.jpg" alt="photo" style="width:100%;height:100%;object-fit:cover;" class="rounded"/>
+                            <img src="images/activiteDefault.jpg" alt="photo" style="width:100%;height:100%;object-fit:cover;"/>
                         {% else %}
-                            <img src="images/{{ activite.photo }}" alt="photo" style="width:100%;height:100%;object-fit:cover;" class="rounded"/>
+                            <img src="images/{{ activite.photo }}" alt="photo" style="width:100%;height:100%;object-fit:cover;"/>
                         {% endif %}
         
                         <p style="font-family:RobotoMedium;position:absolute;background-color:rgba(255,255,255,0.95);padding:10px;z-index:500;box-shadow: 0px 0px 5px rgba(100, 100, 100,0.3);" class="rounded texteImg colorLinkTwo border border-muted">{{ activite.activite }}</p>
-                        <div class="overlay rounded"></div>
+                        <div class="overlay"></div>
                     </div>
                 </a>
                 {% endfor %}
