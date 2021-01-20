@@ -43,7 +43,7 @@
                                     Prendre rendez-vous
                         </button>
                         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog" role="document">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <h6 class="modal-title" id="exampleModalLabel" style="font-size:17px;"><i class="fas fa-question-circle" style='margin-right:10px;'></i> Prise de rendez-vous</h6>
@@ -70,21 +70,27 @@
                     </div>
                     <input type="checkbox" class="checkBox" id="checkBox">
                     <div class="listeBtn">
+                            <a class="btnMenu accueilResponsive" href="index.php?action=index">ACCUEIL <i class="fas fa-home" style="margin-left:5px;margin-top:2px;"></i></a>
                             <div class="dropDown">      
-                                <label for="check" class="labelDeux" style="margin:0px;"><span class="btnDropdown">LE CENTRE DE SANTÉ<i style="margin-left:10px;" class="fas fa-caret-down"></i></span></label>
+                                <label for="check" class="labelDeux" style="margin:0px;width:100%;"><span class="btnDropdown">LE CENTRE DE SANTÉ<i style="margin-left:10px;" class="fas fa-caret-down"></i></span></label>
                                 <input type="checkbox" class="check" id="check">
                                 <div class="dropdown-child">
                                     <a href="index.php?action=presentation">Présentation</a>
                                     <a href="index.php?action=projetSoin">Projet de soins</a>
-                                    <a href="index.php?action=partenaires">Nos partenaires</a>
+                                    <a href="index.php?action=partenaires" style="border:none;">Nos partenaires</a>
                                 </div>
                             </div>
                             <div class="dropDown">
-                                <label for="checking" class="labelDeux" style="margin:0px;"><span class="btnDropdown">NOS ACTIVITÉS<i style="margin-left:10px;" class="fas fa-caret-down"></i></span></label>
+                                <label for="checking" class="labelDeux" style="margin:0px;width:100%;"><span class="btnDropdown">NOS ACTIVITÉS<i style="margin-left:10px;" class="fas fa-caret-down"></i></span></label>
                                 <input type="checkbox" class="checking" id="checking">
                                 <div class="dropdown-child-activite">
                                 {% for activite in activites %}
                                     <a href="index.php?action=activites&id={{ activite.id }}">{{ activite.activite }}</a>
+                                {% endfor %}
+                                {% for lastActivit in lastActivite %}
+         
+                                    <a style="border:none;" href="index.php?action=activites&id={{ lastActivit.id }}">{{ lastActivit.activite }}</a>
+                                    
                                 {% endfor %}
                                 </div>
                             </div>

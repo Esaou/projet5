@@ -27,41 +27,47 @@ class FrontController
 
     public function index(): void
     {
+        $lastActivite = $this->frontManager->lastActivite();
         $dataEncadre = $this->frontManager->encadre();
         $dataActivites = $this->frontManager->activites();
-        $this->view->render(['template' => 'index', 'data' => ['encadres' => $dataEncadre,'activites' => $dataActivites]]);
+        $allActivites = $this->frontManager->allActivites();
+        $this->view->render(['template' => 'index', 'data' => ['allActivites'=>$allActivites,'lastActivite' => $lastActivite,'encadres' => $dataEncadre,'activites' => $dataActivites]]);
     }
 
     public function presentation(): void
     {
+        $lastActivite = $this->frontManager->lastActivite();
         $dataActivites = $this->frontManager->activites();
         $table = new \App\Model\GlobalManager($this->database);
         $contenu = $table->contenuPresentation();
-        $this->view->render(['template' => 'presentation', 'data' => ['presentation' => $contenu,'activites' => $dataActivites]]);
+        $this->view->render(['template' => 'presentation', 'data' => ['lastActivite' => $lastActivite,'presentation' => $contenu,'activites' => $dataActivites]]);
     }
 
     public function projetSoin(): void
     {
+        $lastActivite = $this->frontManager->lastActivite();
         $dataActivites = $this->frontManager->activites();
         $table = new \App\Model\GlobalManager($this->database);
         $contenu = $table->contenuProjetSoin();
-        $this->view->render(['template' => 'projetSoin', 'data' => ['projetSoins' => $contenu,'activites' => $dataActivites]]);
+        $this->view->render(['template' => 'projetSoin', 'data' => ['lastActivite' => $lastActivite,'projetSoins' => $contenu,'activites' => $dataActivites]]);
     }
 
     public function partenaires(): void
     {
         $dataActivites = $this->frontManager->activites();
+        $lastActivite = $this->frontManager->lastActivite();
         $table = new \App\Model\GlobalManager($this->database);
         $contenu = $table->contenuPartenaires();
-        $this->view->render(['template' => 'partenaires', 'data' => ['partenaires' => $contenu,'activites' => $dataActivites]]);
+        $this->view->render(['template' => 'partenaires', 'data' => ['lastActivite' => $lastActivite,'partenaires' => $contenu,'activites' => $dataActivites]]);
     }
 
     public function activites(): void
     {
+        $lastActivite = $this->frontManager->lastActivite();
         $dataActivites = $this->frontManager->activites();
         $dataShowActivites = $this->frontManager->showActivites();
         $dataShowProfessionnels = $this->frontManager->showProfessionnels();
-        $this->view->render(['template' => 'activites', 'data' => ['activites' => $dataActivites,'showActivites' => $dataShowActivites,'professionnels' => $dataShowProfessionnels]]);
+        $this->view->render(['template' => 'activites', 'data' => ['lastActivite' => $lastActivite,'activites' => $dataActivites,'showActivites' => $dataShowActivites,'professionnels' => $dataShowProfessionnels]]);
     }
 
     public function rejoindre(): void
@@ -70,6 +76,7 @@ class FrontController
         $tokenSession = $this->request->getSession()->get('token');
         $tokenGet = $this->request->getPost()->get('token');
 
+        $lastActivite = $this->frontManager->lastActivite();
         $nom = $this->request->getPost()->get('nom');
         $email = $this->request->getPost()->get('email');
         $objet = $this->request->getPost()->get('objet');
@@ -118,24 +125,27 @@ class FrontController
         $dataActivites = $this->frontManager->activites();
         $dataForm = $this->frontManager->form();
 
-        $this->view->render(['template' => 'rejoindre', 'data' => ['emailError' => $emailError,'tokenSession' => $tokenSession, 'token' => $token, 'tokenError' => $tokenError,'nameError' => $nameError,'result' => $result, 'error' => $error,'errors' => $errors,'forms' => $dataForm, 'activites' => $dataActivites]]);
+        $this->view->render(['template' => 'rejoindre', 'data' => ['lastActivite' => $lastActivite,'emailError' => $emailError,'tokenSession' => $tokenSession, 'token' => $token, 'tokenError' => $tokenError,'nameError' => $nameError,'result' => $result, 'error' => $error,'errors' => $errors,'forms' => $dataForm, 'activites' => $dataActivites]]);
     }
 
     public function contact(): void
     {
+        $lastActivite = $this->frontManager->lastActivite();
         $dataActivites = $this->frontManager->activites();
-        $this->view->render(['template' => 'contact', 'data' => ['activites' => $dataActivites]]);
+        $this->view->render(['template' => 'contact', 'data' => ['lastActivite' => $lastActivite,'activites' => $dataActivites]]);
     }
 
     public function notFound():void
     {
+        $lastActivite = $this->frontManager->lastActivite();
         $dataActivites = $this->frontManager->activites();
-        $this->view->render(['template' => 'notFound', 'data' => ['activites' => $dataActivites]]);
+        $this->view->render(['template' => 'notFound', 'data' => ['lastActivite' => $lastActivite,'activites' => $dataActivites]]);
     }
 
     public function forbidden():void
     {
+        $lastActivite = $this->frontManager->lastActivite();
         $dataActivites = $this->frontManager->activites();
-        $this->view->render(['template' => 'forbidden', 'data' => ['activites' => $dataActivites]]);
+        $this->view->render(['template' => 'forbidden', 'data' => ['lastActivite' => $lastActivite,'activites' => $dataActivites]]);
     }
 }

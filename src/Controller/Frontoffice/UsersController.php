@@ -55,8 +55,9 @@ class UsersController
         $this->request->getSession()->set('token', $token);
         
         $dataForm = $this->frontManager->form();
+        $lastActivite = $this->frontManager->lastActivite();
         $dataActivites = $this->frontManager->activites();
 
-        $this->view->render(['template' => 'login', 'data' => ['token' => $token, 'tokenError' => $tokenError,'forms' => $dataForm, 'error' => $error,'activites' => $dataActivites]]);
+        $this->view->render(['template' => 'login', 'data' => ['lastActivite' => $lastActivite,'token' => $token, 'tokenError' => $tokenError,'forms' => $dataForm, 'error' => $error,'activites' => $dataActivites]]);
     }
 }
