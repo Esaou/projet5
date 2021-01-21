@@ -82,6 +82,20 @@ class BootstrapForm
         );
     }
 
+    public function inputEtage(string $name, string $id):string
+    {
+        return $this->surround(
+            '<label for="'.$id.'" style="font-size:16px;font-family:RobotoMedium;" class="colorTitle">' . ucfirst($name) . ' <span style="font-family:sans-serif;font-size:15px;" class="colorTitle">(ex: Rez-de-chaussée)</span></label><input id="'.$id.'" style="font-family:sans-serif;font-size:15px;margin-bottom:30px;" type="text" name="' . $name . '" value="' . $this->getValue($name) . '" class="form-control">'
+        );
+    }
+
+    public function inputLien(string $name, string $id):string
+    {
+        return $this->surround(
+            '<label for="'.$id.'" style="font-size:16px;font-family:RobotoMedium;" class="colorTitle">' . ucfirst($name) . ' <span style="font-family:sans-serif;font-size:15px;" class="colorTitle">(ex: https://www.ubiclic.com/medecine-generale/st-martin-d-heres/dr-saou-paul)</span></label><input id="'.$id.'" style="font-family:sans-serif;font-size:15px;margin-bottom:30px;" type="text" name="' . $name . '" value="' . $this->getValue($name) . '" class="form-control">'
+        );
+    }
+
     public function inputEditor(string $name, string $id):string
     {
         return $this->surround(

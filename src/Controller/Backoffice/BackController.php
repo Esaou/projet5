@@ -490,6 +490,8 @@ class BackController
         
         $nom = $this->request->getPost()->get('nom');
         $titre = $this->request->getPost()->getWithoutHtml('titre');
+        $etage = $this->request->getPost()->getWithoutHtml('etage');
+        $lien = $this->request->getPost()->getWithoutHtml('lien');
         $activite = $this->request->getPost()->get('activite');
         
         $error = false;
@@ -517,12 +519,14 @@ class BackController
                         $champs = true;
                     } else {
                         $res = move_uploaded_file($_FILES['photo']['tmp_name'], $path);
-                        if ($res and !empty($nom) && !empty($activite) && !empty($titre)) {
+                        if ($res and !empty($nom) && !empty($activite) && !empty($titre) && !empty($etage) && !empty($lien)) {
                             $resultat = $this->backManager->createProfessionnel([
                                 
                                 'nom' => $nom,
                                 'titre' => $titre,
                                 'id_activites' => $activite,
+                                'etage' => $etage,
+                                'lien' => $lien,
                                 'photo' => $nomPhoto . "." . $extensionUpload
 
                             ]);
@@ -531,11 +535,24 @@ class BackController
                             $photoError = true;
                         }
                     }
-                } elseif (!empty($nom) && !empty($activite) && !empty($titre)) {
+                } elseif (!empty($nom) && !empty($activite) && !empty($titre) && !empty($etage) && !empty($lien)) {
                     $this->backManager->createProfessionnel([
                         
                             'nom' => $nom,
                             'titre' => $titre,
+                            'etage' => $etage,
+                            'lien' => $lien,
+                            'id_activites' => $activite,
+
+                        ]);
+                    $result = true;
+                } elseif (!empty($nom) && !empty($activite) && !empty($titre) && !empty($etage) && empty($lien)) {
+                    $this->backManager->createProfessionnel([
+                        
+                            'nom' => $nom,
+                            'titre' => $titre,
+                            'etage' => $etage,
+                            'lien' => null,
                             'id_activites' => $activite,
 
                         ]);
@@ -725,6 +742,8 @@ class BackController
 
         $nom = $this->request->getPost()->get('nom');
         $titre = $this->request->getPost()->getWithoutHtml('titre');
+        $etage = $this->request->getPost()->getWithoutHtml('etage');
+        $lien = $this->request->getPost()->getWithoutHtml('lien');
         $activite = $this->request->getPost()->get('activite');
         $id = $this->request->getGet()->get('id');
         $idActivite = $this->request->getGet()->get('id_activite');
@@ -761,11 +780,13 @@ class BackController
                         $photoExtension = true;
                     } else {
                         $res = move_uploaded_file($_FILES['photo']['tmp_name'], $path);
-                        if ($res and !empty($nom) && !empty($activite) && !empty($titre)) {
+                        if ($res and !empty($nom) && !empty($activite) && !empty($titre) && !empty($etage) && !empty($lien)) {
                             $resultat = $this->backManager->updateProfessionnel($id, [
                             
                                 'nom' => $nom,
                                 'titre' => $titre,
+                                'etage' => $etage,
+                                'lien' => $lien,
                                 'id_activites' => $activite,
                                 'photo' => $nomPhoto . "." . $extensionUpload
 
@@ -775,14 +796,27 @@ class BackController
                             $photoError = true;
                         }
                     }
-                } elseif (!empty($nom) && !empty($activite) && !empty($titre)) {
+                } elseif (!empty($nom) && !empty($activite) && !empty($titre) && !empty($etage) && !empty($lien)) {
                     $resultat = $this->backManager->updateProfessionnel($id, [
                                 
                         'nom' => $nom,
                         'titre' => $titre,
+                        'etage' => $etage,
+                        'lien' => $lien,
                         'id_activites' => $activite
     
                     ]);
+                    $result = true;
+                } elseif (!empty($nom) && !empty($activite) && !empty($titre) && !empty($etage) && empty($lien)) {
+                    $resultat = $this->backManager->updateProfessionnel($id, [
+                
+                            'nom' => $nom,
+                            'titre' => $titre,
+                            'etage' => $etage,
+                            'lien' => null,
+                            'id_activites' => $activite
+
+                        ]);
                     $result = true;
                 } else {
                     $error = true;

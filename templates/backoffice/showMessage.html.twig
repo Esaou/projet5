@@ -34,7 +34,10 @@
             {% for message in messages %}
                 <h5 class="colorTitle" style="margin-top:25px;">Contenu</h5>
                 <p class="text-left text-dark container rounded border border-muted bg-light" style="padding:10px;margin-top:20px;margin-bottom:30px;">{{ message.message|raw }}</p>
-                <p class="text-right"><a class="btn btn-primary" href="index.php?action=messagesManager">Retour à la liste des messages</a></p>
+                <div style="display:flex;flex-direction:raw;justify-content:space-between;">
+                    <p><a class="btn btn-primary" href="mailto:{{ message.email|raw }}">Répondre <i style="margin-left:5px;" class="fas fa-reply"></i></a></p>
+                    <p><a class="btn btn-primary" href="index.php?action=messagesManager">Retour à la liste des messages</a></p>
+                </div>
             {% endfor %}
         </div>
 

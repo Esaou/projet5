@@ -43,19 +43,16 @@ class FrontManager
         $limit = $limit[0][0] ;
         $limit = intval($limit) - 1;
         return $this->database->getDb()->query("SELECT * FROM activites ORDER BY id LIMIT $limit ", 'App\Models\FrontManager');
-
     }
 
-    public function lastActivite(){
-
+    public function lastActivite()
+    {
         return $this->database->getDb()->query("SELECT * FROM activites ORDER BY id DESC LIMIT 1 ", 'App\Models\FrontManager');
-
     }
 
-    public function allActivites(){
-
+    public function allActivites()
+    {
         return $this->database->getDb()->query("SELECT * FROM activites ORDER BY id", 'App\Models\FrontManager');
-
     }
 
     public function showActivites()
