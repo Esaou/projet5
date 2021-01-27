@@ -283,6 +283,22 @@
 
 }
 
+.btnMenuAccueil{
+
+    font-size: 20px;
+    color: rgb(100, 100, 100);
+    transition: color 500ms ease;
+
+}
+
+.btnMenuAccueil:hover{
+
+    text-decoration: none;
+    color:rgb(100, 203, 74);
+    cursor: pointer;
+
+}
+
 .btnMenu:hover{
 
     border-top:2px solid rgb(100, 203, 74);
@@ -445,7 +461,7 @@
 
 .modifCarouselRejoindre{
 
-    height: 270px!important;
+    height: 220px!important;
     width: 100%!important;
     box-shadow: 0px 0px 6px rgba(100, 100, 100,0.8)!important;
     border: 1px solid white;
@@ -966,7 +982,7 @@ html{
     flex-direction:column;
     align-items:center;
     width:45%;
-    justify-content:space-between;
+    justify-content:space-around;
 
 }
 
@@ -1883,6 +1899,8 @@ header{
 
     .accueilResponsive{
         display: flex!important;
+        flex-direction: column;
+        justify-content: center;
     }
 
     .modifCarousel{
