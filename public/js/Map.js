@@ -36,7 +36,7 @@ class Map {
             accessToken: 'pk.eyJ1IjoiZXNhb3UiLCJhIjoiY2s0YjZxajJxMGF5NTNla2RlanZpdHU0aiJ9.WahFKT--zBVeywHI5U6i3Q'
         }).addTo(this.map);
         this.marqueurVert = L.marker([45.171905, 5.757263], {icon: this.marqueur}).addTo(this.map);
-        this.marqueurVert.bindPopup('<p class="colorTitle" style="font-family:RobotoMedium;min-width:125px;">Centre de santé l\'Étoile</p>').openPopup();    
+        this.marqueurVert.bindPopup('<p class="colorTitle" style="font-size:14px;font-family:RobotoMedium;min-width:150px;">Centre de santé l\'Étoile</p>').openPopup();    
     } 
 
     boutonRecentrer(){

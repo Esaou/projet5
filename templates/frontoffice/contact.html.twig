@@ -13,13 +13,6 @@
             <h5 class="colorTitle">Nous contacter</h5> 
             <hr/>
             <p>Vous pouvez nous contacter au 04.76.62.27.95 du lundi au vendredi de 8h à 18h. Sans réponse de notre part ? Laissez-nous un message nous vous rapelleront dès que possible !</p>
-            <div id="dateHeure" class="marquee-rtl text-center colorTitle" style="padding:15px;background-color:white;">
-                <div>
-                    <span id="ouverture"></span>
-                    <span id="date"></span>
-                    <span id="heure"></span>
-                </div>
-            </div>
         </div>
 
     </div>
@@ -29,16 +22,27 @@
             <h5 class="colorTitle">Nous localiser</h5> 
             <hr/>
             <p><span style="font-family:RobotoMedium;">Adresse</span> : 4 avenue du 8 mai 1945, 38400 Saint Martin d'Hères - Auvergne-Rhône-Alpes</p>
-            <p>Situé face à la Poste Principale - <span style="font-family:RobotoMedium;">Entrée côté place Étienne Grappe</span> - En face du terminus Tram D</p>
-            <p>Parking du TRAM D avec place PMR / Pistes cyclables / Barres à vélo</p>
+            <p style="font-size:15px;">Situé face à la Poste Principale - <span style="font-family:RobotoMedium;">Entrée côté place Étienne Grappe</span> - En face du terminus Tram D</p>
+            <p style="font-size:15px;">Parking du TRAM D avec place PMR / Pistes cyclables / Barres à vélo</p>
             <hr/>
             <div class="blocContact">
                 <div class="sousBlocContact">
                     <p>Arrêt de tram et de bus : <span id="arret" style="font-family:RobotoMedium;"></span></p>
                     <p>Trafic routier : <span id="traficR" style="font-family:RobotoMedium;"></span> <a href="https://www.mobilites-m.fr/trafic.html" target="_blank"><i class="fas fa-question-circle" style="color:rgb(140,140,140);"></i></a></p>
                     <p>Trafic transport en commun : <span id="traficT" style="font-family:RobotoMedium;"></span> <a target="_blank" href="https://www.mobilites-m.fr/index.html?page=Evts"><i class="fas fa-question-circle" style="color:rgb(140,140,140);"></i></a></p>
+                    <div class="logoTransport">
+                        <img src="/images/busUn.png" alt="transport">
+                        <img src="/images/busDeux.png" alt="transport">
+                        <img src="/images/busTrois.png" alt="transport">
+                        <img src="/images/tram.png" alt="transport">
+                    </div>               
                 </div>
-                <div id="carouselExampleSlidesOnly" class="carousel slide modifCarousel" data-ride="carousel">
+                <div id="carouselExampleIndicators" class="carousel slide modifCarousel" data-ride="carousel">
+                    <ol class="carousel-indicators">
+                        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                    </ol>
                     <div class="carousel-inner">
                         <div class="carousel-item active">
                         <img class="d-block w-100" src="images/maison.jpg" alt="First slide" style="width:300px;height:200px;">
@@ -55,19 +59,12 @@
             <hr/>
         </div>
         <div class="transports container" style="margin-bottom:25px;">
-            <div class="logoTransport">
-            <img src="/images/busUn.png" alt="transport">
-            <img src="/images/busDeux.png" alt="transport">
-            <img src="/images/busTrois.png" alt="transport">
-            <img src="/images/tram.png" alt="transport">
-            </div>
-            <hr style="margin-bottom:25px;">
 
             <div id="carte">
 
                 <div class="containerIti">
-                    <a class="btn-sm btn-success text-center" style="margin-bottom:10px;width:90px;color:white;font-family:RobotoMedium;padding:10px;background-color:rgb(105, 208, 79)!important;box-shadow:0px 0px 4px rgba(100,100,100,0.3)!important;" target="_blank" href="https://www.google.com/maps/dir//google++espace+sant%C3%A9+l'%C3%A9toile/@45.1718479,5.7521593,15z/data=!4m8!4m7!1m0!1m5!1m1!1s0x478af52238f415ef:0x5c35a791b9943c87!2m2!1d5.7570156!2d45.1717431">Itinéraire</a>
-                    <p class="btn-sm btn-success text-center" style="width:90px;cursor:pointer;font-family:RobotoMedium;padding:10px;background-color:rgb(105, 208, 79)!important;box-shadow:0px 0px 4px rgba(100,100,100,0.3)!important;" id="boutonRecentrer">Recentrer</p>
+                    <a class="btn-sm btn-success text-center" style="margin:10px;width:90px;color:white;font-family:RobotoMedium;padding:8px;background-color:rgb(105, 208, 79)!important;" target="_blank" href="https://www.google.com/maps/dir//google++espace+sant%C3%A9+l'%C3%A9toile/@45.1718479,5.7521593,15z/data=!4m8!4m7!1m0!1m5!1m1!1s0x478af52238f415ef:0x5c35a791b9943c87!2m2!1d5.7570156!2d45.1717431">Itinéraire</a>
+                    <p class="btn-sm btn-success text-center" style="margin:10px;width:90px;cursor:pointer;font-family:RobotoMedium;padding:8px;background-color:rgb(105, 208, 79)!important;" id="boutonRecentrer">Recentrer</p>
                 </div>
                 
             </div>
