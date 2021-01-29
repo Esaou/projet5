@@ -5,12 +5,12 @@
 {% block content %}
 
         <div class="card-body" style="padding-top:0px!important;padding-bottom:0px!important;">
-            <h4 class="card-title colorTitle">Activités</h4>
+            <h4 class="card-title colorTitleAdmin">Activités</h4>
             <hr/>
             <a href="?action=addActivite" class="btn btn-success" style="margin-bottom:20px;">Ajouter une activité</a>
             <table class="table table-striped table-responsive-sm text-center">
                 <thead>
-                    <tr class="colorTitle">
+                    <tr class="colorTitleAdmin">
                         <th scope="col">Nom</th>
                         <th scope="col">Actions</th>
                     </tr>
@@ -53,27 +53,27 @@
                     {% endfor %}
                 </tbody>
             </table>
-            <div class="d-flex justify-content-center colorTitle">
+            <div class="d-flex justify-content-center colorTitleAdmin" style="font-size:17px!important;">
             Pages :
             {% for i in 1.. pagesTotales %}
                 {% if i == 1 and pageCourante >= 4 %}
-                    <a href='index.php?action=activitesManager&page=1' class="page" style='display:flex;justify-content:flex-end;min-width:20px;font-size:18px;margin-left:10px;'>1</a>
+                    <a href='index.php?action=activitesManager&page=1' class="page" style='display:flex;justify-content:flex-end;min-width:20px;font-size:17px;margin-left:10px;'>1</a>
                 {% endif %}
                 {% if i == 1 and pageCourante >= 5 %}
-                    <span href='index.php?action=activitesManager&page=1' class="page" style='display:flex;justify-content:flex-end;min-width:20px;font-size:18px;'>...</span>
+                    <span href='index.php?action=activitesManager&page=1' class="page" style='display:flex;justify-content:flex-end;min-width:20px;font-size:17px;'>...</span>
                 {% endif %}
                 {% if (pageCourante - 3) < i and i < (pageCourante + 3) %}  
                     {% if i == pageCourante %}
-                    <span class="page" style='display:flex;justify-content:flex-end;min-width:20px;font-size:18px;text-decoration:underline;'>{{ i }}</span>
+                    <span class="page" style='display:flex;justify-content:flex-end;min-width:20px;font-size:17px;text-decoration:underline;'>{{ i }}</span>
                     {% else %}
-                    <a class="page" href='index.php?action=activitesManager&page={{ i }}' style='display:flex;justify-content:flex-end;min-width:20px;font-size:18px;'>{{ i }}</a>
+                    <a class="page" href='index.php?action=activitesManager&page={{ i }}' style='display:flex;justify-content:flex-end;min-width:20px;font-size:17px;'>{{ i }}</a>
                     {% endif %}
                 {% endif %}
                 {% if i == pagesTotales and pageCourante < (pagesTotales - 3) %}
-                    <span class="page" style='display:flex;justify-content:flex-end;min-width:20px;font-size:18px;'>...</span>
+                    <span class="page" style='display:flex;justify-content:flex-end;min-width:20px;font-size:17px;'>...</span>
                 {% endif %}
                 {% if i == pagesTotales and pageCourante <= (pagesTotales - 3) %}
-                    <a href='index.php?action=activitesManager&page={{ pagesTotales }}' class="page" style='display:flex;justify-content:flex-end;min-width:20px;font-size:18px;'>{{ pagesTotales|raw }}</a>
+                    <a href='index.php?action=activitesManager&page={{ pagesTotales }}' class="page" style='display:flex;justify-content:flex-end;min-width:20px;font-size:17px;'>{{ pagesTotales|raw }}</a>
                 {% endif %}
             {% endfor %}
             </div>

@@ -8,7 +8,7 @@
         <h4 class="card-title colorTitle text-center">Bienvenue dans votre espace administration !</h4>
         <hr/>
         <div class="d-flex row justify-content-center">
-                <a href="?action=activitesManager" class="linkCarte colorTitle" style="display:flex;text-decoration:none;">
+                <a href="?action=activitesManager" class="linkCarte colorTitleAdmin" style="display:flex;text-decoration:none;">
                 <div class="card bg-light mb-3 carteAdmin" style="width: 18rem;margin:15px;">
                         <div class="card-header titreCarte">Dernière activité</div>
                         <div class="card-body" style="font-size:16px;">
@@ -20,7 +20,7 @@
                         </div>
                 </div>
                 </a>
-                <a href="?action=professionnelsManager" class="linkCarte colorTitle" style="display:flex;text-decoration:none;">
+                <a href="?action=professionnelsManager" class="linkCarte colorTitleAdmin" style="display:flex;text-decoration:none;">
                 <div class="card bg-light mb-3 carteAdmin" style="width: 18rem;margin:15px;">
                         <div class="card-header titreCarte">Dernier professionnel</div>
                         <div class="card-body" style="font-size:16px;">
@@ -35,7 +35,7 @@
                 
                 {% if messages %}
                 {% for message in messages %}
-                <a href="?action=showMessage&id={{ message.id|raw }}" class="linkCarte colorTitle" style="display:flex;text-decoration:none;">
+                <a href="?action=showMessage&id={{ message.id|raw }}" class="linkCarte colorTitleAdmin" style="display:flex;text-decoration:none;">
                 <div class="card bg-light mb-3 carteAdmin" style="width: 18rem;margin:15px;">
                         <div class="card-header titreCarte">Dernier message</div>
                         <div class="card-body" style="font-size:16px;">
@@ -47,7 +47,7 @@
                 </a>
                 {% endfor %}
                 {% else %}
-                <a href="?action=messagesManager" class="linkCarte colorTitle" style="display:flex;text-decoration:none;">
+                <a href="?action=messagesManager" class="linkCarte colorTitleAdmin" style="display:flex;text-decoration:none;">
                 <div class="card bg-light mb-3 carteAdmin" style="width: 18rem;margin:15px;">
                         <div class="card-header titreCarte">Dernier message</div>
                         <div class="card-body" style="font-size:16px;display:flex;flex-direction:raw;align-items:center;">

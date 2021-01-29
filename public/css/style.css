@@ -42,6 +42,14 @@
     }
 }
 
+.textMap{
+
+    font-size: 14px;
+    color: rgb(125, 125, 125);
+    min-width:150px;
+
+}
+
 .redirection{
     animation: couleur 5s ease infinite;
     transition: color 1s ease;
@@ -82,7 +90,7 @@
 
 .spanPass{
 
-    font-size:15px;
+    font-size:15px!important;
     margin-bottom:30px;
     padding-left:10px;
     padding-right:10px;
@@ -93,6 +101,19 @@
 .maxWidth{
 
     width: 80%;
+
+}
+
+.colorTitleAdmin{
+
+    color: rgb(130, 130, 130)!important;
+    font-size: 19px!important;
+
+}
+
+.colorTitleAdmin th{
+
+    font-size: 15px!important;
 
 }
 
@@ -124,6 +145,12 @@
 
 }
 
+.card-text{
+
+    font-family:sans-serif!important;
+
+}
+
 .responsivePadding{
 
     padding-top:80px;
@@ -137,6 +164,20 @@
 }
 
 .colorTitle{
+
+    color: rgb(140, 140, 140);
+    font-size: 19px;
+    font-family: RobotoMedium;
+
+}
+
+#arret{
+
+    color: rgb(125, 125, 125);
+
+}
+
+.colorInput{
 
     color: rgb(130, 130, 130);
     font-size: 19px;
@@ -561,15 +602,15 @@ hr{
 .professionnels{
 
     width: 100%;
-    background-color: white;
+    background-color: rgb(245,245,245);
     padding-bottom: 30px;
 
 }
 .recrutement{
 
     width: 100%;
-    padding-bottom: 50px;
-    background-color: rgb(245, 245, 245);
+    padding-bottom: 70px;
+    background-color: white;
 
 }
 
@@ -594,7 +635,7 @@ hr{
 
     border:1px solid rgb(180, 180, 180);
     background-color: white;
-    width: 250px;
+    width: 400px;
     height:175px;
     margin:10px;
     display: flex;
@@ -657,7 +698,7 @@ hr{
 .infoImportante{
 
     width: 100%;
-    background-color: rgb(245, 245, 245);
+    background-color: white;
     padding-bottom: 50px;
 
 }
@@ -927,9 +968,14 @@ html{
 
 .bienvenue{
 
-    padding-top: 38px;
+    width: 100%;
+    padding-top: 15px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    box-shadow: 0px 0px 2px rgba(100, 100, 100,0.4);
     font-size:19.5px;
-    padding-bottom:25px;
+    padding-bottom:15px;
+    background-color: white;
     color: rgb(140, 140, 140);
 
 }
@@ -1033,6 +1079,12 @@ html{
     background-color: rgb(235, 235, 235);
 }
 
+.emplacement{
+
+    color: rgb(100, 100, 100)!important;
+
+}
+
 .statutPro,.surRdv{
     background-color: rgb(245, 245, 245);
 }
@@ -1048,7 +1100,7 @@ html{
 }
 
 .nomPro{
-    color: rgb(100, 100, 100);
+    color: rgb(100, 100, 100)!important;
     font-family: robotoMedium;
 }
 
@@ -1239,7 +1291,7 @@ header{
 .titreCarte{
 
     font-family: RobotoMedium;
-    font-size: 17px;
+    font-size: 16px;
 
 }
 
@@ -1412,8 +1464,8 @@ header{
     .containerIti{
 
         width: 100%;
-        height: 100px;
-        
+        height: 50px;
+        z-index: 1500;
         bottom: 0px;
         display: flex;
         flex-direction: row;
@@ -1434,6 +1486,8 @@ header{
     
     .presentation{
 
+        max-width: 90%;
+        min-width: 90%;
         padding-top:100px;
         min-height: 100vh;
     
@@ -1541,9 +1595,26 @@ header{
 
   @media screen and (max-width: 1050px) {
 
+    .bienvenue{
+
+        padding-top: 15px;
+        padding-bottom: 15px;
+        margin-top: 15px;
+        margin-bottom: 25px;
+        font-size: 18px;
+
+    }
+
     .navAdmin{
 
         padding-top: 25px;
+
+    }
+
+    .maxWidth{
+
+        min-width: 100%;
+        max-width: 100%;
 
     }
 
@@ -1571,7 +1642,7 @@ header{
     .blocForm{
 
         width: 100%;
-        margin-bottom: 40px;
+        margin-bottom: 60px;
 
     }
 
@@ -1606,6 +1677,8 @@ header{
     .presentation{
 
         padding-top:50px;
+        min-width: 90%;
+        max-width: 90%;
     
     }
 
@@ -1815,6 +1888,20 @@ header{
 
 @media screen and (max-width: 600px) {
 
+    .body{
+
+        font-size: 15px!important;
+
+    }
+
+    .colorTitle{
+
+        color: rgb(130, 130, 130);
+        font-size: 17px!important;
+        font-family: RobotoMedium;
+    
+    }
+
     .carousel-control-prev:hover,.carousel-control-next:hover{
 
         background-color: rgba(0, 0, 0,0)!important;
@@ -1875,7 +1962,10 @@ header{
 
     .bienvenue{
 
+        padding-top: 15px;
         padding-bottom: 15px;
+        margin-top: 25px;
+        margin-bottom: 25px;
         font-size: 18px;
 
     }
@@ -1930,6 +2020,35 @@ header{
 
     .chevronResp{
         display: none!important;
+    }
+
+    .textMap{
+
+        min-width:125px;
+        font-size: 12px;
+    
+    }
+
+    .listeBtn{
+
+        margin-top: 25px;
+        margin-bottom: 25px;
+
+    }
+
+    .activitesIndex{
+
+        margin-left: 0px;
+        width: 100%;
+
+    }
+
+    .carousel{
+        height: 250px;
+    }
+
+    .carousel-item{
+        height: 248px;
     }
 
 }

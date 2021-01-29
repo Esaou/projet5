@@ -9,24 +9,24 @@
             {{ message.nom|raw }}
                 {% endfor %}</span></h5>
             <hr/>
-            <table class="table table-striped table-responsive-sm text-left colorTitle" style="font-family:sans-serif;margin-top:25px;">
+            <table class="table table-striped table-responsive-sm text-left colorTitleAdmin" style="font-family:sans-serif;margin-top:25px;">
                 <tbody>
                     {% for message in messages %}
                         <tr>
                             <th>Nom</th>
-                            <td>{{ message.nom|raw }}</td>
+                            <td style="color:rgb(90,90,90);font-size:15px;">{{ message.nom|raw }}</td>
                         </tr>
                         <tr>
                             <th>Email</th>
-                            <td>{{ message.email|raw }}</td>
+                            <td style="color:rgb(90,90,90);font-size:15px;">{{ message.email|raw }}</td>
                         </tr>
                         <tr>
                             <th>Objet</th>
-                            <td>{{ message.objet|raw }}</td>
+                            <td style="color:rgb(90,90,90);font-size:15px;">{{ message.objet|raw }}</td>
                         </tr>
                         <tr>
                             <th>Date</th>
-                            <td>le {{ message.date|date("d/m/Y") }} à {{ message.date|date("H") }}h{{ message.date|date("i") }}</td>
+                            <td style="color:rgb(90,90,90);font-size:15px;">le {{ message.date|date("d/m/Y") }} à {{ message.date|date("H") }}h{{ message.date|date("i") }}</td>
                         </tr>
                     {% endfor %}
                 </tbody>

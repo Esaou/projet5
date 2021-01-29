@@ -22,21 +22,21 @@ class BootstrapForm
     public function input(string $name, string $id):string
     {
         return $this->surround(
-            '<label style="font-size:15px;" for="'.$id.'" class="colorTitle">' . ucfirst($name) . '</label><input style="font-family:sans-serif;" type="text" name="' . $name . '" id="'.$id.'" value="' . $this->getValue($name) . '" class="form-control">'
+            '<label style="font-size:15px;" for="'.$id.'" class="colorInput">' . ucfirst($name) . '</label><input style="font-family:sans-serif;" type="text" name="' . $name . '" id="'.$id.'" value="' . $this->getValue($name) . '" class="form-control">'
         );
     }
 
     public function inputNom(string $name, string $id):string
     {
         return $this->surround(
-            '<label style="font-size:15px;" for="'.$id.'" class="colorTitle">' . ucfirst($name) . '</label><input style="font-family:sans-serif;" type="text" name="' . $name . '" id="'.$id.'" value="" class="form-control">'
+            '<label style="font-size:15px;" for="'.$id.'" class="colorInput">' . ucfirst($name) . '</label><input style="font-family:sans-serif;" type="text" name="' . $name . '" id="'.$id.'" value="" class="form-control">'
         );
     }
 
     public function inputEmail(string $name, string $id):string
     {
         return $this->surround(
-            '<label style="font-size:15px;" for="'.$id.'" class="colorTitle">' . ucfirst($name) . '</label><input style="font-family:sans-serif;" type="text" name="' . $name . '" id="'.$id.'" value="" class="form-control">'
+            '<label style="font-size:15px;" for="'.$id.'" class="colorInput">' . ucfirst($name) . '</label><input style="font-family:sans-serif;" type="text" name="' . $name . '" id="'.$id.'" value="" class="form-control">'
         );
     }
 
@@ -106,7 +106,7 @@ class BootstrapForm
     public function textArea(string $name):string
     {
         return $this->surround(
-            '<label for="i" style="font-size:15px;" class="colorTitle">' . ucfirst($name) . '</label><textarea id=i style="min-height:100px;" name="' . $name . '" class="form-control">' . $this->getValue($name) .'</textarea>'
+            '<label for="i" style="font-size:15px;" class="colorInput">' . ucfirst($name) . '</label><textarea id=i style="min-height:100px;" name="' . $name . '" class="form-control">' . $this->getValue($name) .'</textarea>'
         );
     }
 

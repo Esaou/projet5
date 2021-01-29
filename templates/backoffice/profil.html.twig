@@ -13,7 +13,7 @@
             {{ form.inputProfil('Username' , 'profil')|raw }}
             {{ form.passwordProfil('Password','profilPass')|raw }}
             {{ form.passwordProfil('Confirm','profilPassConfirm')|raw }}
-            <span id="error" class="colorTitle spanPass">Votre mot de passe doit contenir au moins 1 chiffre, une lettre minuscule, majuscule, un caractère spécial et 8 caractères minimum !</span>
+            <span id="error" class="colorTitleAdmin spanPass" style="font-size:15px!important;">Votre mot de passe doit contenir au moins 1 chiffre, une lettre minuscule, majuscule, un caractère spécial et 8 caractères minimum !</span>
             {% if error == true %}
                 <div class="alert alert-danger text-center" style="margin-top:15px">Tous les champs doivent être complétés !</div>
             {% endif %}
