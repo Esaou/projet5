@@ -1,6 +1,6 @@
 {% extends "/frontoffice/layout2.html.twig" %}
 
-{% block title %}Centre de santé l'Étoile | Login{% endblock %}
+{% block title %}Login | Centre de santé l'Étoile{% endblock %}
 
 {% block content %}
 <div class="container starter-template containerDefaultLogin">
@@ -10,7 +10,7 @@
         {{ forms.input('username','login')|raw }}
         {{ forms.password('password')|raw }}
         </div>
-        <button class="btn btn-success text-center" style="padding:10px;background-color:rgb(105, 208, 79)!important;margin-right:20px!important;box-shadow:0px 0px 4px rgba(100,100,100,0.3)!important;">Se connecter</button>
+        <button class="btn btn-success text-center" style="border-radius:4px;padding:10px;background-color:rgb(105, 208, 79)!important;margin-right:20px!important;box-shadow:0px 0px 4px rgba(100,100,100,0.3)!important;">Se connecter</button>
         {% if error == true %}
             <div class="alert alert-danger" style="margin-top:15px;">Identifiants incorrects</div>
         {% endif %}
